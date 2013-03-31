@@ -1,0 +1,45 @@
+" Based on Tommy MacWilliam's vimrc
+" https://github.com/tmacwill/vimrc
+
+" disable backups
+set nobackup
+set nowritebackup
+set noswapfile
+
+" disable annoying beep on errors
+set noerrorbells
+if has('autocmd')
+  autocmd GUIEnter * set vb t_vb=
+endif
+
+" font options
+set background=dark
+set t_Co=256
+colorscheme smyck
+set gfn=Inconsolata-dz:h15
+
+" keep at least 5 lines below the cursor
+set scrolloff=5
+
+" close buffer when tab is closed
+set nohidden
+
+" better moving between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" ; is better than :, and kj is better than ctrl-c
+nnoremap ; :
+
+" also autosave when going to insert mode
+inoremap kj <Esc>:w<CR>
+
+" more logical vertical navigation
+nnoremap <silent> k gk
+nnoremap <silent> j gj
+
+nnoremap <leader>e :PeepOpen<CR>
+nnoremap <leader>s :vsplit<CR>
+nnoremap <D-t>     :tabnew<CR>

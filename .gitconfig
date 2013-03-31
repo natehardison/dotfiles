@@ -1,0 +1,26 @@
+[user]
+  name = Nate Hardison
+  email = natehardison@gmail.com
+
+[core]
+  editor = /usr/bin/vim
+
+[push]
+  default = simple
+
+[alias]
+  co = commit
+  ds = diff --stat
+  st = status
+
+[pager]
+  color = true
+
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+
+[github]
+  user = natehardison
