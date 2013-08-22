@@ -13,6 +13,10 @@ INSTALLATION
 
         $ curl -Lo- https://bit.ly/janus-bootstrap | bash
 
+1. Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):
+
+        $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
 1. Set up links to the dot files:
 
         $ ln -s dotfiles/.bash_aliases ~/.bash_aliases
@@ -20,6 +24,7 @@ INSTALLATION
         $ ln -s dotfiles/.janus ~/.janus
         $ ln -s dotfiles/.janus/.vimrc.before ~/.vimrc.before
         $ ln -s dotfiles/.janus/.vimrc.after ~/.vimrc.after
+        $ ln -s dotfiles/.zshrc ~/.zshrc
 
 1. Set up Inconsolata-dz as the font:
 
