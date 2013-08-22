@@ -4,6 +4,11 @@ INSTALLATION
 
         $ git clone git@github.com:natehardison/dotfiles.git
 
+1. Initialize submodules:
+
+        $ git submodule init
+        $ git submodule update
+
 1. Install [Janus](https://github.com/carlhuda/janus):
 
         $ curl -Lo- https://bit.ly/janus-bootstrap | bash
@@ -19,3 +24,12 @@ INSTALLATION
 1. Set up Inconsolata-dz as the font:
 
         $ cp dotfiles/.janus/Inconsolata-dz.otf ~/Library/Fonts
+
+PACKAGES
+========
+* Homebrew
+* tree
+* autojump
+* ack
+* git
+* gpg
