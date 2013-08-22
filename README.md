@@ -9,6 +9,10 @@ INSTALLATION
         $ git submodule init
         $ git submodule update
 
+1. Install [Homebrew](http://brew.sh/):
+
+        $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+
 1. Install [Janus](https://github.com/carlhuda/janus):
 
         $ curl -Lo- https://bit.ly/janus-bootstrap | bash
@@ -30,11 +34,9 @@ INSTALLATION
 
         $ cp dotfiles/.janus/Inconsolata-dz.otf ~/Library/Fonts
 
-PACKAGES
-========
-* Homebrew
-* tree
-* autojump
-* ack
-* git
-* gpg
+1. Install the following Homebrew packages:
+
+    * `ack`
+    * `autojump`
+    * `gpg`
+    * `tree`
