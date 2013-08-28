@@ -12,6 +12,12 @@ if has('autocmd')
   autocmd GUIEnter * set vb t_vb=
 endif
 
+" expand tabs to 4 spaces
+set shiftwidth=4
+set tabstop=4
+set smarttab
+set expandtab
+
 " font options
 set background=dark
 set t_Co=256
