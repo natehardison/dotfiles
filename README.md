@@ -38,5 +38,6 @@ INSTALLATION
 
     * `ack`
     * `autojump`
-    * `gpg`
+    * `gnupg`
+    * `macvim`
     * `tree`
