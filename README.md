@@ -28,6 +28,7 @@ INSTALLATION
         $ ln -s dotfiles/.janus ~/.janus
         $ ln -s dotfiles/.janus/.vimrc.before ~/.vimrc.before
         $ ln -s dotfiles/.janus/.vimrc.after ~/.vimrc.after
+        $ ln -s dotfiles/.ssh/config ~/.ssh/config
         $ ln -s dotfiles/.zshrc ~/.zshrc
 
 1. Set up Inconsolata-dz as the font:
