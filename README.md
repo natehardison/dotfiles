@@ -36,7 +36,7 @@ INSTALLATION
 
 1. Install the following Homebrew packages:
 
-    * `ack`
+    * `ag`
     * `autojump`
     * `gnupg`
     * `macvim`
