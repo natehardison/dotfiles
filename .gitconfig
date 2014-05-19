@@ -12,6 +12,7 @@
   co = commit
   ds = diff --stat
   st = status
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 [pager]
   color = true
