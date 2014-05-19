@@ -47,6 +47,9 @@ source $ZSH/oh-my-zsh.sh
 # Rewire Mac OS X's default PATH fuckup
 export PATH=/usr/local/bin:$PATH
 
+# Tack homedir's bin onto PATH
+export PATH=$HOME/bin:$PATH
+
 # Parastructure backend build configuration
 GRADLE_HOME=/Users/nate/Developer/essential/tools/gradle
 export GRADLE_HOME
