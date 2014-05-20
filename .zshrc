@@ -44,8 +44,5 @@ plugins=(autojump brew git heroku npm)
 
 source $ZSH/oh-my-zsh.sh
 
-# Rewire Mac OS X's default PATH fuckup
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-# Tack homedir's bin onto PATH
-export PATH=$HOME/bin:$PATH
+# Set up proper bin/ dir ordering on PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
