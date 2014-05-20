@@ -49,8 +49,3 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Tack homedir's bin onto PATH
 export PATH=$HOME/bin:$PATH
-
-# Parastructure backend build configuration
-GRADLE_HOME=/Users/nate/Developer/essential/tools/gradle
-export GRADLE_HOME
-export PATH=$GRADLE_HOME/bin:$PATH
