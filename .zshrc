@@ -50,3 +50,4 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # Set up proper bin/ dir ordering on PATH
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
