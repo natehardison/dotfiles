@@ -40,9 +40,12 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump brew git heroku npm)
+plugins=(autojump brew git heroku npm virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
+
+# Set up virtualenvwrapper
+source /usr/local/bin/virtualenvwrapper.sh
 
 # Set up proper bin/ dir ordering on PATH
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
