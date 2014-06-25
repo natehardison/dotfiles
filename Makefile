@@ -7,6 +7,7 @@ all: fonts links
 
 clean:
 	@rm -f ~/Library/Fonts/Inconsolata-dz.otf
+	@rm -f ~/bin
 	@rm -f ~/.gitconfig
 	@rm -f ~/.janus
 	@rm -f ~/.vimrc.before
@@ -18,6 +19,7 @@ fonts:
 	@cp .janus/Inconsolata-dz.otf ~/Library/Fonts
 
 links:
+	@ln -s $(MAKEFILE_DIR)/bin ~/bin
 	@ln -s $(MAKEFILE_DIR)/.gitconfig ~/.gitconfig
 	@ln -s $(MAKEFILE_DIR)/.janus ~/.janus
 	@ln -s $(MAKEFILE_DIR)/.janus/.vimrc.before ~/.vimrc.before
