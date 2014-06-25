@@ -56,3 +56,4 @@ if [ -d "/Applications/Postgres.app" ]; then
     export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH
 fi
 
+export HOMEBREW_GITHUB_API_TOKEN="24c945d2285a3c13b33a4760b65ea7515af848c7"
