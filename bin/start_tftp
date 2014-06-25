@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+start_tftp_darwin() {
+    sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
+    sudo launchctl start com.apple.tftpd
+}
+
+system=$(uname -s)
+case $system in
+    Darwin)
+        start_tftp_darwin
+        ;;
+
+    *)
+        echo "Unsupported system $system"
+        exit 1
+
+esac
+
+echo "TFTP server started"
