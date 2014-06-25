@@ -53,6 +53,6 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # Add Postgres.app to PATH, if present
 if [ -d "/Applications/Postgres.app" ]; then
-    export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin":$PATH
+    export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH
 fi
 
