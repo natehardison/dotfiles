@@ -1,16 +1,35 @@
 #!/bin/sh
 
+# Starts a TFTP server running locally. Right now only works for Mac OS X.
+# Author: Nate Hardison <natehardison@gmail.com>
+
 set -e
 
-start_tftp_darwin() {
-    sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
-    sudo launchctl start com.apple.tftpd
+is_tftpd_running() {
+    launchctl list | grep -q tftpd
+}
+
+start_tftpd() {
+    launchctl load -F /System/Library/LaunchDaemons/tftp.plist
+    launchctl start com.apple.tftpd
+}
+
+stop_tftpd() {
+    launchctl stop com.apple.tftpd
+    launchctl unload /System/Library/LaunchDaemons/tftp.plist
 }
 
 system=$(uname -s)
 case $system in
     Darwin)
-        start_tftp_darwin
+        if [[ $EUID -ne 0 ]]; then
+            echo "Error: you must be root to run this script."
+            exit 1
+        fi
+        if is_tftpd_running ; then
+            stop_tftpd
+        fi
+        start_tftpd
         ;;
 
     *)
