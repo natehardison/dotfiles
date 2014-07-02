@@ -45,8 +45,10 @@ plugins=(autojump brew git heroku npm)
 source $ZSH/oh-my-zsh.sh
 
 # Set up virtualenvwrapper
-export PROJECT_HOME=$HOME/src
-source /usr/local/bin/virtualenvwrapper.sh
+if $(which -s virtualenvwrapper.sh); then
+    export PROJECT_HOME=$HOME/src
+    source `which virtualenvwrapper.sh`
+fi
 
 # Set up proper bin/ dir ordering on PATH
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
