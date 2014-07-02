@@ -50,12 +50,19 @@ if $(which -s virtualenvwrapper.sh); then
     source `which virtualenvwrapper.sh`
 fi
 
-# Set up proper bin/ dir ordering on PATH
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+system=$(uname -s)
+case $system in
+    Darwin)
+        # Set up proper bin/ dir ordering on PATH
+        export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
-# Add Postgres.app to PATH, if present
-if [ -d "/Applications/Postgres.app" ]; then
-    export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH
-fi
+        # Add Postgres.app to PATH, if present
+        if [ -d "/Applications/Postgres.app" ]; then
+            export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH
+        fi
+        ;;
+    *)
+        ;;
+esac
 
 export HOMEBREW_GITHUB_API_TOKEN="24c945d2285a3c13b33a4760b65ea7515af848c7"
