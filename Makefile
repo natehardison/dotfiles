@@ -1,33 +1,30 @@
-# yeah, this doesn't work for all dirs...
-MAKEFILE_DIR := $(shell pwd)
-
 all: fonts links
 
-.PHONY: clean fonts links update
-
 clean:
-	@rm -f ~/Library/Fonts/Inconsolata-dz.otf
-	@rm -f ~/bin
-	@rm -f ~/.gitconfig
-	@rm -f ~/.janus
-	@rm -f ~/.vimrc.before
-	@rm -f ~/.vimrc.after
-	@rm -f ~/.ssh/config
-	@rm -f ~/.zshrc
+	@rm -f $(HOME)/Library/Fonts/Inconsolata-dz.otf
+	@rm -f $(HOME)/bin
+	@rm -f $(HOME)/.gitconfig
+	@rm -f $(HOME)/.janus
+	@rm -f $(HOME)/.vimrc.before
+	@rm -f $(HOME)/.vimrc.after
+	@rm -f $(HOME)/.ssh/config
+	@rm -f $(HOME)/.zshrc
 
 fonts:
-	@cp .janus/Inconsolata-dz.otf ~/Library/Fonts
+	@cp .janus/Inconsolata-dz.otf $(HOME)/Library/Fonts
 
 links:
-	@ln -s $(MAKEFILE_DIR)/bin ~/bin
-	@ln -s $(MAKEFILE_DIR)/.gitconfig ~/.gitconfig
-	@ln -s $(MAKEFILE_DIR)/.janus ~/.janus
-	@ln -s $(MAKEFILE_DIR)/.janus/.vimrc.before ~/.vimrc.before
-	@ln -s $(MAKEFILE_DIR)/.janus/.vimrc.after ~/.vimrc.after
-	@ln -s $(MAKEFILE_DIR)/.ssh/config ~/.ssh/config
-	@ln -s $(MAKEFILE_DIR)/.zshrc ~/.zshrc
+	@ln -s $(CURDIR)/bin $(HOME)/bin
+	@ln -s $(CURDIR)/.gitconfig $(HOME)/.gitconfig
+	@ln -s $(CURDIR)/.janus $(HOME)/.janus
+	@ln -s $(CURDIR)/.janus/.vimrc.before $(HOME)/.vimrc.before
+	@ln -s $(CURDIR)/.janus/.vimrc.after $(HOME)/.vimrc.after
+	@ln -s $(CURDIR)/.ssh/config $(HOME)/.ssh/config
+	@ln -s $(CURDIR)/.zshrc $(HOME)/.zshrc
 
 update:
 	git submodule update
 	brew update && brew doctor
-	cd ~/.vim && rake && cd -
+	cd $(HOME)/.vim && rake && cd -
+
+.PHONY: all clean fonts links update
