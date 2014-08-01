@@ -19,6 +19,26 @@ stop_tftpd() {
     launchctl unload /System/Library/LaunchDaemons/tftp.plist
 }
 
+
+usage() {
+    cat<<EO
+
+    Usage: manage_tftpd start|stop
+
+EO
+}
+
+if [ $# -ne 1 ]; then
+    usage
+    exit 1
+fi
+
+cmd="$1"
+if [ $cmd != "start" -a $cmd != "stop" ]; then
+    usage
+    exit 1
+fi
+
 system=$(uname -s)
 case $system in
     Darwin)
@@ -26,16 +46,22 @@ case $system in
             echo "Error: you must be root to run this script."
             exit 1
         fi
+
+        # stop in all cases
         if is_tftpd_running ; then
             stop_tftpd
         fi
-        start_tftpd
+
+        if [ $cmd = "start" ] ; then
+            start_tftpd
+            echo "TFTP server started"
+        else
+            echo "TFTP server stopped"
+        fi
         ;;
 
     *)
         echo "Unsupported system $system"
         exit 1
-
+        ;;
 esac
-
-echo "TFTP server started"
