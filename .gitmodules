@@ -1,5 +1,5 @@
-[submodule ".janus/vim-latex"]
-	path = .janus/vim-latex
+[submodule "janus/vim-latex"]
+	path = janus/vim-latex
 	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
 [submodule "Smyck-Color-Scheme"]
 	path = Smyck-Color-Scheme

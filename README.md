@@ -23,17 +23,17 @@ INSTALLATION
 
 1. Set up links to the dot files:
 
-        $ ln -s dotfiles/.bash_aliases ~/.bash_aliases
-        $ ln -s dotfiles/.gitconfig ~/.gitconfig
-        $ ln -s dotfiles/.janus ~/.janus
-        $ ln -s dotfiles/.janus/.vimrc.before ~/.vimrc.before
-        $ ln -s dotfiles/.janus/.vimrc.after ~/.vimrc.after
-        $ ln -s dotfiles/.ssh/config ~/.ssh/config
-        $ ln -s dotfiles/.zshrc ~/.zshrc
+        $ ln -s dotfiles/bash_aliases ~/.bash_aliases
+        $ ln -s dotfiles/gitconfig ~/.gitconfig
+        $ ln -s dotfiles/janus ~/.janus
+        $ ln -s dotfiles/janus/.vimrc.before ~/.vimrc.before
+        $ ln -s dotfiles/janus/.vimrc.after ~/.vimrc.after
+        $ ln -s dotfiles/ssh/config ~/.ssh/config
+        $ ln -s dotfiles/zshrc ~/.zshrc
 
 1. Set up Inconsolata-dz as the font:
 
-        $ cp dotfiles/.janus/Inconsolata-dz.otf ~/Library/Fonts
+        $ cp dotfiles/janus/Inconsolata-dz.otf ~/Library/Fonts
 
 1. Install the following Homebrew packages:
 
