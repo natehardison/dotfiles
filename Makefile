@@ -1,7 +1,15 @@
+OS := $(shell uname -s)
+
+ifeq ($(OS),Darwin)
+	FONTS := $(HOME)/Library/Fonts
+else
+	FONTS := $(HOME)/.fonts
+endif
+
 all: fonts links
 
 clean:
-	@rm -f $(HOME)/Library/Fonts/Inconsolata-dz.otf
+	@rm -f $(FONTS)/Inconsolata-dz.otf
 	@rm -f $(HOME)/bin
 	@rm -f $(HOME)/.bash_aliases
 	@rm -f $(HOME)/.gitconfig
@@ -12,7 +20,8 @@ clean:
 	@rm -f $(HOME)/.zshrc
 
 fonts:
-	@cp janus/Inconsolata-dz.otf $(HOME)/Library/Fonts
+	@mkdir -p $(FONTS)
+	@cp janus/Inconsolata-dz.otf $(FONTS)
 
 links:
 	@ln -s $(CURDIR)/bash_aliases $(HOME)/.bash_aliases
