@@ -1,9 +1,9 @@
 OS := $(shell uname -s)
 
 ifeq ($(OS),Darwin)
-	FONTS := $(HOME)/Library/Fonts
+FONTS := $(HOME)/Library/Fonts
 else
-	FONTS := $(HOME)/.fonts
+FONTS := $(HOME)/.fonts
 endif
 
 all: fonts links
