@@ -1,0 +1,6 @@
+autojump
+gnupg
+iperf
+nmap
+tree
+valgrind
