@@ -1,5 +1,4 @@
-Host github.com
-Host heroku.com
+Host github.com, heroku.com
     IdentityFile ~/.ssh/natehardison@gmail.com
 
 Host *.stanford.edu
