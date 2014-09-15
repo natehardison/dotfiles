@@ -11,8 +11,7 @@ Host *.stanford.edu
     GSSAPIDelegateCredentials yes
 
 # Don't do host key checking on LAN
-Host 10.0.*
-Host 192.168.*
+Host 10.*, 192.168.*
     LogLevel QUIET
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
