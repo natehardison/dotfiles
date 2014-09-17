@@ -1,36 +1,36 @@
 [user]
-  name = Nate Hardison
-  email = natehardison@gmail.com
+    name = Nate Hardison
+    email = natehardison@gmail.com
 
 [core]
-  editor = /usr/bin/vim
+    editor = /usr/bin/vim
 
 [push]
-  default = upstream
+    default = upstream
 
 [alias]
-  co = commit
-  ds = diff --stat
-  st = status
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    co = commit
+    ds = diff --stat
+    st = status
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 [pager]
-  color = true
+    color = true
 
 [color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 
 [github]
-  user = natehardison
+    user = natehardison
 
 [diff]
-  tool = vimdiff
+    tool = vimdiff
 
 [merge]
-  tool = vimdiff
+    tool = vimdiff
 
 [difftool]
-  prompt = false
+    prompt = false
