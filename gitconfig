@@ -9,10 +9,11 @@
     default = upstream
 
 [alias]
-    co = commit
+    dc = diff --cached
     ds = diff --stat
     st = status
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    wip = commit -a -m"WIP"
 
 [pager]
     color = true
