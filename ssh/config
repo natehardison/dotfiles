@@ -1,4 +1,4 @@
-Host github.com, heroku.com
+Host github.com heroku.com
     IdentityFile ~/.ssh/natehardison@gmail.com
 
 Host *.stanford.edu
@@ -9,8 +9,8 @@ Host *.stanford.edu
     # Set to yes to use services like AFS
     GSSAPIDelegateCredentials yes
 
-# Don't do host key checking on LAN
-Host 10.*, 192.168.*
+# Don't do host key checking on LAN hosts
+Host 10.* 192.168.*
     LogLevel QUIET
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
