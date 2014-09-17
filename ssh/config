@@ -14,3 +14,7 @@ Host 10.* 192.168.*
     LogLevel QUIET
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+
+Host *.prtl.io
+    ForwardAgent yes
+    IdentityFile ~/.ssh/nate@prtl.io
