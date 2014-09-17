@@ -35,3 +35,11 @@
 
 [difftool]
     prompt = false
+
+[sendemail]
+    smtpserver = smtp.gmail.com
+    smtpuser = $GMAIL_USER
+    smtppass = $GMAIL_PASSWORD
+    smtpencryption = tls
+    smtpserverport = 587
+    chainreplyto = false
