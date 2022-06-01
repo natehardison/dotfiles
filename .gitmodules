@@ -3,4 +3,4 @@
 	url = git://git.code.sf.net/p/vim-latex/vim-latex
 [submodule "Smyck-Color-Scheme"]
 	path = Smyck-Color-Scheme
-	url = git://github.com/hukl/Smyck-Color-Scheme.git
+	url = https://github.com/hukl/Smyck-Color-Scheme.git
