@@ -15,7 +15,7 @@ INSTALLATION
 
 1. Install [Homebrew](http://brew.sh/):
 
-        $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+        $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 1. Install [Janus](https://github.com/carlhuda/janus):
 

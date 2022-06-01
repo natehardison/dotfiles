@@ -35,7 +35,7 @@ fonts: prepare
 
 ifeq ($(OS),Darwin)
 homebrew: prepare
-	$(Q)ruby -e "$$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+	$(Q)/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 .PHONY: homebrew
 endif
