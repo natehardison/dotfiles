@@ -28,7 +28,7 @@ clean:
 	$(Q)rm -f $(HOME)/.vimrc.after
 	$(Q)rm -f $(HOME)/.screenrc
 	$(Q)rm -f $(HOME)/.ssh/config
-	$(Q)rm -f $(HOME)/.zshrc
+	$(Q)rm -f $(HOME)/.zpreztorc
 
 fonts: prepare
 	$(Q)mkdir -p $(FONTS)
@@ -53,10 +53,13 @@ links: prepare
 	$(Q)ln -s $(CURDIR)/janus/vimrc.after $(HOME)/.vimrc.after
 	$(Q)ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	$(Q)ln -s $(CURDIR)/ssh/config $(HOME)/.ssh/config
-	$(Q)ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
+	$(Q)ln -s $(CURDIR)/zpreztorc $(HOME)/.zpreztorc
 
 prepare:
 	$(Q)git submodule update --init
+
+prezto: prepare
+	$(Q)git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
 update:
 ifeq ($(OS),Darwin)
@@ -64,7 +67,4 @@ ifeq ($(OS),Darwin)
 endif
 	$(Q)cd $(HOME)/.vim && rake && cd -
 
-zsh: prepare
-	$(Q)curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-
-.PHONY: all clean fonts janus links prepare update zsh
+.PHONY: all clean fonts janus links prepare prezto update

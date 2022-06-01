@@ -26,9 +26,13 @@ INSTALLATION
 
         $ curl -Lo- https://bit.ly/janus-bootstrap | bash
 
-1. Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):
+1. Install [Prezto](https://github.com/sorin-ionescu/prezto):
 
-        $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+        $ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+        $ setopt EXTENDED_GLOB
+        $ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+            ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+          done
 
 1. Set up links to the dot files:
 
@@ -38,7 +42,7 @@ INSTALLATION
         $ ln -s dotfiles/janus/.vimrc.before ~/.vimrc.before
         $ ln -s dotfiles/janus/.vimrc.after ~/.vimrc.after
         $ ln -s dotfiles/ssh/config ~/.ssh/config
-        $ ln -s dotfiles/zshrc ~/.zshrc
+        $ ln -s dotfiles/zpreztorc ~/.zpreztorc
 
 1. Set up Inconsolata-dz as the font:
 
