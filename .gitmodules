@@ -1,6 +1,6 @@
 [submodule "janus/vim-latex"]
 	path = janus/vim-latex
-	url = git://git.code.sf.net/p/vim-latex/vim-latex
+	url = https://github.com/vim-latex/vim-latex.git
 [submodule "Smyck-Color-Scheme"]
 	path = Smyck-Color-Scheme
 	url = https://github.com/hukl/Smyck-Color-Scheme.git
