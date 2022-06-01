@@ -1,6 +1,8 @@
 " Based on Tommy MacWilliam's vimrc
 " https://github.com/tmacwill/vimrc
 
+let mapleader = ','
+
 " disable backups
 set nobackup
 set nowritebackup

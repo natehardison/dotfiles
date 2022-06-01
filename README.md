@@ -22,10 +22,6 @@ INSTALLATION
 
         $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-1. Install [Janus](https://github.com/carlhuda/janus):
-
-        $ curl -Lo- https://bit.ly/janus-bootstrap | bash
-
 1. Install [Prezto](https://github.com/sorin-ionescu/prezto):
 
         $ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -38,15 +34,13 @@ INSTALLATION
 
         $ ln -s dotfiles/bash_aliases ~/.bash_aliases
         $ ln -s dotfiles/gitconfig ~/.gitconfig
-        $ ln -s dotfiles/janus ~/.janus
-        $ ln -s dotfiles/janus/.vimrc.before ~/.vimrc.before
-        $ ln -s dotfiles/janus/.vimrc.after ~/.vimrc.after
         $ ln -s dotfiles/ssh/config ~/.ssh/config
+        $ ln -s dotfiles/vimrc ~/.vimrc
         $ ln -s dotfiles/zpreztorc ~/.zpreztorc
 
 1. Set up Inconsolata-dz as the font:
 
-        $ cp dotfiles/janus/Inconsolata-dz.otf ~/Library/Fonts
+        $ cp dotfiles/Inconsolata-dz.otf ~/Library/Fonts
 
 1. Install the following Homebrew packages:
 

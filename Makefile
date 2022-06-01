@@ -23,16 +23,14 @@ clean:
 	$(Q)rm -f $(HOME)/bin
 	$(Q)rm -f $(HOME)/.bash_aliases
 	$(Q)rm -f $(HOME)/.gitconfig
-	$(Q)rm -f $(HOME)/.janus
-	$(Q)rm -f $(HOME)/.vimrc.before
-	$(Q)rm -f $(HOME)/.vimrc.after
+	$(Q)rm -f $(HOME)/.vimrc
 	$(Q)rm -f $(HOME)/.screenrc
 	$(Q)rm -f $(HOME)/.ssh/config
 	$(Q)rm -f $(HOME)/.zpreztorc
 
 fonts: prepare
 	$(Q)mkdir -p $(FONTS)
-	$(Q)cp janus/Inconsolata-dz.otf $(FONTS)
+	$(Q)cp Inconsolata-dz.otf $(FONTS)
 
 ifeq ($(OS),Darwin)
 homebrew: prepare
@@ -41,16 +39,11 @@ homebrew: prepare
 .PHONY: homebrew
 endif
 
-janus: prepare
-	$(Q)curl -Lo- https://bit.ly/janus-bootstrap | bash
-
 links: prepare
 	$(Q)ln -s $(CURDIR)/bash_aliases $(HOME)/.bash_aliases
 	$(Q)ln -s $(CURDIR)/bin $(HOME)/bin
 	$(Q)ln -s $(CURDIR)/gitconfig $(HOME)/.gitconfig
-	$(Q)ln -s $(CURDIR)/janus $(HOME)/.janus
-	$(Q)ln -s $(CURDIR)/janus/vimrc.before $(HOME)/.vimrc.before
-	$(Q)ln -s $(CURDIR)/janus/vimrc.after $(HOME)/.vimrc.after
+	$(Q)ln -s $(CURDIR)/vimrc $(HOME)/.vimrc
 	$(Q)ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	$(Q)ln -s $(CURDIR)/ssh/config $(HOME)/.ssh/config
 	$(Q)ln -s $(CURDIR)/zpreztorc $(HOME)/.zpreztorc
@@ -65,6 +58,5 @@ update:
 ifeq ($(OS),Darwin)
 	$(Q)brew update && brew doctor
 endif
-	$(Q)cd $(HOME)/.vim && rake && cd -
 
-.PHONY: all clean fonts janus links prepare prezto update
+.PHONY: all clean fonts links prepare prezto update
