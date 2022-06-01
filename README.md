@@ -4,6 +4,11 @@ INSTALLATION
 
         $ xcode-select --install
 
+1. Ensure SSH keys generated and added to macOS SSH agent
+
+        $ ssh-keygen -t ed25519 -C "email@example.com"
+        $ ssh-add --apple-use-keychain ~/.ssh/<keyfile>
+
 1. Clone this repo:
 
         $ git clone git@github.com:natehardison/dotfiles.git
