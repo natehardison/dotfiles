@@ -26,6 +26,7 @@ clean:
 	$(Q)rm -f $(HOME)/.janus
 	$(Q)rm -f $(HOME)/.vimrc.before
 	$(Q)rm -f $(HOME)/.vimrc.after
+	$(Q)rm -f $(HOME)/.screenrc
 	$(Q)rm -f $(HOME)/.ssh/config
 	$(Q)rm -f $(HOME)/.zshrc
 
@@ -50,6 +51,7 @@ links: prepare
 	$(Q)ln -s $(CURDIR)/janus $(HOME)/.janus
 	$(Q)ln -s $(CURDIR)/janus/vimrc.before $(HOME)/.vimrc.before
 	$(Q)ln -s $(CURDIR)/janus/vimrc.after $(HOME)/.vimrc.after
+	$(Q)ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	$(Q)ln -s $(CURDIR)/ssh/config $(HOME)/.ssh/config
 	$(Q)ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
 
