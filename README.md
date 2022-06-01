@@ -1,5 +1,9 @@
 INSTALLATION
 ============
+1. Ensure macOS command line tools are installed:
+
+        $ xcode-select --install
+
 1. Clone this repo:
 
         $ git clone git@github.com:natehardison/dotfiles.git
