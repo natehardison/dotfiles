@@ -35,7 +35,7 @@ INSTALLATION
         $ ln -s dotfiles/bash_aliases ~/.bash_aliases
         $ ln -s dotfiles/gitconfig ~/.gitconfig
         $ ln -s dotfiles/ssh/config ~/.ssh/config
-        $ ln -s dotfiles/vimrc ~/.vimrc
+        $ ln -s dotfiles/vim ~/.vim
         $ ln -s dotfiles/zpreztorc ~/.zpreztorc
 
 1. Set up Inconsolata-dz as the font:
