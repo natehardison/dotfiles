@@ -1,1 +1,1 @@
-../../Smyck-Color-Scheme/smyck.vim
+../../colors/smyck/smyck.vim
