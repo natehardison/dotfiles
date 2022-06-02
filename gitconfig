@@ -5,8 +5,14 @@
 [core]
     editor = /usr/bin/vim
 
+[init]
+    defaultBranch = main
+
 [push]
     default = upstream
+
+[pull]
+    rebase = true
 
 [alias]
     dc = diff --cached
