@@ -1,3 +1,6 @@
 [submodule "smyck"]
 	path = colors/smyck
 	url = https://github.com/hukl/Smyck-Color-Scheme.git
+[submodule "vim-airline"]
+	path = vim/pack/plugins/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
