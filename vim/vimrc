@@ -1,57 +1,92 @@
-" Based on Tommy MacWilliam's vimrc
-" https://github.com/tmacwill/vimrc
+" Cribbed from various, including:
+" - Tommy MacWilliam (https://github.com/tmacwill/vimrc)
+" - shapeshed (https://github.com/shapeshed/dotfiles/vimrc)
 
-let mapleader = ','
+set nocompatible                 " Vim defaults, not vi compatible
 
-" disable backups
-set nobackup
-set nowritebackup
-set noswapfile
+syntax on                        " Enable syntax highlighting
+filetype plugin indent on        " Allow plugins to determine indentation
 
-" disable annoying beep on errors
-set noerrorbells
-if has('autocmd')
-  autocmd GUIEnter * set vb t_vb=
-endif
+let mapleader = ","
+let g:netrw_banner = 0           " Disable banner in file browser
 
-" expand tabs to 4 spaces
-set shiftwidth=4
-set tabstop=4
+set autoindent                   " Copy indent from current line on <CR>
+set background=dark              " Set dark background
+set belloff=all                  " Silence terminal bell
+set cursorline                   " Highlight cursor line
+set encoding=utf-8               " UTF-8 everything
+set expandtab                    " Expand tabs to spaces
+set guifont=Inconsolata-dz:h15   " Font to use in GUI versions
+set hlsearch                     " Highlight search matches
+set ignorecase                   " Ignore case when searching
+set incsearch                    " Show incremental matches while typing
+set linebreak
+set nobackup                     " Disable backups
+set nohidden                     " Close buffer when tab closed
+set noswapfile                   " No swapfiles
+set nowritebackup                " Disable backups
+set number                       " Show line numbers
+set numberwidth=4
+set scrolloff=5                  " Keep 5 lines below the cursor
+set shiftwidth=4                 " Number of spaces to use for auto-indent
+set showtabline=2                " Always show tab line to avoid resizing
+set smartcase                    " Override 'ignorecase' if search has uppercase
+set smartindent
 set smarttab
-set expandtab
+set softtabstop=4                " Number of tabs that a <Tab> counts for
+set tabpagemax=25                " 10 tabs is far too few
+set tabstop=4
+set wildignore+=.git             " Ignore .git/ in completions
+set wildmenu                     " Enable command-line completion
+set wrap                         " Wrap long lines
 
-" font options
-set background=dark
-set t_Co=256
 colorscheme smyck
-set gfn=Inconsolata-dz:h15
 
-" keep at least 5 lines below the cursor
-set scrolloff=5
+" ; is better than :
+nnoremap ; :
 
-" close buffer when tab is closed
-set nohidden
+" kj is better than <Esc> or <C-c>
+inoremap kj <Esc>
 
-" better moving between windows
+" More logical vertical navigation with lines that wrap
+nnoremap <silent> k gk
+nnoremap <silent> j gj
+
+" Make it easier to work with splits
+nnoremap <leader>s :vsplit<CR>
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" ; is better than :, and kj is better than ctrl-c
-nnoremap ; :
+" Make it easier to work with tabs
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>w :tabclose<CR>
+nnoremap <Tab> :tabnext<CR>
+nnoremap <S-Tab> :tabprevious<CR>
 
-" also autosave when going to insert mode
-inoremap kj <Esc>:w<CR>
+" Move current line down 1 (-) or up 1 (_)
+nnoremap - yypkDj
+nnoremap _ yykkpdddd
 
-" more logical vertical navigation
-nnoremap <silent> k gk
-nnoremap <silent> j gj
+" Make current word all uppercase
+nnoremap <C-u> viwU
+inoremap <C-u> <Esc>viwUea
 
-" extra shortcuts
-nnoremap <leader>e :CtrlP<CR>
-nnoremap <leader>s :vsplit<CR>
-nnoremap <D-t>     :tabnew<CR>:CtrlP<CR>
+" Fast editing and sourcing of this file
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Make double-<Esc> clear search highlights
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
+" Fix typos
+iabbrev adn and
+iabbrev waht what
+iabbrev tehn then
+
+" Shortcuts
+iabbrev @@ natehardison@gmail.com
 
 " vim-latex configuration
 let g:Tex_ViewRule_pdf = 'Preview'
