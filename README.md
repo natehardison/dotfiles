@@ -11,12 +11,7 @@ INSTALLATION
 
 1. Clone this repo:
 
-        $ git clone git@github.com:natehardison/dotfiles.git
-
-1. Initialize submodules:
-
-        $ git submodule init
-        $ git submodule update
+        $ git clone --recurse-submodules -j8 git@github.com:natehardison/dotfiles.git
 
 1. Install [Homebrew](http://brew.sh/):
 
