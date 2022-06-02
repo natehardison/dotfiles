@@ -30,7 +30,7 @@ clean:
 
 fonts: prepare
 	$(Q)mkdir -p $(FONTS)
-	$(Q)cp Inconsolata-dz.otf $(FONTS)
+	$(Q)cp fonts/Inconsolata-dz.otf $(FONTS)
 
 ifeq ($(OS),Darwin)
 homebrew: prepare

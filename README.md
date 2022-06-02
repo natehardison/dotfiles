@@ -40,7 +40,7 @@ INSTALLATION
 
 1. Set up Inconsolata-dz as the font:
 
-        $ cp dotfiles/Inconsolata-dz.otf ~/Library/Fonts
+        $ cp dotfiles/fonts/Inconsolata-dz.otf ~/Library/Fonts
 
 1. Install the following Homebrew packages:
 
