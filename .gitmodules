@@ -10,3 +10,6 @@
 [submodule "vim-sensible"]
 	path = vim/pack/plugins/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
+[submodule "prezto"]
+	path = zsh/.zprezto
+	url = https://github.com/sorin-ionescu/prezto.git

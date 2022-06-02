@@ -17,21 +17,19 @@ INSTALLATION
 
         $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-1. Install [Prezto](https://github.com/sorin-ionescu/prezto):
-
-        $ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-        $ setopt EXTENDED_GLOB
-        $ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-            ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-          done
-
 1. Set up links to the dot files:
 
         $ ln -s dotfiles/bash_aliases ~/.bash_aliases
         $ ln -s dotfiles/gitconfig ~/.gitconfig
         $ ln -s dotfiles/ssh/config ~/.ssh/config
         $ ln -s dotfiles/vim ~/.vim
-        $ ln -s dotfiles/zpreztorc ~/.zpreztorc
+        $ ln -s dotfiles/zsh/zpreztorc ~/.zpreztorc
+        $ ln -s dotfiles/zsh/.zprezto ~/.zprezto
+        $ ln -s dotfiles/zsh/.zprezto/runcoms/zlogin ~/.zlogin
+        $ ln -s dotfiles/zsh/.zprezto/runcoms/zlogout ~/.zlogout
+        $ ln -s dotfiles/zsh/.zprezto/runcoms/zprofile ~/.zprofile
+        $ ln -s dotfiles/zsh/.zprezto/runcoms/zshenv ~/.zshenv
+        $ ln -s dotfiles/zsh/.zprezto/runcoms/zshrc ~/.zshrc
 
 1. Set up Inconsolata-dz as the font:
 
