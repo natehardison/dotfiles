@@ -1,15 +1,6 @@
 [submodule "smyck"]
 	path = colors/smyck
 	url = https://github.com/hukl/Smyck-Color-Scheme.git
-[submodule "vim-airline"]
-	path = vim/pack/plugins/start/vim-airline
-	url = https://github.com/vim-airline/vim-airline.git
-[submodule "vim-fugitive"]
-	path = vim/pack/plugins/start/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim-sensible"]
-	path = vim/pack/plugins/start/vim-sensible
-	url = https://github.com/tpope/vim-sensible.git
 [submodule "prezto"]
 	path = zsh/.zprezto
 	url = https://github.com/sorin-ionescu/prezto.git

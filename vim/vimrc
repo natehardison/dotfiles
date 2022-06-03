@@ -1,14 +1,21 @@
 " Cribbed from various, including:
 " - Tommy MacWilliam (https://github.com/tmacwill/vimrc)
 " - shapeshed (https://github.com/shapeshed/dotfiles/vimrc)
+" - junegunn (https://github.com/junegunn/dotfiles/vimrc)
 
 set nocompatible                 " Vim defaults, not vi compatible
 
-syntax on                        " Enable syntax highlighting
-filetype plugin indent on        " Allow plugins to determine indentation
-
 let mapleader = ","
 let g:netrw_banner = 0           " Disable banner in file browser
+
+call plug#begin()
+Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary.vim'
+Plug 'tpope/vim-fugitive.vim'
+Plug 'tpope/vim-sensible.vim'
+Plug 'vim-airline/vim-airline.vim'
+call plug#end()
 
 set autoindent                   " Copy indent from current line on <CR>
 set background=dark              " Set dark background
