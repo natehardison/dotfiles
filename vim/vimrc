@@ -24,7 +24,6 @@ set cursorline                   " Highlight cursor line
 set encoding=utf-8               " UTF-8 everything
 set expandtab                    " Expand tabs to spaces
 set guifont=Inconsolata-dz:h15   " Font to use in GUI versions
-set hlsearch                     " Highlight search matches
 set ignorecase                   " Ignore case when searching
 set incsearch                    " Show incremental matches while typing
 set linebreak
