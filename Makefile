@@ -16,16 +16,19 @@ ifneq ($(VERBOSE),s)
 Q := @
 endif
 
-all: fonts links
+all: bat fonts links prezto
 
-clean: clean-fonts clean-prezto
-	$(Q)rm -f $(HOME)/bin
-	$(Q)rm -f $(HOME)/.bash_aliases
-	$(Q)rm -f $(HOME)/.gitconfig
-	$(Q)rm -rf $(HOME)/.vim
-	$(Q)rm -f $(HOME)/.screenrc
-	$(Q)rm -f $(HOME)/.ssh/config
-	$(Q)rm -f $(HOME)/.zshrc
+clean: clean-bat clean-fonts clean-links clean-prezto
+
+prepare:
+	$(Q)git submodule update --init
+
+bat: prepare
+	$(Q)mkdir -p $(HOME)/.config
+	$(Q)ln -s $(CURDIR)/bat $(HOME)/.config/bat
+
+clean-bat:
+	$(Q)rm -r $(HOME)/.config/bat
 
 fonts: prepare
 	$(Q)mkdir -p $(FONTS)
@@ -50,8 +53,14 @@ links: prepare
 	$(Q)ln -s $(CURDIR)/ssh/config $(HOME)/.ssh/config
 	$(Q)ln -s $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
-prepare:
-	$(Q)git submodule update --init
+clean-links:
+	$(Q)rm -f $(HOME)/bin
+	$(Q)rm -f $(HOME)/.bash_aliases
+	$(Q)rm -f $(HOME)/.gitconfig
+	$(Q)rm -rf $(HOME)/.vim
+	$(Q)rm -f $(HOME)/.screenrc
+	$(Q)rm -f $(HOME)/.ssh/config
+	$(Q)rm -f $(HOME)/.zshrc
 
 prezto: prepare
 	$(Q)ln -s $(CURDIR)/zsh/.zprezto $(HOME)/.zprezto
@@ -74,4 +83,4 @@ ifeq ($(OS),Darwin)
 	$(Q)brew update && brew doctor
 endif
 
-.PHONY: all clean clean-fonts clean-prezto fonts links prepare prezto update
+.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts links prepare prezto update

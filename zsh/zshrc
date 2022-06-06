@@ -10,9 +10,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
 EDITOR=vim
 VISUAL=vim
+
+# use bat for man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
