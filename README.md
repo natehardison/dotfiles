@@ -31,9 +31,9 @@ INSTALLATION
         $ ln -s dotfiles/zsh/.zprezto/runcoms/zshenv ~/.zshenv
         $ ln -s dotfiles/zsh/.zprezto/runcoms/zshrc ~/.zshrc
 
-1. Set up Inconsolata-dz as the font:
+1. Set up fonts
 
-        $ cp dotfiles/fonts/Inconsolata-dz.otf ~/Library/Fonts
+        $ ./dotfiles/fonts/install.sh
 
 1. Install the following Homebrew packages:
 
