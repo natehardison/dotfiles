@@ -6,15 +6,26 @@
 set nocompatible                 " Vim defaults, not vi compatible
 
 let mapleader = ","
-let g:netrw_banner = 0           " Disable banner in file browser
 
 call plug#begin()
-Plug 'junegunn/fzf', { 'do': './install --all' }
+" basic vim configuration
+Plug 'tpope/vim-sensible'
+
+" navigation plugins
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-commentary.vim'
-Plug 'tpope/vim-fugitive.vim'
-Plug 'tpope/vim-sensible.vim'
-Plug 'vim-airline/vim-airline.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" editing
+Plug 'tpope/vim-commentary'
+
+" git plugins
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" colors and statusline
+Plug 'vim-airline/vim-airline'
+Plug 'hukl/Smyck-Color-Scheme'
 call plug#end()
 
 set autoindent                   " Copy indent from current line on <CR>
@@ -23,7 +34,6 @@ set belloff=all                  " Silence terminal bell
 set cursorline                   " Highlight cursor line
 set encoding=utf-8               " UTF-8 everything
 set expandtab                    " Expand tabs to spaces
-set guifont=Inconsolata-dz:h15   " Font to use in GUI versions
 set ignorecase                   " Ignore case when searching
 set incsearch                    " Show incremental matches while typing
 set linebreak
@@ -40,19 +50,22 @@ set smartcase                    " Override 'ignorecase' if search has uppercase
 set smartindent
 set smarttab
 set softtabstop=4                " Number of tabs that a <Tab> counts for
-set tabpagemax=25                " 10 tabs is far too few
 set tabstop=4
 set wildignore+=.git             " Ignore .git/ in completions
 set wildmenu                     " Enable command-line completion
 set wrap                         " Wrap long lines
 
 colorscheme smyck
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " ; is better than :
 nnoremap ; :
 
 " kj is better than <Esc> or <C-c>
+cnoremap kj <C-c>
 inoremap kj <Esc>
+xnoremap kj <Esc>
 
 " More logical vertical navigation with lines that wrap
 nnoremap <silent> k gk
@@ -68,8 +81,25 @@ map <C-l> <C-W>l
 " Make it easier to work with tabs
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>w :tabclose<CR>
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabprev<CR>
 nnoremap <Tab> :tabnext<CR>
 nnoremap <S-Tab> :tabprevious<CR>
+
+" Make it easier to work with buffers
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
+
+" Quick searching with fzf
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :GFiles<CR>
+
+" Open the NERDtree
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Open help in a vertical split to the left
+cabbrev h vert help
+cabbrev help vert help
 
 " Move current line down 1 (-) or up 1 (_)
 nnoremap - yypkDj
@@ -80,7 +110,7 @@ nnoremap <C-u> viwU
 inoremap <C-u> <Esc>viwUea
 
 " Fast editing and sourcing of this file
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Make double-<Esc> clear search highlights
@@ -93,7 +123,6 @@ iabbrev tehn then
 
 " Shortcuts
 iabbrev @@ natehardison@gmail.com
-
 
 " Transparent editing of GnuPG-encrypted files
 " Based on a solution by Wouter Hanegraaff
