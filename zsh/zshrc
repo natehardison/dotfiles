@@ -1,0 +1,40 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+EDITOR=vim
+VISUAL=vim
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias ve='vim ~/.vim/vimrc'
+alias ze='vim ~/.zshrc'
+
+# Git aliases that don't exist in Prezto module
+alias ga='git add'
+alias gap='git add -p'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gf='git fetch'
+alias gfo='git fetch origin'
+alias gl='git log'
+alias glp='git log -p'
+alias gr='git rebase'
+alias gri='git rebase -i'
+alias grm='git rm'
+alias gs='git status'

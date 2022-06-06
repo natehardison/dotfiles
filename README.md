@@ -23,13 +23,13 @@ INSTALLATION
         $ ln -s dotfiles/gitconfig ~/.gitconfig
         $ ln -s dotfiles/ssh/config ~/.ssh/config
         $ ln -s dotfiles/vim ~/.vim
-        $ ln -s dotfiles/zsh/zpreztorc ~/.zpreztorc
+        $ ln -s dotfiles/zsh/zshrc ~/.zshrc
         $ ln -s dotfiles/zsh/.zprezto ~/.zprezto
+        $ ln -s dotfiles/zsh/zpreztorc ~/.zpreztorc
         $ ln -s dotfiles/zsh/.zprezto/runcoms/zlogin ~/.zlogin
         $ ln -s dotfiles/zsh/.zprezto/runcoms/zlogout ~/.zlogout
         $ ln -s dotfiles/zsh/.zprezto/runcoms/zprofile ~/.zprofile
         $ ln -s dotfiles/zsh/.zprezto/runcoms/zshenv ~/.zshenv
-        $ ln -s dotfiles/zsh/.zprezto/runcoms/zshrc ~/.zshrc
 
 1. Set up fonts
 
