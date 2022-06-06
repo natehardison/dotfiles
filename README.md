@@ -37,8 +37,10 @@ INSTALLATION
 
 1. Install the following Homebrew packages:
 
-    * `ag`
-    * `autojump`
+    * `bat`
+    * `fzf`
+    * `git-delta`
     * `gnupg`
     * `macvim`
+    * `ripgrep`
     * `tree`
