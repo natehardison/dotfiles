@@ -25,7 +25,11 @@ Plug 'airblade/vim-gitgutter'
 
 " colors and statusline
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'hukl/Smyck-Color-Scheme'
+Plug 'jnurmine/Zenburn'
+
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 set autoindent                   " Copy indent from current line on <CR>
@@ -55,7 +59,8 @@ set wildignore+=.git             " Ignore .git/ in completions
 set wildmenu                     " Enable command-line completion
 set wrap                         " Wrap long lines
 
-colorscheme smyck
+colorscheme zenburn
+let g:airline_theme = 'zenburn'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 

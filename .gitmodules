@@ -10,3 +10,6 @@
 [submodule "solarized"]
 	path = colors/solarized
 	url = https://github.com/altercation/solarized
+[submodule "zenburn"]
+	path = colors/zenburn
+	url = https://github.com/bdesham/zenburn-terminal
