@@ -50,6 +50,7 @@ links: prepare
 	$(Q)ln -s $(CURDIR)/gitconfig $(HOME)/.gitconfig
 	$(Q)ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	$(Q)ln -s $(CURDIR)/ssh/config $(HOME)/.ssh/config
+	$(Q)ln -s $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 	$(Q)ln -s $(CURDIR)/tmux/tmux.conf $(HOME)/.tmux.conf
 	$(Q)ln -s $(CURDIR)/vim $(HOME)/.vim
 	$(Q)ln -s $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
@@ -60,6 +61,7 @@ clean-links:
 	$(Q)rm -f $(HOME)/.gitconfig
 	$(Q)rm -f $(HOME)/.screenrc
 	$(Q)rm -f $(HOME)/.ssh/config
+	$(Q)rm -f $(HOME)/.ssh/config.d
 	$(Q)rm -f $(HOME)/.tmux.conf
 	$(Q)rm -rf $(HOME)/.vim
 	$(Q)rm -f $(HOME)/.zshrc

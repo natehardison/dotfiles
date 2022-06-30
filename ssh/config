@@ -1,3 +1,6 @@
+# Include any more specific files
+Include config.d/*
+
 # Don't do host key checking on LAN hosts
 Host 10.* 192.168.*
     LogLevel QUIET
