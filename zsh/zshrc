@@ -20,6 +20,9 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# required for 256 color tmux terminal
+export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias ve='vim ~/.vim/vimrc'

@@ -22,6 +22,7 @@ INSTALLATION
         $ ln -s dotfiles/bash_aliases ~/.bash_aliases
         $ ln -s dotfiles/gitconfig ~/.gitconfig
         $ ln -s dotfiles/ssh/config ~/.ssh/config
+        $ ln -s dotfiles/tmux/tmux.conf ~/.tmux.conf
         $ ln -s dotfiles/vim ~/.vim
         $ ln -s dotfiles/zsh/zshrc ~/.zshrc
         $ ln -s dotfiles/zsh/.zprezto ~/.zprezto
@@ -42,7 +43,10 @@ INSTALLATION
     * `git-delta`
     * `gnupg`
     * `macvim`
+    * `--cask rectangle`
     * `ripgrep`
+    * `telnet`
+    * `tmux`
     * `tree`
     * `volta`
 
