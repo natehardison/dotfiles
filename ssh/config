@@ -4,5 +4,10 @@ Host 10.* 192.168.*
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+# Need to set these in order to use macOS keychain opts
+# https://www.technomancer.com/archives/464
 Host *
     ForwardAgent yes
+    IgnoreUnknown UseKeychain
+    UseKeychain yes
+    AddKeysToAgent yes
