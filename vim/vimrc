@@ -65,6 +65,7 @@ colorscheme zenburn
 let g:airline_theme = 'zenburn'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#whitespace#enabled = 1
 
 " ; is better than :
 nnoremap ; :
