@@ -16,6 +16,10 @@ VISUAL=vim
 # use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# use Volta for managing node (required for coc)
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias ve='vim ~/.vim/vimrc'

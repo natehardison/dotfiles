@@ -44,3 +44,8 @@ INSTALLATION
     * `macvim`
     * `ripgrep`
     * `tree`
+    * `volta`
+
+1. Use `volta` to install `node` (required for `vim` command / code completion)
+
+    $ volta install node

@@ -29,7 +29,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'hukl/Smyck-Color-Scheme'
 Plug 'jnurmine/Zenburn'
 
+" language support
 Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 set autoindent                   " Copy indent from current line on <CR>
