@@ -40,6 +40,7 @@ INSTALLATION
 
     * `bat`
     * `fzf`
+    * `gh`
     * `git-delta`
     * `gnupg`
     * `macvim`
@@ -48,6 +49,7 @@ INSTALLATION
     * `telnet`
     * `tmux`
     * `tree`
+    * `universal-ctags`
     * `volta`
 
 1. Use `volta` to install `node` (required for `vim` command / code completion)
