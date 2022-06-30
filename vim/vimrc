@@ -59,6 +59,7 @@ set softtabstop=4                " Number of tabs that a <Tab> counts for
 set tabstop=4
 set wildignore+=.git             " Ignore .git/ in completions
 set wildmenu                     " Enable command-line completion
+set whichwrap+=hl                " Allow h / l to wrap to prev / next line
 set wrap                         " Wrap long lines
 
 colorscheme zenburn
