@@ -15,9 +15,12 @@ Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ludovicchabant/vim-gutentags'
 
 " editing
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
 
 " git plugins
 Plug 'tpope/vim-fugitive'
@@ -40,6 +43,7 @@ set belloff=all                  " Silence terminal bell
 set cursorline                   " Highlight cursor line
 set encoding=utf-8               " UTF-8 everything
 set expandtab                    " Expand tabs to spaces
+set hlsearch                     " Highlight search matches
 set ignorecase                   " Ignore case when searching
 set incsearch                    " Show incremental matches while typing
 set linebreak
@@ -64,9 +68,14 @@ set wrap                         " Wrap long lines
 
 colorscheme zenburn
 let g:airline_theme = 'zenburn'
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 1
+
+let g:gutentags_cache_dir = '~/.tags'
+
+let g:python_highlight_all = 1
 
 " ; is better than :
 nnoremap ; :
@@ -121,6 +130,9 @@ inoremap <C-u> <Esc>viwUea
 " Fast editing and sourcing of this file
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Make // search current selection in visual mode
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Make double-<Esc> clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
