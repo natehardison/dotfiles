@@ -14,11 +14,16 @@ EDITOR=vim
 VISUAL=vim
 
 # use bat for man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
 
 # use Volta for managing node (required for coc)
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# use pyenv for managing Python
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # required for 256 color tmux terminal
 export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
@@ -45,5 +50,7 @@ alias gl='git log'
 alias glp='git log -p'
 alias gr='git rebase'
 alias gri='git rebase -i'
+alias gro='git fetch origin && git rebase origin'
+alias grom='git fetch origin && git rebase origin main'
 alias grm='git rm'
 alias gs='git status'
