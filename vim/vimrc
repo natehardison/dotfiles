@@ -16,6 +16,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 
 " editing
 Plug 'tpope/vim-commentary'
@@ -114,6 +115,9 @@ nnoremap <leader>g :GFiles<CR>
 
 " Open the NERDtree
 nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Open/close the tagbar
+nmap <leader>b :TagbarToggle<CR>
 
 " Open help in a vertical split to the left
 cabbrev h vert help
