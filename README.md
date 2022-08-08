@@ -36,6 +36,11 @@ INSTALLATION
 
         $ ./dotfiles/fonts/install.sh
 
+1. Store screenshots in `~/screenshots/`, not ~/Desktop
+
+        $ mkdir $HOME/screenshots
+        $ defaults write com.apple.screencapture location $HOME/screenshots/ && killall SystemUIServer
+
 1. Install the following Homebrew packages:
 
     * `bat`
