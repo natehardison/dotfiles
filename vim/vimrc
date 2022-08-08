@@ -141,6 +141,9 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Make double-<Esc> clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
+" Format Entire File
+nnoremap fef gvG=
+
 " Fix typos
 iabbrev adn and
 iabbrev waht what
