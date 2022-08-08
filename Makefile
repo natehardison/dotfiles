@@ -2,6 +2,7 @@ OS := $(shell uname -s)
 
 ifeq ($(OS),Darwin)
 FONTS := $(HOME)/Library/Fonts
+SCREENSHOTS := $(HOME)/screenshots
 else
 FONTS := $(HOME)/.fonts
 endif
@@ -40,6 +41,11 @@ clean-fonts:
 ifeq ($(OS),Darwin)
 homebrew: prepare
 	$(Q)/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+screenshots:
+	$(Q)mkdir -p $(SCREENSHOTS)
+	$(Q)defaults write com.apple.screencapture location $(SCREENSHOTS)
+	$(Q)killall SystemUIServer
 
 .PHONY: homebrew
 endif
