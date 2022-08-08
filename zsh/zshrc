@@ -37,8 +37,18 @@ export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# quick config file edits
 alias ve='vim ~/.vim/vimrc'
 alias ze='vim ~/.zshrc'
+
+# allow opening of golinks (go/<foobar>) in browser
+open() {
+  if [[ $1 == go/* ]]; then
+    /usr/bin/open "https://$*"
+  else
+    /usr/bin/open $*
+  fi
+}
 
 # Git aliases that don't exist in Prezto module
 alias ga='git add'
