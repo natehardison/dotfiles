@@ -5,6 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# allow bash-style shell completions
+autoload -U +X bashcompinit && bashcompinit
+
 # add Homebrew shell completions (must come before sourcing Prezto)
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
