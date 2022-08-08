@@ -71,3 +71,8 @@ alias gro='git fetch origin && git rebase origin'
 alias grom='git fetch origin && git rebase origin main'
 alias grm='git rm'
 alias gs='git status'
+
+alias vpnls='scutil --nc list'
+alias vpnst='scutil --nc status'
+alias vpnon='networksetup -connectpppoeservice'
+alias vpnoff='networksetup -disconnectpppoeservice'
