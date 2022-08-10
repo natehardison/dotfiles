@@ -16,7 +16,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 
 " editing
 Plug 'tpope/vim-commentary'
@@ -62,7 +62,7 @@ set smartindent
 set smarttab
 set softtabstop=4                " Number of tabs that a <Tab> counts for
 set tabstop=4
-set wildignore+=.git             " Ignore .git/ in completions
+set wildignore+=.git,.mypy_cache " Ignore .git/ in completions
 set wildmenu                     " Enable command-line completion
 set whichwrap+=hl                " Allow h / l to wrap to prev / next line
 set wrap                         " Wrap long lines
@@ -75,6 +75,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 1
 
 let g:gutentags_cache_dir = '~/.tags'
+set statusline+=%{gutentags#statusline()}
 
 let g:python_highlight_all = 1
 
@@ -86,6 +87,9 @@ cnoremap kj <C-c>
 inoremap kj <Esc>
 xnoremap kj <Esc>
 
+" Make Y behave like other capitals
+nnoremap Y y$
+
 " More logical vertical navigation with lines that wrap
 nnoremap <silent> k gk
 nnoremap <silent> j gj
@@ -96,28 +100,26 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" Make it easier to work with tabs
-nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>w :tabclose<CR>
-nnoremap ]t :tabnext<CR>
-nnoremap [t :tabprev<CR>
-nnoremap <Tab> :tabnext<CR>
-nnoremap <S-Tab> :tabprevious<CR>
+nnoremap <Tab> <C-W>w
+nnoremap <S-Tab> <C-W>W
 
 " Make it easier to work with buffers
+nmap <leader>b :Buffers<CR>
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
+nnoremap <leader>w :bd<CR>
 
 " Quick searching with fzf
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>g :GFiles<CR>
+nnoremap <leader>f :GFiles<CR>
 
-" Open the NERDtree
+" Open Git
+nnoremap <leader>g :Git<CR>
+
+" Toggle the NERDtree
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" Open/close the tagbar
-nmap <leader>b :TagbarToggle<CR>
+" Toggle the tagbar
+nnoremap <leader>t :TagbarToggle f<CR>
 
 " Open help in a vertical split to the left
 cabbrev h vert help
@@ -132,7 +134,7 @@ nnoremap <C-u> viwU
 inoremap <C-u> <Esc>viwUea
 
 " Fast editing and sourcing of this file
-nnoremap <leader>ev :tabnew $MYVIMRC<CR>
+nnoremap <leader>ev :enew<CR>:e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Make // search current selection in visual mode
@@ -142,7 +144,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " Format Entire File
-nnoremap fef gvG=
+nnoremap fef ggvG=
 
 " Fix typos
 iabbrev adn and
