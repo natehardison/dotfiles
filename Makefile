@@ -23,9 +23,9 @@ clean: clean-bat clean-fonts clean-links clean-prezto
 
 prepare:
 	$(Q)git submodule update --init
+	$(Q)mkdir -p $(HOME)/.config
 
 bat: prepare
-	$(Q)mkdir -p $(HOME)/.config
 	$(Q)ln -s $(CURDIR)/bat $(HOME)/.config/bat
 
 clean-bat:
@@ -53,13 +53,6 @@ endif
 links: prepare
 	$(Q)ln -s $(CURDIR)/bash_aliases $(HOME)/.bash_aliases
 	$(Q)ln -s $(CURDIR)/bin $(HOME)/bin
-	$(Q)ln -s $(CURDIR)/gitconfig $(HOME)/.gitconfig
-	$(Q)ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
-	$(Q)ln -s $(CURDIR)/ssh/config $(HOME)/.ssh/config
-	$(Q)ln -s $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
-	$(Q)ln -s $(CURDIR)/tmux/tmux.conf $(HOME)/.tmux.conf
-	$(Q)ln -s $(CURDIR)/vim $(HOME)/.vim
-	$(Q)ln -s $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
 clean-links:
 	$(Q)rm -f $(HOME)/bin
@@ -72,14 +65,6 @@ clean-links:
 	$(Q)rm -rf $(HOME)/.vim
 	$(Q)rm -f $(HOME)/.zshrc
 
-prezto: prepare
-	$(Q)ln -s $(CURDIR)/zsh/.zprezto $(HOME)/.zprezto
-	$(Q)ln -s $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
-	$(Q)ln -s $(CURDIR)/zsh/.zprezto/runcoms/zshenv $(HOME)/.zshenv
-	$(Q)ln -s $(CURDIR)/zsh/.zprezto/runcoms/zprofile $(HOME)/.zprofile
-	$(Q)ln -s $(CURDIR)/zsh/.zprezto/runcoms/zlogin $(HOME)/.zlogin
-	$(Q)ln -s $(CURDIR)/zsh/.zprezto/runcoms/zlogout $(HOME)/.zlogout
-
 clean-prezto:
 	$(Q)rm -f $(HOME)/.zshenv
 	$(Q)rm -f $(HOME)/.zprofile
@@ -88,9 +73,32 @@ clean-prezto:
 	$(Q)rm -f $(HOME)/.zlogin
 	$(Q)rm -f $(HOME)/.zlogout
 
-update:
-ifeq ($(OS),Darwin)
-	$(Q)brew update && brew doctor
-endif
+git:
+	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.gitconfig
+
+prezto:
+	$(Q)ln -sF $(CURDIR)/zsh/.zprezto $(HOME)/.zprezto
+	$(Q)ln -sf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
+	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zshenv $(HOME)/.zshenv
+	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zprofile $(HOME)/.zprofile
+	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zlogin $(HOME)/.zlogin
+	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zlogout $(HOME)/.zlogout
+
+screen:
+	$(Q)ln -sf $(CURDIR)/screenrc $(HOME)/.screenrc
+
+ssh:
+	$(Q)mkdir -p $(HOME)/.ssh/
+	$(Q)ln -sf $(CURDIR)/ssh/config $(HOME)/.ssh/config
+	$(Q)ln -sF $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
+
+tmux:
+	$(Q)ln -sF $(CURDIR)/tmux $(HOME)/.tmux
+
+vim:
+	$(Q)ln -sF $(CURDIR)/vim $(HOME)/.vim
+
+zsh: prepare
+	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
 .PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts links prepare prezto update
