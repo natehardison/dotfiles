@@ -77,8 +77,8 @@ git:
 	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.gitconfig
 
 oh-my-tmux:
-	$(Q)ln -sF $(CURDIR)/tmux/oh-my-tmux $(HOME)/.tmux
-	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux/tmux.conf.local
+	$(Q)ln -sf $(CURDIR)/tmux/oh-my-tmux/.tmux.conf $(HOME)/.tmux
+	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux.conf.local
 
 prezto:
 	$(Q)ln -sF $(CURDIR)/zsh/.zprezto $(HOME)/.zprezto
