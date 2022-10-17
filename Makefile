@@ -76,6 +76,10 @@ clean-prezto:
 git:
 	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.gitconfig
 
+oh-my-tmux:
+	$(Q)ln -sF $(CURDIR)/tmux/oh-my-tmux $(HOME)/.tmux
+	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux/tmux.conf.local
+
 prezto:
 	$(Q)ln -sF $(CURDIR)/zsh/.zprezto $(HOME)/.zprezto
 	$(Q)ln -sf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
@@ -101,4 +105,4 @@ vim:
 zsh: prepare
 	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
-.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts links prepare prezto update
+.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts links prepare prezto

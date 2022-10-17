@@ -13,3 +13,6 @@
 [submodule "zenburn"]
 	path = colors/zenburn
 	url = https://github.com/bdesham/zenburn-terminal
+[submodule "tmux/oh-my-tmux"]
+	path = tmux/oh-my-tmux
+	url = https://github.com/gpakosz/.tmux.git
