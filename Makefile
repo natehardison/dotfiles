@@ -17,7 +17,7 @@ ifneq ($(VERBOSE),s)
 Q := @
 endif
 
-all: bat fonts links prezto
+all:: bat fonts git links screen ssh vim zsh
 
 clean: clean-bat clean-fonts clean-links clean-prezto
 
@@ -39,6 +39,8 @@ clean-fonts:
 	$(Q)/bin/bash fonts/uninstall.sh
 
 ifeq ($(OS),Darwin)
+all:: homebrew screenshots
+
 homebrew: prepare
 	$(Q)/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -73,14 +75,14 @@ clean-prezto:
 	$(Q)rm -f $(HOME)/.zlogin
 	$(Q)rm -f $(HOME)/.zlogout
 
-git:
-	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.gitconfig
+git: prepare
+	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.config/git/config
 
-oh-my-tmux:
+oh-my-tmux: prepare
 	$(Q)ln -sf $(CURDIR)/tmux/oh-my-tmux/.tmux.conf $(HOME)/.tmux
 	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux.conf.local
 
-prezto:
+prezto: prepare
 	$(Q)ln -sF $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
 	$(Q)ln -sf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
 	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
@@ -96,13 +98,12 @@ ssh:
 	$(Q)ln -sf $(CURDIR)/ssh/config $(HOME)/.ssh/config
 	$(Q)ln -sF $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 
-tmux:
-	$(Q)ln -sF $(CURDIR)/tmux $(HOME)/.tmux
+tmux: oh-my-tmux
 
 vim:
 	$(Q)ln -sF $(CURDIR)/vim $(HOME)/.vim
 
-zsh: prepare
+zsh: prepare prezto
 	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
-.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts links prepare prezto
+.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts git links oh-my-tmux prepare prezto screen ssh tmux vim zsh
