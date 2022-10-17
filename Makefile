@@ -81,12 +81,12 @@ oh-my-tmux:
 	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux.conf.local
 
 prezto:
-	$(Q)ln -sF $(CURDIR)/zsh/.zprezto $(HOME)/.zprezto
+	$(Q)ln -sF $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
 	$(Q)ln -sf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
-	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zshenv $(HOME)/.zshenv
-	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zprofile $(HOME)/.zprofile
-	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zlogin $(HOME)/.zlogin
-	$(Q)ln -sf $(CURDIR)/zsh/.zprezto/runcoms/zlogout $(HOME)/.zlogout
+	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
+	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
+	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
+	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
 
 screen:
 	$(Q)ln -sf $(CURDIR)/screenrc $(HOME)/.screenrc
