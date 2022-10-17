@@ -75,7 +75,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 1
 
 let g:gutentags_cache_dir = '~/.tags'
-set statusline+=%{gutentags#statusline()}
 
 let g:python_highlight_all = 1
 
@@ -94,12 +93,13 @@ nnoremap Y y$
 nnoremap <silent> k gk
 nnoremap <silent> j gj
 
-" Make it easier to work with splits
+" Make it easier to work with windows
 nnoremap <leader>s :vsplit<CR>
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+map <C-r> <C-W>r
 nnoremap <Tab> <C-W>w
 nnoremap <S-Tab> <C-W>W
 
@@ -109,8 +109,12 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 nnoremap <leader>w :bd<CR>
 
+" Reload current file
+nnoremap <leader>r :e<CR>
+
 " Quick searching with fzf
-nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>e :GFiles<CR>
+nnoremap <leader>f :Rg<CR>
 
 " Open Git
 nnoremap <leader>g :Git<CR>
@@ -118,8 +122,12 @@ nnoremap <leader>g :Git<CR>
 " Toggle the NERDtree
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" Toggle the tagbar
+" Make it easier to work with tags
 nnoremap <leader>t :TagbarToggle f<CR>
+nnoremap <C-]> g<C-]>
+nnoremap g] g<C-]>
+nnoremap ]g :tnext<CR>
+nnoremap [g :pop<CR>
 
 " Open help in a vertical split to the left
 cabbrev h vert help
@@ -185,4 +193,10 @@ augroup encrypted
   " Undo the encryption so we are back in the normal text, directly
   " after the file has been written.
   autocmd BufWritePost,FileWritePost *.gpg,*.asc u
+augroup END
+
+" Turn on line wrapping for markdown files
+augroup Markdown
+  autocmd!
+  autocmd FileType markdown set textwidth=80
 augroup END
