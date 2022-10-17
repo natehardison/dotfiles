@@ -5,9 +5,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# allow bash-style shell completions
-autoload -U +X bashcompinit && bashcompinit
-
 # add Homebrew shell completions (must come before sourcing Prezto)
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
@@ -15,6 +12,9 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+# allow bash-style shell completions
+autoload -U +X bashcompinit && bashcompinit
 
 EDITOR=vim
 VISUAL=vim
@@ -38,11 +38,40 @@ export PATH="$HOME/.local/bin:$PATH"
 # required for 256 color tmux terminal
 export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
 
+# configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# configure zoxide
+eval "$(zoxide init zsh)"
+
+# use exa instead of ls
+alias ls='exa --git'
+alias la='ll -a'
+
+# jq aliases
+alias jqf='jq -r | fzf --tac'
+alias jql='jq -C | bat'
+alias jqr='jqfzf'
+
 # quick config file edits
+alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
 alias ze='vim ~/.zshrc'
+
+# shortcut for making python virtualenvs
+mkenv() {
+  python -m venv $1 && source $1/bin/activate
+}
+
+lsenv() {
+  ls -a | grep -E "\.\w+env$" --color=never
+}
+
+srcenv() {
+  source $1/bin/activate
+}
+
+alias toast='z node-automation && source .virtualenv/bin/activate'
 
 # allow opening of golinks (go/<foobar>) in browser
 open() {
@@ -70,12 +99,21 @@ alias gl='git log'
 alias glp='git log -p'
 alias gr='git rebase'
 alias gri='git rebase -i'
+alias grim='git rebase -i origin/main'
 alias gro='git fetch origin && git rebase origin'
-alias grom='git fetch origin && git rebase origin main'
+alias grom='git fetch origin && git rebase origin/main'
 alias grm='git rm'
 alias gs='git status'
 
+# macOS VPN utilities
 alias vpnls='scutil --nc list'
 alias vpnst='scutil --nc status'
 alias vpnon='networksetup -connectpppoeservice'
 alias vpnoff='networksetup -disconnectpppoeservice'
+
+# autocompletions
+complete -C eero-api eero-api
+eval "$(register-python-argcomplete pipx)"
+
+zstyle -d ':completion:*' format
+zstyle ':completion:*:descriptions' format '[%d]'
