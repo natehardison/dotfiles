@@ -79,7 +79,7 @@ git: prepare
 	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.config/git/config
 
 oh-my-tmux: prepare
-	$(Q)ln -sf $(CURDIR)/tmux/oh-my-tmux/.tmux.conf $(HOME)/.tmux
+	$(Q)ln -sf $(CURDIR)/tmux/oh-my-tmux/.tmux.conf $(HOME)/.tmux.conf
 	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux.conf.local
 
 prezto: prepare
