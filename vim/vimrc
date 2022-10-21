@@ -38,6 +38,7 @@ Plug 'jnurmine/Zenburn'
 " language support
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 
 set autoindent                   " Copy indent from current line on <CR>
@@ -59,11 +60,13 @@ set numberwidth=4
 set scrolloff=5                  " Keep 5 lines below the cursor
 set shiftwidth=4                 " Number of spaces to use for auto-indent
 set showtabline=2                " Always show tab line to avoid resizing
+set signcolumn=yes
 set smartcase                    " Override 'ignorecase' if search has uppercase
 set smartindent
 set smarttab
 set softtabstop=4                " Number of tabs that a <Tab> counts for
 set tabstop=4
+set updatetime=300               " Speed up updates (default 4000ms)
 set wildignore+=.git,.mypy_cache " Ignore .git/ in completions
 set wildmenu                     " Enable command-line completion
 set whichwrap+=hl                " Allow h / l to wrap to prev / next line
@@ -76,7 +79,26 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 1
 
+" needed in zenburn to show completion menu highlights
+highlight! link CocPumMenu Pmenu
+highlight! link CocMenuSel PmenuSel
+
+let g:coc_global_extensions = [
+  \ '@yaegassy/coc-ansible',
+  \ 'coc-cmake',
+  \ 'coc-jedi',
+  \ 'coc-json',
+  \ 'coc-git',
+  \ 'coc-pyright'
+\]
+
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+\}
+
 let g:gutentags_cache_dir = '~/.tags'
+
+let g:jedi#completions_enabled = 0
 
 let g:python_highlight_all = 1
 
@@ -202,3 +224,18 @@ augroup Markdown
   autocmd!
   autocmd FileType markdown set textwidth=80
 augroup END
+
+" Completions
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ CheckBackspace() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
