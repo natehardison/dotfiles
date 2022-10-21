@@ -71,7 +71,7 @@ srcenv() {
   source $1/bin/activate
 }
 
-alias toast='z node-automation && source .virtualenv/bin/activate'
+alias toast='z node-automation && srcenv .virtualenv'
 
 # allow opening of golinks (go/<foobar>) in browser
 open() {

@@ -76,6 +76,7 @@ clean-prezto:
 	$(Q)rm -f $(HOME)/.zlogout
 
 git: prepare
+	$(Q)mkdir -p $(HOME)/.config/git
 	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.config/git/config
 
 oh-my-tmux: prepare
