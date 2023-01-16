@@ -19,6 +19,8 @@ autoload -U +X bashcompinit && bashcompinit
 EDITOR=vim
 VISUAL=vim
 
+alias vim=nvim
+
 # use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
 alias cat=bat

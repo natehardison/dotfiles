@@ -14,7 +14,7 @@ Plug 'tpope/vim-sensible'
 " navigation plugins
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
@@ -79,6 +79,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 1
 
+let g:python_host_provider = '/Users/nateh/.pyenv/shims/python3.10'
+
 " needed in zenburn to show completion menu highlights
 highlight! link CocPumMenu Pmenu
 highlight! link CocMenuSel PmenuSel
@@ -89,7 +91,8 @@ let g:coc_global_extensions = [
   \ 'coc-jedi',
   \ 'coc-json',
   \ 'coc-git',
-  \ 'coc-pyright'
+  \ 'coc-pyright',
+  \ 'coc-rust-analyzer'
 \]
 
 let g:coc_filetype_map = {
@@ -131,7 +134,12 @@ nnoremap <S-Tab> <C-W>W
 nmap <leader>b :Buffers<CR>
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
-nnoremap <leader>w :bd<CR>
+
+" Make it easier to work with tabs
+nnoremap <leader>t :tabnew<CR>
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabprev<CR>
+nnoremap <leader>w :tabclose<CR>
 
 " Reload current file
 nnoremap <leader>r :e<CR>
@@ -140,14 +148,11 @@ nnoremap <leader>r :e<CR>
 nnoremap <leader>e :GFiles<CR>
 nnoremap <leader>f :Rg<CR>
 
-" Open Git
-nnoremap <leader>g :Git<CR>
-
-" Toggle the NERDtree
-nnoremap <leader>n :NERDTreeToggle<CR>
+" Toggle the CHADtree
+nnoremap <leader>v <cmd>CHADopen<cr>
 
 " Make it easier to work with tags
-nnoremap <leader>t :TagbarToggle f<CR>
+nnoremap <leader>g :TagbarToggle f<CR>
 nnoremap <C-]> g<C-]>
 nnoremap g] g<C-]>
 nnoremap ]g :tnext<CR>
@@ -166,7 +171,7 @@ nnoremap <C-u> viwU
 inoremap <C-u> <Esc>viwUea
 
 " Fast editing and sourcing of this file
-nnoremap <leader>ev :enew<CR>:e $MYVIMRC<CR>
+nnoremap <leader>ev :enew<CR>:e ~/.vim/vimrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Make // search current selection in visual mode
