@@ -9,8 +9,11 @@ Host 10.* 192.168.*
 
 # Need to set these in order to use macOS keychain opts
 # https://www.technomancer.com/archives/464
+# Host *
+#     IgnoreUnknown UseKeychain
+#     UseKeychain yes
+#     AddKeysToAgent yes
+
+# Use 1Password ssh-agent instead of macOS
 Host *
-    ForwardAgent yes
-    IgnoreUnknown UseKeychain
-    UseKeychain yes
-    AddKeysToAgent yes
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
