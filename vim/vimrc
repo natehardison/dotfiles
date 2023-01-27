@@ -79,8 +79,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 1
 
-let g:python_host_provider = '/Users/nateh/.pyenv/shims/python3.10'
-
 " needed in zenburn to show completion menu highlights
 highlight! link CocPumMenu Pmenu
 highlight! link CocMenuSel PmenuSel
