@@ -26,7 +26,7 @@ prepare:
 	$(Q)mkdir -p $(HOME)/.config
 
 bat: prepare
-	$(Q)ln -s $(CURDIR)/bat $(HOME)/.config/bat
+	$(Q)ln -s $(CURDIR)/$@ $(HOME)/.config/$@
 
 clean-bat:
 	$(Q)rm -r $(HOME)/.config/bat
@@ -42,7 +42,8 @@ ifeq ($(OS),Darwin)
 all:: homebrew screenshots
 
 homebrew: prepare
-	$(Q)/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	$(Q)/bin/bash -c "$$(which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	cat $(CURDIR)/brew/leaves.txt | xargs brew install
 
 screenshots:
 	$(Q)mkdir -p $(SCREENSHOTS)
@@ -79,6 +80,16 @@ git: prepare
 	$(Q)mkdir -p $(HOME)/.config/git
 	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.config/git/config
 
+iterm2:
+	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
+
+node: homebrew
+	$(Q)/bin/bash -c "$$(which -s node || volta install node)"
+
+nvim: prepare vim
+	$(Q)ln -sF $(CURDIR)/$@ $(HOME)/.config/$@
+	nvim +PlugUpdate +qall
+
 oh-my-tmux: prepare
 	$(Q)ln -sf $(CURDIR)/tmux/oh-my-tmux/.tmux.conf $(HOME)/.tmux.conf
 	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux.conf.local
@@ -91,6 +102,9 @@ prezto: prepare
 	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
 	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
 
+s: prepare
+	$(Q)ln -sF $(CURDIR)/$@ $(HOME)/.config/$@
+
 screen:
 	$(Q)ln -sf $(CURDIR)/screenrc $(HOME)/.screenrc
 
@@ -101,10 +115,10 @@ ssh:
 
 tmux: oh-my-tmux
 
-vim:
+vim: homebrew node
 	$(Q)ln -sF $(CURDIR)/vim $(HOME)/.vim
 
 zsh: prepare prezto
 	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
-.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts git links oh-my-tmux prepare prezto screen ssh tmux vim zsh
+.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts git links iterm2 node nvim oh-my-tmux prepare prezto s screen ssh tmux vim zsh

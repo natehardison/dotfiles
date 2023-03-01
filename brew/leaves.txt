@@ -9,6 +9,7 @@ macvim
 neovim
 pyenv
 ripgrep
+s-search
 telnet
 tmux
 tree
