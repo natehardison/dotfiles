@@ -31,9 +31,10 @@ bat: prepare
 clean-bat:
 	$(Q)rm -r $(HOME)/.config/bat
 
-fonts: prepare
+fonts: prepare homebrew
 	$(Q)mkdir -p $(FONTS)
 	$(Q)/bin/bash fonts/install.sh
+	brew tap homebrew/cask-fonts && brew install --cask font-inconsolata-go-nerd-font
 
 clean-fonts:
 	$(Q)/bin/bash fonts/uninstall.sh
@@ -80,7 +81,7 @@ git: prepare
 	$(Q)mkdir -p $(HOME)/.config/git
 	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.config/git/config
 
-iterm2:
+iterm2: fonts
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
 
 node: homebrew
