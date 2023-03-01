@@ -3,7 +3,7 @@
     email = natehardison@gmail.com
 
 [core]
-    editor = vim
+    editor = nvim
     pager = delta
 
 [interactive]
