@@ -21,7 +21,9 @@ autoload -U +X bashcompinit && bashcompinit
 EDITOR=vim
 VISUAL=vim
 
-alias vim=nvim
+if command -v nvim >/dev/null; then
+  alias vim=nvim
+fi
 
 # use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
@@ -34,7 +36,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # use pyenv for managing Python
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 # allow pipx-installed CLIs to run
 export PATH="$HOME/.local/bin:$PATH"
@@ -51,7 +53,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # configure zoxide
-eval "$(zoxide init zsh)"
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
 # use exa instead of ls
 alias ls='exa --git'
@@ -123,7 +125,7 @@ alias vpnoff='networksetup -disconnectpppoeservice'
 
 # autocompletions
 complete -C eero-api eero-api
-eval "$(register-python-argcomplete pipx)"
+command -v register-python-argcomplete >/dev/null && eval "$(register-python-argcomplete pipx)"
 
 zstyle -d ':completion:*' format
 zstyle ':completion:*:descriptions' format '[%d]'
