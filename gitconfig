@@ -47,6 +47,8 @@
     st = status
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     wip = commit -a -m"WIP"
+    sw = switch
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)%an <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
 
 [pager]
     color = true
@@ -56,6 +58,7 @@
     diff = auto
     interactive = auto
     status = auto
+    ui = auto
 
 [github]
     user = natehardison

@@ -5,8 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# add Homebrew shell completions (must come before sourcing Prezto)
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # add Homebrew shell completions (must come before sourcing Prezto)
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -41,7 +43,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
 
 # add the 1Password SSH agent
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+fi
 
 # configure fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -59,6 +63,7 @@ alias jql='jq -C | bat'
 alias jqr='jqfzf'
 
 # quick config file edits
+alias se='vim ~/.ssh/config'
 alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
 alias ze='vim ~/.zshrc'
