@@ -14,7 +14,9 @@ Plug 'tpope/vim-sensible'
 " navigation plugins
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+if has('nvim')
+  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+endif
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
