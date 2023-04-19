@@ -17,19 +17,22 @@ ifneq ($(VERBOSE),s)
 Q := @
 endif
 
-all:: bat fonts git links screen ssh vim zsh
+CONFIG := $(HOME)/.config
 
-clean: clean-bat clean-fonts clean-links clean-prezto
+define install-config
+ln -sF $(CURDIR)/$@ $(CONFIG)/$@
+endef
+
+all:: bat fonts git links nvim s screen ssh tmux vim zsh
+
+clean: clean-bat clean-fonts clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-zsh
 
 prepare:
-	$(Q)git submodule update --init
-	$(Q)mkdir -p $(HOME)/.config
+	$(Q)git submodule update --init --recursive
+	$(Q)mkdir -p $(CONFIG)
 
 bat: prepare
-	$(Q)ln -s $(CURDIR)/$@ $(HOME)/.config/$@
-
-clean-bat:
-	$(Q)rm -r $(HOME)/.config/bat
+	$(Q)$(install-config)
 
 fonts: prepare homebrew
 	$(Q)mkdir -p $(FONTS)
@@ -38,6 +41,9 @@ fonts: prepare homebrew
 
 clean-fonts:
 	$(Q)/bin/bash fonts/uninstall.sh
+
+git: prepare
+	$(Q)$(install-config)
 
 ifeq ($(OS),Darwin)
 all:: homebrew screenshots
@@ -61,25 +67,6 @@ links: prepare
 clean-links:
 	$(Q)rm -f $(HOME)/bin
 	$(Q)rm -f $(HOME)/.bash_aliases
-	$(Q)rm -f $(HOME)/.gitconfig
-	$(Q)rm -f $(HOME)/.screenrc
-	$(Q)rm -f $(HOME)/.ssh/config
-	$(Q)rm -f $(HOME)/.ssh/config.d
-	$(Q)rm -f $(HOME)/.tmux.conf
-	$(Q)rm -rf $(HOME)/.vim
-	$(Q)rm -f $(HOME)/.zshrc
-
-clean-prezto:
-	$(Q)rm -f $(HOME)/.zshenv
-	$(Q)rm -f $(HOME)/.zprofile
-	$(Q)rm -f $(HOME)/.zprezto
-	$(Q)rm -f $(HOME)/.zpreztorc
-	$(Q)rm -f $(HOME)/.zlogin
-	$(Q)rm -f $(HOME)/.zlogout
-
-git: prepare
-	$(Q)mkdir -p $(HOME)/.config/git
-	$(Q)ln -sf $(CURDIR)/gitconfig $(HOME)/.config/git/config
 
 iterm2: fonts
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
@@ -88,12 +75,8 @@ node: homebrew
 	$(Q)/bin/bash -c "$$(which -s node || volta install node)"
 
 nvim: prepare vim
-	$(Q)ln -sF $(CURDIR)/$@ $(HOME)/.config/$@
+	$(Q)$(install-config)
 	nvim +PlugUpdate +qall
-
-oh-my-tmux: prepare
-	$(Q)ln -sf $(CURDIR)/tmux/oh-my-tmux/.tmux.conf $(HOME)/.tmux.conf
-	$(Q)ln -sf $(CURDIR)/tmux/tmux.conf.local $(HOME)/.tmux.conf.local
 
 prezto: prepare
 	$(Q)ln -sF $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
@@ -102,25 +85,50 @@ prezto: prepare
 	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
 	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
 	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
-	$(Q)git clone https://github.com/Aloxaf/fzf-tab $(CURDIR)/zsh/zprezto/contrib/fzf-tab
+	$(Q)git clone https://github.com/Aloxaf/fzf-tab $(CURDIR)/zsh/zprezto/contrib/fzf-tab || true
+
+clean-prezto:
+	$(Q)rm -f $(HOME)/.zprezto
+	$(Q)rm -f $(HOME)/.zpreztorc
+	$(Q)rm -f $(HOME)/.zshenv
+	$(Q)rm -f $(HOME)/.zprofile
+	$(Q)rm -f $(HOME)/.zlogin
+	$(Q)rm -f $(HOME)/.zlogout
 
 s: prepare
-	$(Q)ln -sF $(CURDIR)/$@ $(HOME)/.config/$@
+	$(Q)$(install-config)
 
 screen:
 	$(Q)ln -sf $(CURDIR)/screenrc $(HOME)/.screenrc
+
+clean-screen:
+	$(Q)rm -f $(HOME)/.screenrc
 
 ssh:
 	$(Q)mkdir -p $(HOME)/.ssh/
 	$(Q)ln -sf $(CURDIR)/ssh/config $(HOME)/.ssh/config
 	$(Q)ln -sF $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 
-tmux: oh-my-tmux
+clean-ssh:
+	$(Q)rm -f $(HOME)/.ssh/config
+	$(Q)rm -f $(HOME)/.ssh/config.d
+
+tmux: prepare
+	$(Q)$(install-config)
 
 vim: homebrew node
 	$(Q)ln -sF $(CURDIR)/vim $(HOME)/.vim
 
+clean-vim:
+	$(Q)rm -rf $(HOME)/.vim
+
 zsh: prepare prezto
 	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
-.PHONY: all bat clean clean-bat clean-fonts clean-prezto fonts git links iterm2 node nvim oh-my-tmux prepare prezto s screen ssh tmux vim zsh
+clean-zsh: clean-prezto
+	$(Q)rm -f $(HOME)/.zshrc
+
+clean-%:
+	$(Q)rm $(CONFIG)/$*
+
+.PHONY: all bat clean clean-fonts clean-prezto fonts git links iterm2 node nvim prepare prezto s screen ssh tmux vim zsh
