@@ -37,7 +37,6 @@ bat: prepare
 fonts: prepare homebrew
 	$(Q)mkdir -p $(FONTS)
 	$(Q)/bin/bash fonts/install.sh
-	brew tap homebrew/cask-fonts && brew install --cask font-inconsolata-go-nerd-font
 
 clean-fonts:
 	$(Q)/bin/bash fonts/uninstall.sh
@@ -50,7 +49,7 @@ all:: homebrew screenshots
 
 homebrew: prepare
 	$(Q)/bin/bash -c "$$(which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	cat $(CURDIR)/brew/leaves.txt | xargs brew install
+	brew bundle --file $(CURDIR)/brew/Brewfile
 
 screenshots:
 	$(Q)mkdir -p $(SCREENSHOTS)
