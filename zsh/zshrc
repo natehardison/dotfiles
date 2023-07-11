@@ -29,6 +29,11 @@ fi
 export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
 alias cat=bat
 
+# add go
+export GOPATH=$HOME/go
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
 # use Volta for managing node (required for coc)
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
