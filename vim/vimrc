@@ -92,6 +92,7 @@ let g:coc_global_extensions = [
   \ '@yaegassy/coc-ansible',
   \ 'coc-cmake',
   \ 'coc-go',
+  \ 'coc-clangd',
   \ 'coc-jedi',
   \ 'coc-json',
   \ 'coc-git',
