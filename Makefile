@@ -23,9 +23,9 @@ define install-config
 ln -sF $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-all:: bat fonts git links nvim s screen ssh tmux vim zsh
+all:: bat fonts git links nvim s screen ssh tmux vim wireshark zsh
 
-clean: clean-bat clean-fonts clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-zsh
+clean: clean-bat clean-fonts clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-wireshark clean-zsh
 
 prepare:
 	$(Q)git submodule update --init --recursive
@@ -121,6 +121,14 @@ vim: homebrew node
 clean-vim:
 	$(Q)rm -rf $(HOME)/.vim
 
+# just save profiles directory, not whole wireshark dir
+wireshark:
+	$(Q)mkdir -p $(CONFIG)/$@
+	$(Q)ln -sF $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
+
+clean-wireshark:
+	$(Q)rm -rf $(CONFIG)/wireshark/profiles
+
 zsh: prepare prezto
 	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
@@ -130,4 +138,4 @@ clean-zsh: clean-prezto
 clean-%:
 	$(Q)rm $(CONFIG)/$*
 
-.PHONY: all bat clean clean-fonts clean-prezto fonts git links iterm2 node nvim prepare prezto s screen ssh tmux vim zsh
+.PHONY: all bat clean clean-fonts clean-prezto fonts git links iterm2 node nvim prepare prezto s screen ssh tmux vim wireshark zsh
