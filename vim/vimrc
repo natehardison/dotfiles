@@ -41,6 +41,9 @@ Plug 'jnurmine/Zenburn'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'davidhalter/jedi-vim'
+
+" formatting
+Plug 'psf/black', { 'branch': 'stable' }
 call plug#end()
 
 set autoindent                   " Copy indent from current line on <CR>
