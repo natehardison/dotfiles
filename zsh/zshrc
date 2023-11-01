@@ -92,18 +92,6 @@ pypi() {
   open https://www.pypi.org/project/$1
 }
 
-
-alias toast='z node-automation && srcenv .virtualenv'
-
-# allow opening of golinks (go/<foobar>) in browser
-open() {
-  if [[ $1 == go/* ]]; then
-    /usr/bin/open "https://$*"
-  else
-    /usr/bin/open $*
-  fi
-}
-
 # Git aliases that don't exist in Prezto module
 alias ga='git add'
 alias gap='git add -p'
@@ -132,14 +120,29 @@ alias grm='git rm'
 alias gs='git status'
 
 # macOS VPN utilities
-alias vpnls='scutil --nc list'
-alias vpnst='scutil --nc status'
-alias vpnon='networksetup -connectpppoeservice'
-alias vpnoff='networksetup -disconnectpppoeservice'
+vpnls() {
+  scutil --nc list
+}
+
+vpnst() {
+  scutil --nc status $*
+}
+
+vpnon() {
+  networksetup -connectpppoeservice $*
+}
+
+vpnoff() {
+  networksetup -disconnectpppoeservice $*
+}
 
 # autocompletions
-complete -C eero-api eero-api
 command -v register-python-argcomplete >/dev/null && eval "$(register-python-argcomplete pipx)"
 
 zstyle -d ':completion:*' format
 zstyle ':completion:*:descriptions' format '[%d]'
+
+# load machine-specific stuff, use (N) glob qualifier to ignore empty match
+for file in $HOME/.zsh.d/*(N); do
+  source "$file"
+done
