@@ -252,25 +252,37 @@
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Yut,%L
+gui.column.hidden: %Cus:frame.comment:0:R,%s,%d,%Cus:wlan.qbss.cu:0:R,%Cus:wlan.ssid:0:R,%L,%Cus:wlan.duration:0:R,%Cus:wlan_radio.11ac.mcs:0:R,%Cus:eap.code:0:R,%Cus:wlan.qbss.scount:0:R,%Cus:eap.identity:0:R,%Cus:wlan.fixed.reason_code:0:R,%Cus:wlan.vht.compressed_beamforming_report.snr:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
 gui.column.format: 
+	"Comment", "%Cus:frame.comment:0:R",
 	"No.", "%m",
+	"Delta", "%Gt",
 	"Time", "%t",
-	"UTC Time", "%Yut",
-	"Delta time", "%Gt",
-	"Delta flow", "%Cus:tcp.time_delta:0:R",
-	"Eth Src", "%rhs",
-	"Eth Dst", "%rhd",
+	"Channel", "%Cus:wlan_radio.channel:0:R",
 	"Source", "%s",
 	"Destination", "%d",
-	"Protocol", "%p",
-	"TTL", "%Cus:ip.ttl:0:R",
-	"Seg Len", "%Cus:tcp.len:0:R",
+	"Transmitter", "%Cus:wlan.ta_resolved:0:R",
+	"Receiver", "%Cus:wlan.ra_resolved:0:R",
+	"Frame Type", "%Cus:frame.coloring_rule.name:1:R",
+	"Qos Control", "%Cus:wlan.qos:0:R",
+	"QBSS Utilization", "%Cus:wlan.qbss.cu:0:R",
+	"SSID", "%Cus:wlan.ssid:0:R",
 	"Length", "%L",
-	"Stream index", "%Cus:tcp.stream:0:R",
+	"Duration", "%Cus:wlan.duration:0:R",
+	"Signal Strength", "%e",
+	"Data Rate", "%x",
+	"MCS index", "%Cus:wlan_radio.11ac.mcs:0:R",
+	"PHY type", "%Cus:wlan_radio.phy:0:R",
+	"EAP", "%Cus:eap.code:0:R",
+	"Associated Clients", "%Cus:wlan.qbss.scount:0:R",
+	"Identity", "%Cus:eap.identity:0:R",
+	"Reason code", "%Cus:wlan.fixed.reason_code:0:R",
+	"Client SNR", "%Cus:wlan.vht.compressed_beamforming_report.snr:0:R",
+	"Sequence number", "%Cus:wlan.seq:0:R",
+	"Length", "%Cus:data.len:0:R",
 	"Info", "%i"
 
 ####### User Interface: Font ########
@@ -298,7 +310,7 @@ gui.qt.font_name: Menlo,13,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 # Layout content of the pane 3
 # One of: NONE, PLIST, PDETAILS, PBYTES, PDIAGRAM
 # (case-insensitive).
-#gui.layout_content_3: PBYTES
+gui.layout_content_3: PDIAGRAM
 
 # Enable Packet List Separator
 # TRUE or FALSE (case-insensitive)
@@ -336,7 +348,7 @@ gui.qt.font_name: Menlo,13,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: llw0(1),utun0(0),utun1(0),utun2(0),utun1000(0),en4(1),lo0(0),anpi1(1),anpi2(1),anpi0(1),en5(1),en6(1),en7(1),en1(1),en2(1),en3(1),bridge0(1),ap1(1),en0(1),gif0(0),stf0(0),awdl0(1),ciscodump(147),randpkt(147),sshdump(147),udpdump(252),wifidump(147)
+capture.devices_linktypes: en0(1),awdl0(1),llw0(1),utun0(0),utun1(0),utun2(0),en4(1),utun1000(0),lo0(0),anpi1(1),anpi2(1),anpi0(1),en5(1),en6(1),en7(1),en1(1),en2(1),en3(1),bridge0(1),ap1(1),gif0(0),stf0(0),ciscodump(147),randpkt(147),sshdump(147),udpdump(252),wifidump(147)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -352,15 +364,15 @@ capture.devices_linktypes: llw0(1),utun0(0),utun1(0),utun2(0),utun1000(0),en4(1)
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: llw0(2),utun0(2),utun1(2),utun2(2),utun1000(2),en4(2),lo0(2),anpi1(2),anpi2(2),anpi0(2),en5(2),en6(2),en7(2),en1(2),en2(2),en3(2),bridge0(2),ap1(2),en0(2),gif0(2),stf0(2),awdl0(2),ciscodump(2),randpkt(2),sshdump(2),udpdump(2),wifidump(2)
+capture.devices_buffersize: en0(2),awdl0(2),llw0(2),utun0(2),utun1(2),utun2(2),en4(2),utun1000(2),lo0(2),anpi1(2),anpi2(2),anpi0(2),en5(2),en6(2),en7(2),en1(2),en2(2),en3(2),bridge0(2),ap1(2),gif0(2),stf0(2),ciscodump(2),randpkt(2),sshdump(2),udpdump(2),wifidump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: llw0:0(262144),utun0:0(262144),utun1:0(262144),utun2:0(262144),utun1000:0(262144),en4:0(262144),lo0:0(262144),anpi1:0(262144),anpi2:0(262144),anpi0:0(262144),en5:0(262144),en6:0(262144),en7:0(262144),en1:0(262144),en2:0(262144),en3:0(262144),bridge0:0(262144),ap1:0(262144),en0:0(262144),gif0:0(262144),stf0:0(262144),awdl0:0(262144),ciscodump:0(262144),randpkt:0(262144),sshdump:0(262144),udpdump:0(262144),wifidump:0(262144)
+capture.devices_snaplen: en0:0(262144),awdl0:0(262144),llw0:0(262144),utun0:0(262144),utun1:0(262144),utun2:0(262144),en4:0(262144),utun1000:0(262144),lo0:0(262144),anpi1:0(262144),anpi2:0(262144),anpi0:0(262144),en5:0(262144),en6:0(262144),en7:0(262144),en1:0(262144),en2:0(262144),en3:0(262144),bridge0:0(262144),ap1:0(262144),gif0:0(262144),stf0:0(262144),ciscodump:0(262144),randpkt:0(262144),sshdump:0(262144),udpdump:0(262144),wifidump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: llw0(1),utun0(1),utun1(1),utun2(1),utun1000(1),en4(1),lo0(1),anpi1(1),anpi2(1),anpi0(1),en5(1),en6(1),en7(1),en1(1),en2(1),en3(1),bridge0(1),ap1(1),en0(1),gif0(1),stf0(1),awdl0(1),ciscodump(1),randpkt(1),sshdump(1),udpdump(1),wifidump(1)
+capture.devices_pmode: en0(1),awdl0(1),llw0(1),utun0(1),utun1(1),utun2(1),en4(1),utun1000(1),lo0(1),anpi1(1),anpi2(1),anpi0(1),en5(1),en6(1),en7(1),en1(1),en2(1),en3(1),bridge0(1),ap1(1),gif0(1),stf0(1),ciscodump(1),randpkt(1),sshdump(1),udpdump(1),wifidump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -636,7 +648,7 @@ capture.devices_pmode: llw0(1),utun0(1),utun1(1),utun2(1),utun1000(1),en4(1),lo0
 
 # Resolve IPv4, IPv6, and IPX addresses into host names. The next set of check boxes determines how name resolution should be performed. If no other options are checked name resolution is made from Wireshark's host file and capture file name resolution blocks.
 # TRUE or FALSE (case-insensitive)
-nameres.network_name: TRUE
+#nameres.network_name: FALSE
 
 # Use address/name pairs found in captured DNS packets for name resolution.
 # TRUE or FALSE (case-insensitive)

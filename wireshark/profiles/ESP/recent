@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 4.0.10.
+# Recent settings file for Wireshark 4.0.8.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -43,7 +43,7 @@ gui.packet_list_colorize: TRUE
 
 # Timestamp display format.
 # One of: RELATIVE, ABSOLUTE, ABSOLUTE_WITH_YMD, ABSOLUTE_WITH_YDOY, ABSOLUTE_WITH_DATE, DELTA, DELTA_DIS, EPOCH, UTC, UTC_WITH_YMD, UTC_WITH_YDOY, UTC_WITH_DATE
-gui.time_format: RELATIVE
+gui.time_format: ABSOLUTE_WITH_YMD
 
 # Timestamp display precision.
 # One of: AUTO, SEC, DSEC, CSEC, MSEC, USEC, NSEC
@@ -75,30 +75,32 @@ gui.allow_hover_selection: TRUE
 
 # Main window upper (or leftmost) pane size.
 # Decimal number.
-gui.geometry_main_upper_pane: 520
+gui.geometry_main_upper_pane: 455
 
 # Main window middle pane size.
 # Decimal number.
-gui.geometry_main_lower_pane: 824
+gui.geometry_main_lower_pane: 1060
 
 # Packet list column pixel widths.
 # Each pair of strings consists of a column format and its pixel width.
 column.width:
         %m, 85,
-        %t, 81,
+        %t, 165,
         %Yut, 237,
         %Gt, 102,
         "%Cus:tcp.time_delta", 111,
-        %rhs, 190,
-        %rhd, 202,
-        %s, 187,
+        "%Cus:udp.time_delta", 115,
+        %rhs, -1,
+        %rhd, 164,
+        %s, 145,
         %d, 164,
-        %p, 63,
+        %p, 101,
+        "%Cus:esp.sequence", 70,
         "%Cus:ip.ttl", -1,
-        "%Cus:tcp.len", -1,
+        "%Cus:udp.length", -1,
         %L, 113,
-        "%Cus:tcp.stream", 121,
-        %i, 3948
+        "%Cus:ip.dsfield", 179,
+        %i, 932
 
 # Open conversation dialog tabs.
 # List of conversation names, e.g. "TCP", "IPv6".

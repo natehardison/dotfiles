@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 4.0.7.
+# Recent settings file for Wireshark 4.0.8.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -75,19 +75,19 @@ gui.allow_hover_selection: TRUE
 
 # Main window upper (or leftmost) pane size.
 # Decimal number.
-gui.geometry_main_upper_pane: 368
+gui.geometry_main_upper_pane: 417
 
 # Main window middle pane size.
 # Decimal number.
-gui.geometry_main_lower_pane: 752
+gui.geometry_main_lower_pane: 1171
 
 # Packet list column pixel widths.
 # Each pair of strings consists of a column format and its pixel width.
 column.width:
         %m, 85,
-        %t, 84,
-        %Yut, -1,
-        %Gt, 109,
+        %t, 96,
+        %Yut, 237,
+        %Gt, 104,
         "%Cus:tcp.time_delta", 111,
         %s, 164,
         %d, 164,
@@ -99,9 +99,10 @@ column.width:
         "%Cus:tcp.nxtseq", -1,
         "%Cus:tcp.ack", -1,
         "%Cus:tcp.analysis.ack_rtt", 106,
-        "%Cus:tcp.window_size", -1,
+        "%Cus:tcp.window_size", 86,
         "%Cus:tcp.analysis.bytes_in_flight", 96,
-        %i, 323
+        "%Cus:tcp.analysis.rto", 113,
+        %i, 1523
 
 # Open conversation dialog tabs.
 # List of conversation names, e.g. "TCP", "IPv6".
@@ -126,7 +127,7 @@ gui.endpoint_tabs_columns:
 gui.rlc_pdus_from_mac_frames: FALSE
 
 # Last directory navigated to in File Open dialog.
-gui.fileopen_remembered_dir: /Users/nateh/Downloads/Pcap_logs/
+gui.fileopen_remembered_dir: /Users/nateh/Downloads/
 
 # Additional Toolbars shown
 # List of additional toolbars to show.
