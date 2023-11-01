@@ -1,7 +1,8 @@
 .DS_Store
-vim/.netrwhist
-vim/plugged
-eero-*
 git/config.d/*
 ssh/config.d/*
 tmux/plugins/
+vim/.netrwhist
+vim/plugged
+wireshark/**/hosts
+!README*
