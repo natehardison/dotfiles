@@ -38,8 +38,8 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'git' \
-  'completion' \
   'fzf-tab' \
+  'completion' \
   'history-substring-search' \
   'prompt'
 
