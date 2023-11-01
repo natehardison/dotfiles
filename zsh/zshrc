@@ -88,6 +88,11 @@ srcenv() {
   source $1/bin/activate
 }
 
+pypi() {
+  open https://www.pypi.org/project/$1
+}
+
+
 alias toast='z node-automation && srcenv .virtualenv'
 
 # allow opening of golinks (go/<foobar>) in browser
