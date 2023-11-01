@@ -79,3 +79,6 @@
     markIgnoredLines = true
     # Mark any lines that were added in a skipped commit and can not be attributed with a `*`
     markUnblamableLines = true
+
+[includeIf "gitdir:eero-inc/"]
+    path = ~/src/natehardison/dotfiles/git/config.d/eero

@@ -2,5 +2,6 @@
 vim/.netrwhist
 vim/plugged
 eero-*
+git/config.d/*
 ssh/config.d/*
 tmux/plugins/
