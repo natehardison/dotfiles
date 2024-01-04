@@ -1,5 +1,10 @@
 lvim.leader = ","
+
+lvim.keys.normal_mode[";"] = ":"
+
+lvim.keys.command_mode["kj"] = "<C-c>"
 lvim.keys.insert_mode["kj"] = "<ESC>"
+lvim.keys.visual_mode["kj"] = "<ESC>"
 
 lvim.plugins = {
   "phha/zenburn.nvim",
