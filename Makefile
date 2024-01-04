@@ -61,6 +61,9 @@ clean-links:
 iterm2: homebrew
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
 
+lvim: prepare
+	$(Q)$(install-config)
+
 node: homebrew
 	$(Q)/bin/bash -c "$$(which -s node || volta install node)"
 
