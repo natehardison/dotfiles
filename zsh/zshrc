@@ -21,10 +21,6 @@ autoload -U +X bashcompinit && bashcompinit
 EDITOR=vim
 VISUAL=vim
 
-if command -v nvim >/dev/null; then
-  alias vim=nvim
-fi
-
 # use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
 alias cat=bat
@@ -43,8 +39,14 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
-# allow pipx-installed CLIs to run
+# make sure ~/.local/bin is on $PATH for lvim, pipx
 export PATH="$HOME/.local/bin:$PATH"
+
+if command -v lvim >/dev/null; then
+  alias vim=lvim
+elif command -v nvim >/dev/null; then
+  alias vim=nvim
+fi
 
 # required for 256 color tmux terminal
 export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
