@@ -94,6 +94,8 @@ pypi() {
   open https://www.pypi.org/project/$1
 }
 
+alias gg='lazygit'
+
 # Git aliases that don't exist in Prezto module
 alias ga='git add'
 alias gap='git add -p'
