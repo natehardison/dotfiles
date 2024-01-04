@@ -1,10 +1,8 @@
 OS := $(shell uname -s)
 
 ifeq ($(OS),Darwin)
-FONTS := $(HOME)/Library/Fonts
 SCREENSHOTS := $(HOME)/screenshots
 else
-FONTS := $(HOME)/.fonts
 endif
 
 ifeq ("$(origin V)", "command line")
@@ -23,9 +21,9 @@ define install-config
 ln -sF $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-all:: bat fonts git links nvim s screen ssh tmux vim wireshark zsh
+all:: bat git links nvim s screen ssh tmux vim wireshark zsh
 
-clean: clean-bat clean-fonts clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-wireshark clean-zsh
+clean: clean-bat clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-wireshark clean-zsh
 
 prepare:
 	$(Q)git submodule update --init --recursive
@@ -33,13 +31,6 @@ prepare:
 
 bat: prepare
 	$(Q)$(install-config)
-
-fonts: prepare homebrew
-	$(Q)mkdir -p $(FONTS)
-	$(Q)/bin/bash fonts/install.sh
-
-clean-fonts:
-	$(Q)/bin/bash fonts/uninstall.sh
 
 git: prepare
 	$(Q)$(install-config)
@@ -67,7 +58,7 @@ clean-links:
 	$(Q)rm -f $(HOME)/bin
 	$(Q)rm -f $(HOME)/.bash_aliases
 
-iterm2: fonts
+iterm2: homebrew
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
 
 node: homebrew
@@ -138,4 +129,4 @@ clean-zsh: clean-prezto
 clean-%:
 	$(Q)rm $(CONFIG)/$*
 
-.PHONY: all bat clean clean-fonts clean-prezto fonts git links iterm2 node nvim prepare prezto s screen ssh tmux vim wireshark zsh
+.PHONY: all bat clean clean-prezto git links iterm2 node nvim prepare prezto s screen ssh tmux vim wireshark zsh
