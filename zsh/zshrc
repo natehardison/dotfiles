@@ -18,9 +18,6 @@ fi
 # allow bash-style shell completions
 autoload -U +X bashcompinit && bashcompinit
 
-EDITOR=vim
-VISUAL=vim
-
 # use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
 alias cat=bat
@@ -44,8 +41,15 @@ export PATH="$HOME/.local/bin:$PATH"
 
 if command -v lvim >/dev/null; then
   alias vim=lvim
+  EDITOR=lvim
+  VISUAL=lvim
 elif command -v nvim >/dev/null; then
   alias vim=nvim
+  EDITOR=nvim
+  VISUAL=nvim
+else
+  EDITOR=vim
+  VISUAL=vim
 fi
 
 # required for 256 color tmux terminal
