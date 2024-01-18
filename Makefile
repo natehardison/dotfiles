@@ -1,10 +1,5 @@
 OS := $(shell uname -s)
 
-ifeq ($(OS),Darwin)
-SCREENSHOTS := $(HOME)/screenshots
-else
-endif
-
 ifeq ("$(origin V)", "command line")
 VERBOSE := $(V)
 endif
@@ -25,47 +20,53 @@ all:: bat git links nvim s screen ssh tmux vim wireshark zsh
 
 clean: clean-bat clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-wireshark clean-zsh
 
-prepare:
+prepare::
 	$(Q)git submodule update --init --recursive
 	$(Q)mkdir -p $(CONFIG)
 
-bat: prepare
-	$(Q)$(install-config)
-
-git: prepare
-	$(Q)$(install-config)
-
 ifeq ($(OS),Darwin)
-all:: homebrew screenshots
+all:: homebrew iterm2 node screenshots
 
-homebrew: prepare
+homebrew:
 	$(Q)/bin/bash -c "$$(which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew bundle --file $(CURDIR)/brew/Brewfile
-
-screenshots:
-	$(Q)mkdir -p $(SCREENSHOTS)
-	$(Q)defaults write com.apple.screencapture location $(SCREENSHOTS)
-	$(Q)killall SystemUIServer
-
-.PHONY: homebrew
-endif
-
-links: prepare
-	$(Q)ln -s $(CURDIR)/bash_aliases $(HOME)/.bash_aliases
-	$(Q)ln -s $(CURDIR)/bin $(HOME)/bin
-
-clean-links:
-	$(Q)rm -f $(HOME)/bin
-	$(Q)rm -f $(HOME)/.bash_aliases
 
 iterm2: homebrew
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
 
-lvim: prepare
-	$(Q)$(install-config)
-
 node: homebrew
 	$(Q)/bin/bash -c "$$(which -s node || volta install node)"
+
+screenshots:
+	$(Q)mkdir -p $(HOME)/screenshots
+	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
+	$(Q)killall SystemUIServer
+
+prepare:: homebrew node screenshots
+
+.PHONY: homebrew iterm2 node screenshots
+endif
+
+bash: prepare
+	$(Q)ln -s $(CURDIR)/bash_aliases $(HOME)/.bash_aliases
+
+clean-bash:
+	$(Q)rm -f $(HOME)/.bash_aliases
+
+bat: prepare
+	$(Q)$(install-config)
+
+bin: prepare
+	$(Q)ln -s $(CURDIR)/bin $(HOME)/bin
+
+clean-bin:
+	$(Q)rm -f $(HOME)/bin
+
+git: prepare
+	$(Q)$(install-config)
+
+lvim: prepare
+	$(Q)$(install-config)
 
 nvim: prepare vim
 	$(Q)$(install-config)
@@ -109,14 +110,14 @@ clean-ssh:
 tmux: prepare
 	$(Q)$(install-config)
 
-vim: homebrew node
+vim: prepare
 	$(Q)ln -sF $(CURDIR)/vim $(HOME)/.vim
 
 clean-vim:
 	$(Q)rm -rf $(HOME)/.vim
 
 # just save profiles directory, not whole wireshark dir
-wireshark:
+wireshark: prepare
 	$(Q)mkdir -p $(CONFIG)/$@
 	$(Q)ln -sF $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
