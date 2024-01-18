@@ -18,9 +18,11 @@ fi
 # allow bash-style shell completions
 autoload -U +X bashcompinit && bashcompinit
 
-# use bat for man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
-alias cat=bat
+# use bat for cat and man pages if available
+if command -v bat >/dev/null; then
+  alias cat=bat
+  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
+fi
 
 # add go
 export GOPATH=$HOME/go
@@ -66,8 +68,10 @@ fi
 # configure zoxide
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
-# use exa instead of ls
-alias ls='exa --git'
+# use exa instead of ls if available
+if command -v exa >/dev/null; then
+  alias ls='exa --git'
+fi
 alias la='ll -a'
 
 # jq aliases
