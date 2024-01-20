@@ -25,9 +25,11 @@ if command -v bat >/dev/null; then
 fi
 
 # add go
-export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+if command -v brew >/dev/null; then
+  export GOPATH=$HOME/go
+  export GOROOT="$(brew --prefix golang)/libexec"
+  export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+fi
 
 # use Volta for managing node (required for coc)
 export VOLTA_HOME="$HOME/.volta"
