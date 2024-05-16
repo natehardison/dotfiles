@@ -1,4 +1,3 @@
-.DS_Store
 git/config.d/*
 ssh/config.d/*
 tmux/plugins/
