@@ -21,9 +21,46 @@ autoload -U +X bashcompinit && bashcompinit
 # make sure ~/.local/bin is on $PATH for mise, lvim, pipx
 export PATH="$HOME/.local/bin:$PATH"
 
+# required for 256 color tmux terminal
+export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
+
+# add the 1Password SSH agent
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+fi
+
+# use bat for cat and man pages if available
+if command -v bat >/dev/null; then
+  alias cat=bat
+  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
+fi
+
+# use duf instead of df
+if command -v duf >/dev/null; then
+  alias df='duf'
+fi
+
+# use exa instead of ls if available
+if command -v exa >/dev/null; then
+  alias ls='exa --git'
+fi
+alias la='ll -a'
+
+# configure fzf for fuzzy-finding
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# use lazygit for git gui
+alias gg='lazygit'
+
+# use htop instead of top
+if command -v htop >/dev/null; then
+  alias top=htop
+fi
+
 # use mise for managing language runtimes
 command -v mise >/dev/null && eval "$(mise activate zsh)"
 
+# use lvim or nvim instead of standard vim
 if command -v lvim >/dev/null; then
   alias vim=lvim
   EDITOR=lvim
@@ -37,61 +74,14 @@ else
   VISUAL=vim
 fi
 
-# use bat for cat and man pages if available
-if command -v bat >/dev/null; then
-  alias cat=bat
-  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
-fi
-
-# required for 256 color tmux terminal
-export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
-
-# add the 1Password SSH agent
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-fi
-
-# configure fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # configure zoxide
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
-
-# use exa instead of ls if available
-if command -v exa >/dev/null; then
-  alias ls='exa --git'
-fi
-alias la='ll -a'
-
-# jq aliases
-alias jqf='jq -r | fzf --tac'
-alias jql='jq -C | bat'
-alias jqr='jqfzf'
 
 # quick config file edits
 alias se='vim ~/.ssh/config'
 alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
 alias ze='vim ~/.zshrc'
-
-# shortcut for making python virtualenvs
-mkenv() {
-  python -m venv $1 && source $1/bin/activate
-}
-
-lsenv() {
-  ls -a | grep -E "\.\w+env$" --color=never
-}
-
-srcenv() {
-  source $1/bin/activate
-}
-
-pypi() {
-  open https://www.pypi.org/project/$1
-}
-
-alias gg='lazygit'
 
 # Git aliases that don't exist in Prezto module
 alias ga='git add'
@@ -120,22 +110,46 @@ alias grom='git fetch origin && git rebase origin/main'
 alias grm='git rm'
 alias gs='git status'
 
+# jq aliases
+alias jqf='jq -r | fzf --tac'
+alias jql='jq -C | bat'
+alias jqr='jqfzf'
+
+# shortcut for making python virtualenvs
+mkenv() {
+  python -m venv $1 && source $1/bin/activate
+}
+
+lsenv() {
+  ls -a | grep -E "\.\w+env$" --color=never
+}
+
+srcenv() {
+  source $1/bin/activate
+}
+
+pypi() {
+  open https://www.pypi.org/project/$1
+}
+
 # macOS VPN utilities
-vpnls() {
-  scutil --nc list
-}
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  vpnls() {
+    scutil --nc list
+  }
 
-vpnst() {
-  scutil --nc status $*
-}
+  vpnst() {
+    scutil --nc status $*
+  }
 
-vpnon() {
-  networksetup -connectpppoeservice $*
-}
+  vpnon() {
+    networksetup -connectpppoeservice $*
+  }
 
-vpnoff() {
-  networksetup -disconnectpppoeservice $*
-}
+  vpnoff() {
+    networksetup -disconnectpppoeservice $*
+  }
+fi
 
 # autocompletions
 command -v register-python-argcomplete >/dev/null && eval "$(register-python-argcomplete pipx)"
