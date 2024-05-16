@@ -18,30 +18,11 @@ fi
 # allow bash-style shell completions
 autoload -U +X bashcompinit && bashcompinit
 
-# use bat for cat and man pages if available
-if command -v bat >/dev/null; then
-  alias cat=bat
-  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
-fi
-
-# add go
-if command -v brew >/dev/null; then
-  export GOPATH=$HOME/go
-  export GOROOT="$(brew --prefix golang)/libexec"
-  export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-fi
-
-# use Volta for managing node (required for coc)
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# use pyenv for managing Python
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv >/dev/null && eval "$(pyenv init -)"
-
-# make sure ~/.local/bin is on $PATH for lvim, pipx
+# make sure ~/.local/bin is on $PATH for mise, lvim, pipx
 export PATH="$HOME/.local/bin:$PATH"
+
+# use mise for managing language runtimes
+command -v mise >/dev/null && eval "$(mise activate zsh)"
 
 if command -v lvim >/dev/null; then
   alias vim=lvim
@@ -54,6 +35,12 @@ elif command -v nvim >/dev/null; then
 else
   EDITOR=vim
   VISUAL=vim
+fi
+
+# use bat for cat and man pages if available
+if command -v bat >/dev/null; then
+  alias cat=bat
+  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
 fi
 
 # required for 256 color tmux terminal

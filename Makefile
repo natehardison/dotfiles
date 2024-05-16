@@ -35,7 +35,7 @@ iterm2: homebrew
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
 
 node: homebrew
-	$(Q)/bin/bash -c "$$(which -s node || volta install node)"
+	$(Q)/bin/bash -c "$$(which -s node || mise install node)"
 
 screenshots:
 	$(Q)mkdir -p $(HOME)/screenshots
@@ -66,6 +66,9 @@ git: prepare
 	$(Q)$(install-config)
 
 lvim: prepare
+	$(Q)$(install-config)
+
+mise: prepare
 	$(Q)$(install-config)
 
 nvim: prepare vim

@@ -1,0 +1,8 @@
+[tools]
+python = "latest"
+node = "latest"
+go = "latest"
+scala = "2.13.14"
+sbt = "1.9.2"
+java = "corretto-17"
+rust = "latest"
