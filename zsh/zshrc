@@ -40,9 +40,9 @@ if command -v duf >/dev/null; then
   alias df='duf'
 fi
 
-# use exa instead of ls if available
-if command -v exa >/dev/null; then
-  alias ls='exa --git'
+# use eza instead of ls if available
+if command -v eza >/dev/null; then
+  alias ls='eza --git'
 fi
 alias la='ll -a'
 
