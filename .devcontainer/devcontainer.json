@@ -1,0 +1,13 @@
+{
+	"name": "Ubuntu",
+	"image": "mcr.microsoft.com/devcontainers/base:noble",
+	"remoteUser": "nate",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"upgradePackages": true,
+			"username": "nate"
+		}
+	}
+}

@@ -3,21 +3,23 @@
 set -e
 
 # install ubi for installing from GitHub
-sudo chown $USER $HOME/.local
-export TARGET=$HOME/.local/bin/
-mkdir $TARGET
+INSTALL_DIR=$HOME/.local/bin
+sudo mkdir -p $INSTALL_DIR
+sudo chown $INSTALL_DIR
+export PATH="$INSTALL_DIR:$PATH"
+export TARGET=$INSTALL_DIR
 curl --silent --location \
     https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh |
     sh
 
 # install utilities
-ubi -p sharkdp/bat -i $TARGET
-ubi -p dandavison/delta -i $TARGET
-ubi -p eza-community/eza -i $TARGET
-ubi -p sharkdp/fd -i $TARGET
-ubi -p junegunn/fzf -i $TARGET
-ubi -p jesseduffield/lazygit -i $TARGET
-ubi -p BurntSushi/ripgrep -i $TARGET
-ubi -p ajeetdsouza/zoxide -i $TARGET
+ubi -p sharkdp/bat -i $INSTALL_DIR
+ubi -p dandavison/delta -i $INSTALL_DIR
+ubi -p eza-community/eza -i $INSTALL_DIR
+ubi -p sharkdp/fd -i $INSTALL_DIR
+ubi -p junegunn/fzf -i $INSTALL_DIR
+ubi -p jesseduffield/lazygit -i $INSTALL_DIR
+ubi -p BurntSushi/ripgrep -i $INSTALL_DIR
+ubi -p ajeetdsouza/zoxide -i $INSTALL_DIR
 
 make bash bat bin zsh
