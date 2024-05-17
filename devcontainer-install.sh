@@ -5,7 +5,7 @@ set -e
 # install ubi for installing from GitHub
 INSTALL_DIR=$HOME/.local/bin
 sudo mkdir -p $INSTALL_DIR
-sudo chown $INSTALL_DIR
+sudo chown $USER $INSTALL_DIR
 export PATH="$INSTALL_DIR:$PATH"
 export TARGET=$INSTALL_DIR
 curl --silent --location \
