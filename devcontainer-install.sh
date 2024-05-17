@@ -19,7 +19,7 @@ ubi -p eza-community/eza -i $INSTALL_DIR
 ubi -p sharkdp/fd -i $INSTALL_DIR
 ubi -p junegunn/fzf -i $INSTALL_DIR
 ubi -p jesseduffield/lazygit -i $INSTALL_DIR
-ubi -p BurntSushi/ripgrep -i $INSTALL_DIR
+ubi -p BurntSushi/ripgrep -i $INSTALL_DIR -e rg
 ubi -p ajeetdsouza/zoxide -i $INSTALL_DIR
 
 make bash bat bin zsh
