@@ -22,4 +22,7 @@ ubi -p jesseduffield/lazygit -i $INSTALL_DIR
 ubi -p BurntSushi/ripgrep -i $INSTALL_DIR -e rg
 ubi -p ajeetdsouza/zoxide -i $INSTALL_DIR
 
-make bash bat bin zsh
+make bash bat bin
+
+# don't overwrite oh-my-zsh config
+echo "source $(pwd)/zsh/zshrc" >> ~/.zshrc
