@@ -35,7 +35,11 @@ fi
 
 # use eza instead of ls if available
 if command -v eza >/dev/null; then
-  alias ls='eza --git'
+  alias ls='eza'
+  # only add --git if successful
+  if $(eza --git) &>/dev/null; then
+    alias ls='eza --git'
+  fi
 fi
 alias la='ll -a'
 
