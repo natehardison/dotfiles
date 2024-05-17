@@ -13,7 +13,7 @@ endif
 CONFIG := $(HOME)/.config
 
 define install-config
-ln -sF $(CURDIR)/$@ $(CONFIG)/$@
+ln -shf $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
 all:: bat git links nvim s screen ssh tmux vim wireshark zsh
@@ -48,7 +48,7 @@ prepare:: homebrew node screenshots
 endif
 
 bash: prepare
-	$(Q)ln -s $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
+	$(Q)ln -shf $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
 
 clean-bash:
 	$(Q)rm -f $(HOME)/.bash_aliases
@@ -57,7 +57,7 @@ bat: prepare
 	$(Q)$(install-config)
 
 bin: prepare
-	$(Q)ln -s $(CURDIR)/bin $(HOME)/bin
+	$(Q)ln -shf $(CURDIR)/bin $(HOME)/bin
 
 clean-bin:
 	$(Q)rm -f $(HOME)/bin
@@ -76,12 +76,12 @@ nvim: prepare vim
 	nvim +PlugUpdate +qall
 
 prezto: prepare
-	$(Q)ln -sF $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
-	$(Q)ln -sf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
-	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
-	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
-	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
-	$(Q)ln -sf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
+	$(Q)ln -shf $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
+	$(Q)ln -shf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
+	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
+	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
+	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
+	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
 	$(Q)git clone https://github.com/Aloxaf/fzf-tab $(CURDIR)/zsh/zprezto/contrib/fzf-tab || true
 
 clean-prezto:
@@ -96,15 +96,15 @@ s: prepare
 	$(Q)$(install-config)
 
 screen:
-	$(Q)ln -sf $(CURDIR)/screen/screenrc $(HOME)/.screenrc
+	$(Q)ln -shf $(CURDIR)/screen/screenrc $(HOME)/.screenrc
 
 clean-screen:
 	$(Q)rm -f $(HOME)/.screenrc
 
 ssh:
 	$(Q)mkdir -p $(HOME)/.ssh/
-	$(Q)ln -sf $(CURDIR)/ssh/config $(HOME)/.ssh/config
-	$(Q)ln -sF $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
+	$(Q)ln -shf $(CURDIR)/ssh/config $(HOME)/.ssh/config
+	$(Q)ln -shf $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 
 clean-ssh:
 	$(Q)rm -f $(HOME)/.ssh/config
@@ -114,7 +114,7 @@ tmux: prepare
 	$(Q)$(install-config)
 
 vim: prepare
-	$(Q)ln -sF $(CURDIR)/vim $(HOME)/.vim
+	$(Q)ln -shf $(CURDIR)/vim $(HOME)/.vim
 
 clean-vim:
 	$(Q)rm -rf $(HOME)/.vim
@@ -122,13 +122,13 @@ clean-vim:
 # just save profiles directory, not whole wireshark dir
 wireshark: prepare
 	$(Q)mkdir -p $(CONFIG)/$@
-	$(Q)ln -sF $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
+	$(Q)ln -shf $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
 clean-wireshark:
 	$(Q)rm -rf $(CONFIG)/wireshark/profiles
 
 zsh: prepare prezto
-	$(Q)ln -sf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
+	$(Q)ln -shf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
 clean-zsh: clean-prezto
 	$(Q)rm -f $(HOME)/.zshrc
