@@ -48,7 +48,7 @@ prepare:: homebrew node screenshots
 endif
 
 bash: prepare
-	$(Q)ln -s $(CURDIR)/bash_aliases $(HOME)/.bash_aliases
+	$(Q)ln -s $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
 
 clean-bash:
 	$(Q)rm -f $(HOME)/.bash_aliases
@@ -96,7 +96,7 @@ s: prepare
 	$(Q)$(install-config)
 
 screen:
-	$(Q)ln -sf $(CURDIR)/screenrc $(HOME)/.screenrc
+	$(Q)ln -sf $(CURDIR)/screen/screenrc $(HOME)/.screenrc
 
 clean-screen:
 	$(Q)rm -f $(HOME)/.screenrc
