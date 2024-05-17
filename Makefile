@@ -16,66 +16,64 @@ define install-config
 ln -shf $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-all:: bat git links nvim s screen ssh tmux vim wireshark zsh
+TARGETS := bash bat bin git lvim mise nvim prezto s screen ssh tmux vim wireshark zsh
 
-clean: clean-bat clean-git clean-links clean-nvim clean-s clean-screen clean-ssh clean-tmux clean-vim clean-wireshark clean-zsh
+.PHONY: all
+all:: $(TARGETS)
 
-prepare::
+.PHONY: clean
+clean:: $(foreach target,$(TARGETS),clean-$(target))
+
+.PHONY: config
+config:
+	$(Q)mkdir -p $(HOME)/.config
+
+.PHONY: submodules
+submodules:
 	$(Q)git submodule update --init --recursive
-	$(Q)mkdir -p $(CONFIG)
 
 ifeq ($(OS),Darwin)
-all:: homebrew iterm2 node screenshots
+all:: brew iterm2 screenshots
 
-homebrew:
+.PHONY: brew
+brew:
 	$(Q)/bin/bash -c "$$(which -s brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew bundle --file $(CURDIR)/brew/Brewfile
 
-iterm2: homebrew
+.PHONY: iterm2
+iterm2: brew
 	@echo "Install $(CURDIR)/Default.json via iTerm2 Preferences"
 
-node: homebrew
-	$(Q)/bin/bash -c "$$(which -s node || mise install node)"
-
+.PHONY: screenshots
 screenshots:
 	$(Q)mkdir -p $(HOME)/screenshots
 	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
 	$(Q)killall SystemUIServer
-
-prepare:: homebrew node screenshots
-
-.PHONY: homebrew iterm2 node screenshots
 endif
 
-bash: prepare
+.PHONY: bash
+bash:
 	$(Q)ln -shf $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
 
+.PHONY: clean-bash
 clean-bash:
 	$(Q)rm -f $(HOME)/.bash_aliases
 
-bat: prepare
-	$(Q)$(install-config)
-
-bin: prepare
+.PHONY: bin
+bin:
 	$(Q)ln -shf $(CURDIR)/bin $(HOME)/bin
 
+.PHONY: clean-bin
 clean-bin:
 	$(Q)rm -f $(HOME)/bin
 
-git: prepare
-	$(Q)$(install-config)
-
-lvim: prepare
-	$(Q)$(install-config)
-
-mise: prepare
-	$(Q)$(install-config)
-
-nvim: prepare vim
+.PHONY: nvim
+nvim: config submodules vim
 	$(Q)$(install-config)
 	nvim +PlugUpdate +qall
 
-prezto: prepare
+.PHONY: prezto
+prezto: submodules
 	$(Q)ln -shf $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
 	$(Q)ln -shf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
 	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
@@ -84,6 +82,7 @@ prezto: prepare
 	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
 	$(Q)git clone https://github.com/Aloxaf/fzf-tab $(CURDIR)/zsh/zprezto/contrib/fzf-tab || true
 
+.PHONY: clean-prezto
 clean-prezto:
 	$(Q)rm -f $(HOME)/.zprezto
 	$(Q)rm -f $(HOME)/.zpreztorc
@@ -92,48 +91,55 @@ clean-prezto:
 	$(Q)rm -f $(HOME)/.zlogin
 	$(Q)rm -f $(HOME)/.zlogout
 
-s: prepare
-	$(Q)$(install-config)
-
+.PHONY: screen
 screen:
 	$(Q)ln -shf $(CURDIR)/screen/screenrc $(HOME)/.screenrc
 
+.PHONY: clean-screen
 clean-screen:
 	$(Q)rm -f $(HOME)/.screenrc
 
+.PHONY: ssh
 ssh:
 	$(Q)mkdir -p $(HOME)/.ssh/
 	$(Q)ln -shf $(CURDIR)/ssh/config $(HOME)/.ssh/config
 	$(Q)ln -shf $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 
+.PHONY: clean-ssh
 clean-ssh:
 	$(Q)rm -f $(HOME)/.ssh/config
 	$(Q)rm -f $(HOME)/.ssh/config.d
 
-tmux: prepare
-	$(Q)$(install-config)
-
-vim: prepare
+.PHONY: vim
+vim:
 	$(Q)ln -shf $(CURDIR)/vim $(HOME)/.vim
 
+.PHONY: clean-vim
 clean-vim:
 	$(Q)rm -rf $(HOME)/.vim
 
 # just save profiles directory, not whole wireshark dir
-wireshark: prepare
+.PHONY: wireshark
+wireshark: config
 	$(Q)mkdir -p $(CONFIG)/$@
 	$(Q)ln -shf $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
+.PHONY: clean-wireshark
 clean-wireshark:
 	$(Q)rm -rf $(CONFIG)/wireshark/profiles
 
-zsh: prepare prezto
+.PHONY: zsh
+zsh:
 	$(Q)ln -shf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
-clean-zsh: clean-prezto
+.PHONY: clean-zsh
+clean-zsh:
 	$(Q)rm -f $(HOME)/.zshrc
 
 clean-%:
-	$(Q)rm $(CONFIG)/$*
+	$(Q)rm -f $(CONFIG)/$*
 
-.PHONY: all bat clean clean-prezto git links iterm2 node nvim prepare prezto s screen ssh tmux vim wireshark zsh
+Makefile: ;
+
+%:: config
+	$(Q)$(install-config)
