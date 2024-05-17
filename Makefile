@@ -12,8 +12,14 @@ endif
 
 CONFIG := $(HOME)/.config
 
+# BSD softlink requires -h to not follow existing links
+SOFTLINK := ln -sf
+ifeq ($(OS), Darwin)
+SOFTLINK := ln -shf
+endif
+
 define install-config
-ln -shf $(CURDIR)/$@ $(CONFIG)/$@
+$(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
 TARGETS := bash bat bin git lvim mise nvim prezto s screen ssh tmux vim wireshark zsh
@@ -53,7 +59,7 @@ endif
 
 .PHONY: bash
 bash:
-	$(Q)ln -shf $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
+	$(Q)$(SOFTLINK) $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
 
 .PHONY: clean-bash
 clean-bash:
@@ -61,7 +67,7 @@ clean-bash:
 
 .PHONY: bin
 bin:
-	$(Q)ln -shf $(CURDIR)/bin $(HOME)/bin
+	$(Q)$(SOFTLINK) $(CURDIR)/bin $(HOME)/bin
 
 .PHONY: clean-bin
 clean-bin:
@@ -74,12 +80,12 @@ nvim: config submodules vim
 
 .PHONY: prezto
 prezto: submodules
-	$(Q)ln -shf $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
-	$(Q)ln -shf $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
-	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
-	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
-	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
-	$(Q)ln -shf $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
 	$(Q)git clone https://github.com/Aloxaf/fzf-tab $(CURDIR)/zsh/zprezto/contrib/fzf-tab || true
 
 .PHONY: clean-prezto
@@ -93,7 +99,7 @@ clean-prezto:
 
 .PHONY: screen
 screen:
-	$(Q)ln -shf $(CURDIR)/screen/screenrc $(HOME)/.screenrc
+	$(Q)$(SOFTLINK) $(CURDIR)/screen/screenrc $(HOME)/.screenrc
 
 .PHONY: clean-screen
 clean-screen:
@@ -102,8 +108,8 @@ clean-screen:
 .PHONY: ssh
 ssh:
 	$(Q)mkdir -p $(HOME)/.ssh/
-	$(Q)ln -shf $(CURDIR)/ssh/config $(HOME)/.ssh/config
-	$(Q)ln -shf $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
+	$(Q)$(SOFTLINK) $(CURDIR)/ssh/config $(HOME)/.ssh/config
+	$(Q)$(SOFTLINK) $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 
 .PHONY: clean-ssh
 clean-ssh:
@@ -112,7 +118,7 @@ clean-ssh:
 
 .PHONY: vim
 vim:
-	$(Q)ln -shf $(CURDIR)/vim $(HOME)/.vim
+	$(Q)$(SOFTLINK) $(CURDIR)/vim $(HOME)/.vim
 
 .PHONY: clean-vim
 clean-vim:
@@ -122,7 +128,7 @@ clean-vim:
 .PHONY: wireshark
 wireshark: config
 	$(Q)mkdir -p $(CONFIG)/$@
-	$(Q)ln -shf $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
+	$(Q)$(SOFTLINK) $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
 .PHONY: clean-wireshark
 clean-wireshark:
@@ -130,7 +136,7 @@ clean-wireshark:
 
 .PHONY: zsh
 zsh:
-	$(Q)ln -shf $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
 .PHONY: clean-zsh
 clean-zsh:
