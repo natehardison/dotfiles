@@ -11,7 +11,7 @@ fi
 # allow bash-style shell completions
 autoload -U +X bashcompinit && bashcompinit
 
-# make sure ~/.local/bin is on $PATH for mise, lvim, pipx
+# make sure ~/.local/bin is on $PATH
 export PATH="$HOME/.local/bin:$PATH"
 
 # required for 256 color tmux terminal
@@ -75,6 +75,9 @@ fi
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
 # quick config file edits
+ce() {
+  vim ~/.config/$1
+}
 alias se='vim ~/.ssh/config'
 alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
@@ -147,9 +150,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     networksetup -disconnectpppoeservice $*
   }
 fi
-
-# autocompletions
-command -v register-python-argcomplete >/dev/null && eval "$(register-python-argcomplete pipx)"
 
 zstyle -d ':completion:*' format
 zstyle ':completion:*:descriptions' format '[%d]'
