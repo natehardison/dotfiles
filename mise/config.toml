@@ -1,7 +1,6 @@
 [tools]
 go = "latest"
 node = "latest"
-python = "latest"
 
 [settings]
 experimental = true
