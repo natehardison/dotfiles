@@ -115,17 +115,26 @@ alias jqf='jq -r | fzf --tac'
 alias jql='jq -C | bat'
 alias jqr='jqfzf'
 
-# shortcut for making python virtualenvs
-mkenv() {
-  python -m venv $1 && source $1/bin/activate
-}
 
+# list all virtualenvs in the current directory
 lsenv() {
   ls -a | grep -E "\.\w+env$" --color=never
 }
 
+# source a virtualenv
 srcenv() {
-  source $1/bin/activate
+  source ${1:-.venv}/bin/activate
+}
+
+# make a new virtualenv and activate it
+mkenv() {
+  local venv="${1:-.venv}"
+  python3 -m venv $venv && srcenv $venv
+}
+
+# remove a virtualenv
+rmenv() {
+  rm -rf "${1:-.venv}"
 }
 
 pypi() {
