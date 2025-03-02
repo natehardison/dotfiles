@@ -3,6 +3,7 @@ ssh/config.d/*
 tmux/plugins/
 vim/.netrwhist
 vim/plugged
+wireshark/profiles/*/80211_keys
 wireshark/profiles/*/decode_as_entries
 wireshark/profiles/*/extcap.cfg
 wireshark/profiles/*/hosts
