@@ -115,6 +115,12 @@ alias jqf='jq -r | fzf --tac'
 alias jql='jq -C | bat'
 alias jqr='jqfzf'
 
+# zip and encrypt a directory
+zipenc() {
+  [ -n "$1" ] || return 1
+  zip --encrypt --junk-paths --exclude \*.DS_Store -r "$(basename $1)" $1
+}
+
 
 # list all virtualenvs in the current directory
 lsenv() {
