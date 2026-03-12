@@ -4,10 +4,10 @@
 
 [core]
     editor = vim
-    pager = delta
+    pager = delta 2>/dev/null || less
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+    diffFilter = delta --color-only --features=interactive 2>/dev/null || cat
 
 [delta]
     features = decorations
@@ -28,11 +28,11 @@
 
 [merge]
     conflictstyle = diff3
-    tool = nvimdiff
+    tool = vimdiff
 
 [diff]
     colorMoved = default
-    tool = nvimdiff
+    tool = vimdiff
 
 [init]
     defaultBranch = main
