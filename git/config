@@ -38,7 +38,7 @@
     defaultBranch = main
 
 [push]
-    default = upstream
+    default = current
 
 [pull]
     rebase = true
@@ -83,3 +83,7 @@
 
 [includeIf "gitdir:eero-inc/"]
     path = ~/src/natehardison/dotfiles/git/config.d/eero
+
+# don't set tracking branch to main on "git checkout -b <new branch>"
+[branch]
+    autoSetupMerge = false
