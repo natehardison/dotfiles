@@ -30,6 +30,12 @@ all:: $(TARGETS)
 .PHONY: clean
 clean:: $(foreach target,$(TARGETS),clean-$(target))
 
+.PHONY: install-minimal
+install-minimal: bash bat bin git mise ssh zsh
+
+.PHONY: install-dev
+install-dev: install-minimal fish nvim prezto tmux
+
 .PHONY: config
 config:
 	$(Q)mkdir -p $(HOME)/.config
