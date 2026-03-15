@@ -40,10 +40,6 @@ install-dev: install-minimal nvim antidote tmux
 config:
 	$(Q)mkdir -p $(HOME)/.config
 
-.PHONY: submodules
-submodules:
-	$(Q)git submodule update --init --recursive
-
 ifeq ($(OS),Darwin)
 all:: brew iterm2 screenshots
 
@@ -80,7 +76,7 @@ clean-bin:
 	$(Q)rm -f $(HOME)/bin
 
 .PHONY: nvim
-nvim: config submodules vim
+nvim: config vim
 	$(Q)$(install-config)
 	nvim +PlugUpdate +qall
 

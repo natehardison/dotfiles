@@ -6,7 +6,7 @@ INSTALLATION
 
 1. Clone this repo:
 
-        $ git clone --recurse-submodules -j8 git@github.com:natehardison/dotfiles.git
+        $ git clone git@github.com:natehardison/dotfiles.git
 
 1. Use `make` to install and set up system
 
