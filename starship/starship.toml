@@ -1,0 +1,49 @@
+# Approximates Prezto sorin theme
+
+format = """$username$hostname$python$directory$character"""
+right_format = """$cmd_duration$git_branch$git_status"""
+
+[character]
+success_symbol = "[❯](bold red)[❯](bold yellow)[❯](bold green)"
+error_symbol = "[❯](bold red)[❯](bold yellow)[❯](bold green)"
+vimcmd_symbol = "[❮](bold green)[❮](bold yellow)[❮](bold red)"
+
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+style = "bold cyan"
+
+[username]
+show_always = false
+format = "[$user]($style)[@](white)"
+style_user = "bold red"
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
+style = "bold yellow"
+
+[git_branch]
+format = "[$symbol$branch]($style)"
+symbol = " "
+style = "bold green"
+
+[git_status]
+format = '([:](white)[$all_status$ahead_behind]($style))'
+ahead = "[⬆](bold purple)"
+behind = "[⬇](bold purple)"
+diverged = "[⬆⬇](bold purple)"
+modified = "[✱](bold blue)"
+staged = "[✚](bold green)"
+deleted = "[✖](bold red)"
+renamed = "[➜](bold purple)"
+untracked = "[◼](bold dimmed white)"
+stashed = "[✭](bold cyan)"
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = "yellow"
+
+[cmd_duration]
+min_time = 5_000
+format = "[$duration]($style) "

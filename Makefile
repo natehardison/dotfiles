@@ -22,7 +22,7 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-TARGETS := bash bat bin fish ghostty git lvim mise nvim prezto s ssh tmux vim wireshark zed zsh
+TARGETS := bash bat bin fish ghostty git lvim mise nvim prezto s ssh starship tmux vim wireshark zed zsh
 
 .PHONY: all
 all:: $(TARGETS)
@@ -131,6 +131,14 @@ wireshark: config
 .PHONY: clean-wireshark
 clean-wireshark:
 	$(Q)rm -rf $(CONFIG)/wireshark/profiles
+
+.PHONY: starship
+starship: config
+	$(Q)$(SOFTLINK) $(CURDIR)/starship/starship.toml $(CONFIG)/starship.toml
+
+.PHONY: clean-starship
+clean-starship:
+	$(Q)rm -f $(CONFIG)/starship.toml
 
 .PHONY: zsh
 zsh:
