@@ -2,10 +2,7 @@
 
 set -e
 
-make bash bat bin
-
-# don't overwrite oh-my-zsh config
-echo "source $(pwd)/zsh/zshrc" >> ~/.zshrc
+make install-minimal antidote starship
 
 # install ubi for installing from GitHub
 INSTALL_DIR=$HOME/.local/bin
@@ -25,4 +22,5 @@ ubi -p sharkdp/fd -i $INSTALL_DIR
 ubi -p junegunn/fzf -i $INSTALL_DIR
 ubi -p jesseduffield/lazygit -i $INSTALL_DIR
 ubi -p BurntSushi/ripgrep -i $INSTALL_DIR -e rg
+ubi -p starship/starship -i $INSTALL_DIR
 ubi -p ajeetdsouza/zoxide -i $INSTALL_DIR
