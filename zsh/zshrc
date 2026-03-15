@@ -116,12 +116,8 @@ fi
 # use mise for managing language runtimes
 command -v mise >/dev/null && eval "$(mise activate zsh)"
 
-# use lvim or nvim instead of standard vim
-if command -v lvim >/dev/null; then
-  alias vim=lvim
-  EDITOR=lvim
-  VISUAL=lvim
-elif command -v nvim >/dev/null; then
+# use nvim instead of standard vim
+if command -v nvim >/dev/null; then
   alias vim=nvim
   EDITOR=nvim
   VISUAL=nvim

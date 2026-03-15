@@ -22,7 +22,7 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-TARGETS := bash bat bin ghostty git lvim mise nvim antidote s ssh starship tmux vim wireshark zed zsh
+TARGETS := bash bat bin ghostty git mise nvim antidote s ssh starship tmux vim wireshark zsh
 
 .PHONY: all
 all:: $(TARGETS)
