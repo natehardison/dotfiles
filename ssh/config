@@ -14,6 +14,9 @@ Host 10.* 192.168.*
 #     UseKeychain yes
 #     AddKeysToAgent yes
 
-# Use 1Password ssh-agent instead of macOS
-Host *
+# Use 1Password ssh-agent
+Match host * exec "test -e ~/Library/'Group Containers'/2BUA8C4S2C.com.1password/t/agent.sock"
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+Match host * exec "test -e ~/.1password/agent.sock"
+    IdentityAgent "~/.1password/agent.sock"
