@@ -1,12 +1,3 @@
-[submodule "smyck"]
-	path = colors/smyck
-	url = https://github.com/hukl/Smyck-Color-Scheme.git
-[submodule "solarized"]
-	path = colors/solarized
-	url = https://github.com/altercation/solarized
-[submodule "zenburn"]
-	path = colors/zenburn
-	url = https://github.com/bdesham/zenburn-terminal
 [submodule "oh-my-tmux"]
 	path = tmux/oh-my-tmux
 	url = https://github.com/gpakosz/.tmux.git
