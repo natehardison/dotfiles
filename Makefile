@@ -22,7 +22,7 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-TARGETS := bash bat bin ghostty git mise nvim antidote ssh starship tmux vim wireshark zsh
+TARGETS := bat bin ghostty git mise nvim antidote ssh starship tmux vim wireshark zsh
 
 .PHONY: all
 all:: $(TARGETS)
@@ -31,7 +31,7 @@ all:: $(TARGETS)
 clean:: $(foreach target,$(TARGETS),clean-$(target))
 
 .PHONY: install-minimal
-install-minimal: bash bat bin git mise ssh zsh
+install-minimal: bat bin git mise ssh zsh
 
 .PHONY: install-dev
 install-dev: install-minimal nvim antidote tmux
@@ -58,14 +58,6 @@ screenshots:
 	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
 	$(Q)killall SystemUIServer
 endif
-
-.PHONY: bash
-bash:
-	$(Q)$(SOFTLINK) $(CURDIR)/bash/bash_aliases $(HOME)/.bash_aliases
-
-.PHONY: clean-bash
-clean-bash:
-	$(Q)rm -f $(HOME)/.bash_aliases
 
 .PHONY: bin
 bin:
