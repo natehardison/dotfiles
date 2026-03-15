@@ -22,7 +22,7 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-TARGETS := bash bat bin fish ghostty git lvim mise nvim prezto s screen ssh tmux vim wireshark zsh
+TARGETS := bash bat bin fish ghostty git lvim mise nvim prezto s ssh tmux vim wireshark zsh
 
 .PHONY: all
 all:: $(TARGETS)
@@ -96,14 +96,6 @@ clean-prezto:
 	$(Q)rm -f $(HOME)/.zprofile
 	$(Q)rm -f $(HOME)/.zlogin
 	$(Q)rm -f $(HOME)/.zlogout
-
-.PHONY: screen
-screen:
-	$(Q)$(SOFTLINK) $(CURDIR)/screen/screenrc $(HOME)/.screenrc
-
-.PHONY: clean-screen
-clean-screen:
-	$(Q)rm -f $(HOME)/.screenrc
 
 .PHONY: ssh
 ssh:
