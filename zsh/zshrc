@@ -100,6 +100,7 @@ if command -v eza >/dev/null; then
     alias ls='eza --git'
   fi
 fi
+alias ll='ls -l'
 alias la='ll -a'
 
 # configure fzf for fuzzy-finding
