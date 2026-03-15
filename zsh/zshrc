@@ -146,7 +146,7 @@ alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
 alias ze='vim ~/.zshrc'
 
-# Git aliases that don't exist in Prezto module
+# Git aliases
 alias ga='git add'
 alias gap='git add -p'
 alias gb='git branch'
