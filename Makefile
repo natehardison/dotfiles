@@ -22,7 +22,7 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-TARGETS := bash bat bin fish ghostty git lvim mise nvim antidote s ssh starship tmux vim wireshark zed zsh
+TARGETS := bash bat bin ghostty git lvim mise nvim antidote s ssh starship tmux vim wireshark zed zsh
 
 .PHONY: all
 all:: $(TARGETS)
@@ -34,7 +34,7 @@ clean:: $(foreach target,$(TARGETS),clean-$(target))
 install-minimal: bash bat bin git mise ssh zsh
 
 .PHONY: install-dev
-install-dev: install-minimal fish nvim antidote tmux
+install-dev: install-minimal nvim antidote tmux
 
 .PHONY: config
 config:
