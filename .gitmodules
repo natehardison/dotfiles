@@ -10,6 +10,3 @@
 [submodule "oh-my-tmux"]
 	path = tmux/oh-my-tmux
 	url = https://github.com/gpakosz/.tmux.git
-[submodule "prezto"]
-	path = zsh/zprezto
-	url = https://github.com/sorin-ionescu/prezto.git

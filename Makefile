@@ -22,7 +22,7 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
-TARGETS := bash bat bin fish ghostty git lvim mise nvim prezto s ssh starship tmux vim wireshark zed zsh
+TARGETS := bash bat bin fish ghostty git lvim mise nvim antidote s ssh starship tmux vim wireshark zed zsh
 
 .PHONY: all
 all:: $(TARGETS)
@@ -34,7 +34,7 @@ clean:: $(foreach target,$(TARGETS),clean-$(target))
 install-minimal: bash bat bin git mise ssh zsh
 
 .PHONY: install-dev
-install-dev: install-minimal fish nvim prezto tmux
+install-dev: install-minimal fish nvim antidote tmux
 
 .PHONY: config
 config:
@@ -84,24 +84,14 @@ nvim: config submodules vim
 	$(Q)$(install-config)
 	nvim +PlugUpdate +qall
 
-.PHONY: prezto
-prezto: submodules
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto $(HOME)/.zprezto
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zpreztorc $(HOME)/.zpreztorc
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zshenv $(HOME)/.zshenv
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zprofile $(HOME)/.zprofile
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zlogin $(HOME)/.zlogin
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zprezto/runcoms/zlogout $(HOME)/.zlogout
-	$(Q)git clone https://github.com/Aloxaf/fzf-tab $(CURDIR)/zsh/zprezto/contrib/fzf-tab || true
+.PHONY: antidote
+antidote:
+	$(Q)git clone --depth=1 https://github.com/mattmc3/antidote.git $(HOME)/.antidote 2>/dev/null || true
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zsh_plugins.txt $(HOME)/.zsh_plugins.txt
 
-.PHONY: clean-prezto
-clean-prezto:
-	$(Q)rm -f $(HOME)/.zprezto
-	$(Q)rm -f $(HOME)/.zpreztorc
-	$(Q)rm -f $(HOME)/.zshenv
-	$(Q)rm -f $(HOME)/.zprofile
-	$(Q)rm -f $(HOME)/.zlogin
-	$(Q)rm -f $(HOME)/.zlogout
+.PHONY: clean-antidote
+clean-antidote:
+	$(Q)rm -f $(HOME)/.zsh_plugins.txt
 
 .PHONY: ssh
 ssh:
