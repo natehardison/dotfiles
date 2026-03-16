@@ -10,6 +10,7 @@ junegunn/fzf
 cli/cli:gh
 jqlang/jq
 jesseduffield/lazygit
+jdx/mise
 BurntSushi/ripgrep:rg
 starship/starship
 ajeetdsouza/zoxide
