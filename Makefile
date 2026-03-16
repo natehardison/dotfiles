@@ -29,7 +29,7 @@ full: minimal ghostty nvim wireshark
 brew:
 	$(Q)echo "==> Installing packages via brew..."
 	$(Q)which brew >/dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	$(Q)brew bundle --file $(CURDIR)/brew/Brewfile
+	$(Q)brew bundle --no-lock --file $(CURDIR)/brew/Brewfile
 
 UBI := $(HOME)/.local/bin/ubi
 .PHONY: ubi
@@ -61,7 +61,7 @@ full: casks screenshots
 .PHONY: casks
 casks: brew
 	$(Q)echo "==> Installing casks..."
-	$(Q)brew bundle --file $(CURDIR)/brew/Caskfile
+	$(Q)brew bundle --no-lock --file $(CURDIR)/brew/Caskfile
 
 .PHONY: screenshots
 screenshots:
