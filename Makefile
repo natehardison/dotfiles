@@ -32,6 +32,7 @@ ubi:
 		curl --silent --location \
 			https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh | sh
 	while IFS=: read -r repo exe; do \
+		case "$$repo" in ''|\#*) continue;; esac; \
 		$(UBI) -p "$$repo" -i $(HOME)/.local/bin $${exe:+-e "$$exe"}; \
 	done < $(CURDIR)/ubi/tools
 

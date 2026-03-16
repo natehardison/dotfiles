@@ -1,3 +1,5 @@
+# GitHub repos for ubi to install on Linux.
+# Format: owner/repo or owner/repo:executable (when binary name != repo name)
 sharkdp/bat
 dandavison/delta
 muesli/duf
