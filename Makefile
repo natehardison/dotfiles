@@ -133,6 +133,16 @@ zsh:
 	$(Q)echo "==> zsh"
 	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
+# -- update --------------------------------------------------------------------
+
+.PHONY: update
+update: packages
+	$(Q)echo "==> Updating antidote plugins..."
+	$(Q)zsh -c 'source $(HOME)/.antidote/antidote.zsh && antidote update'
+	$(Q)echo "==> Updating vim plugins..."
+	$(Q)command -v vim >/dev/null && vim -Es +'PlugUpdate --sync' +qall 2>/dev/null || true
+	$(Q)command -v nvim >/dev/null && nvim --headless +'PlugUpdate --sync' +qall 2>/dev/null || true
+
 # -- clean targets -------------------------------------------------------------
 
 TARGETS := bat bin ghostty git mise nvim antidote ssh starship tmux vim wireshark zsh
