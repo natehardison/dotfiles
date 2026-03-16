@@ -66,6 +66,10 @@ fi
 source "${HOME}/.antidote/antidote.zsh"
 antidote load
 
+# bind up/down to history-substring-search (from antidote plugin)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 # completions (after antidote so plugin FPATH entries are picked up)
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
