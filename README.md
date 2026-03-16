@@ -25,7 +25,7 @@ Personal dotfiles for macOS and Linux.
 |--------|-------------|
 | `make` | Auto-detects: `full` on macOS, `minimal` on Linux |
 | `make minimal` | CLI tools + all configs |
-| `make full` | minimal + GUI apps (casks, ghostty, wireshark, screenshots) |
+| `make full` | minimal + nvim, ghostty, wireshark (+ casks & screenshots on macOS) |
 
 Individual targets (`make vim`, `make ssh`, etc.) also work standalone.
 

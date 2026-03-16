@@ -14,7 +14,7 @@ endef
 minimal: packages config antidote bat bin git mise ssh starship tmux vim zsh
 
 .PHONY: full
-full: minimal ghostty wireshark
+full: minimal ghostty nvim wireshark
 
 # -- package installation ------------------------------------------------------
 
