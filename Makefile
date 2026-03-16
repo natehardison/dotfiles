@@ -1,6 +1,13 @@
 OS := $(shell uname -s)
 CONFIG := $(HOME)/.config
 
+# Suppress command echo by default; use V=1 to see raw commands.
+ifeq ($(V),1)
+Q :=
+else
+Q := @
+endif
+
 # -n: don't follow existing symlinks or descend into directories
 SOFTLINK := ln -snf
 
@@ -20,20 +27,24 @@ full: minimal ghostty nvim wireshark
 
 .PHONY: brew
 brew:
-	which brew >/dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew bundle --file $(CURDIR)/brew/Brewfile
+	$(Q)echo "==> Installing packages via brew..."
+	$(Q)which brew >/dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	$(Q)brew bundle --file $(CURDIR)/brew/Brewfile
 
 UBI := $(HOME)/.local/bin/ubi
 .PHONY: ubi
 ubi:
-	mkdir -p $(HOME)/.local/bin
-	command -v ubi >/dev/null 2>&1 || \
+	$(Q)mkdir -p $(HOME)/.local/bin
+	$(Q)echo "==> Installing ubi..."
+	$(Q)command -v ubi >/dev/null 2>&1 || \
 		export TARGET="$(HOME)/.local/bin" && \
 		curl --silent --location \
 			https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh | sh
-	while IFS=: read -r repo exe; do \
+	$(Q)echo "==> Installing packages via ubi..."
+	$(Q)while IFS=: read -r repo exe; do \
 		case "$$repo" in ''|\#*) continue;; esac; \
-		$(UBI) -p "$$repo" -i $(HOME)/.local/bin $${exe:+-e "$$exe"}; \
+		echo "    $$repo"; \
+		$(UBI) -p "$$repo" -i $(HOME)/.local/bin $${exe:+-e "$$exe"} 2>&1; \
 	done < $(CURDIR)/ubi/tools
 
 # -- macOS ---------------------------------------------------------------------
@@ -49,13 +60,15 @@ full: casks screenshots
 
 .PHONY: casks
 casks: brew
-	brew bundle --file $(CURDIR)/brew/Caskfile
+	$(Q)echo "==> Installing casks..."
+	$(Q)brew bundle --file $(CURDIR)/brew/Caskfile
 
 .PHONY: screenshots
 screenshots:
-	mkdir -p $(HOME)/screenshots
-	defaults write com.apple.screencapture location $(HOME)/screenshots
-	killall SystemUIServer
+	$(Q)echo "==> Configuring screenshots..."
+	$(Q)mkdir -p $(HOME)/screenshots
+	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
+	$(Q)killall SystemUIServer
 
 # -- Linux ---------------------------------------------------------------------
 
@@ -71,45 +84,53 @@ endif
 
 .PHONY: config
 config:
-	mkdir -p $(HOME)/.config
+	$(Q)mkdir -p $(HOME)/.config
 
 .PHONY: antidote
 antidote:
-	git clone --depth=1 https://github.com/mattmc3/antidote.git $(HOME)/.antidote 2>/dev/null || true
-	$(SOFTLINK) $(CURDIR)/zsh/zsh_plugins.txt $(HOME)/.zsh_plugins.txt
+	$(Q)echo "==> antidote"
+	$(Q)git clone --depth=1 https://github.com/mattmc3/antidote.git $(HOME)/.antidote 2>/dev/null || true
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zsh_plugins.txt $(HOME)/.zsh_plugins.txt
 
 .PHONY: bin
 bin:
-	$(SOFTLINK) $(CURDIR)/bin $(HOME)/bin
+	$(Q)echo "==> bin"
+	$(Q)$(SOFTLINK) $(CURDIR)/bin $(HOME)/bin
 
 .PHONY: nvim
 nvim: config vim
-	$(install-config)
-	command -v nvim >/dev/null && nvim +PlugUpdate +qall || true
+	$(Q)echo "==> nvim"
+	$(Q)$(install-config)
+	$(Q)command -v nvim >/dev/null && nvim +'PlugUpdate --sync' +qall 2>/dev/null || true
 
 .PHONY: ssh
 ssh:
-	mkdir -p $(HOME)/.ssh/
-	$(SOFTLINK) $(CURDIR)/ssh/config $(HOME)/.ssh/config
-	$(SOFTLINK) $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
+	$(Q)echo "==> ssh"
+	$(Q)mkdir -p $(HOME)/.ssh/
+	$(Q)$(SOFTLINK) $(CURDIR)/ssh/config $(HOME)/.ssh/config
+	$(Q)$(SOFTLINK) $(CURDIR)/ssh/config.d $(HOME)/.ssh/config.d
 
 .PHONY: starship
 starship: config
-	$(SOFTLINK) $(CURDIR)/starship/starship.toml $(CONFIG)/starship.toml
+	$(Q)echo "==> starship"
+	$(Q)$(SOFTLINK) $(CURDIR)/starship/starship.toml $(CONFIG)/starship.toml
 
 .PHONY: vim
 vim:
-	$(SOFTLINK) $(CURDIR)/vim $(HOME)/.vim
-	command -v vim >/dev/null && vim +PlugInstall +qall || true
+	$(Q)echo "==> vim"
+	$(Q)$(SOFTLINK) $(CURDIR)/vim $(HOME)/.vim
+	$(Q)command -v vim >/dev/null && vim +'PlugInstall --sync' +qall 2>/dev/null || true
 
 .PHONY: wireshark
 wireshark: config
-	mkdir -p $(CONFIG)/$@
-	$(SOFTLINK) $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
+	$(Q)echo "==> wireshark"
+	$(Q)mkdir -p $(CONFIG)/$@
+	$(Q)$(SOFTLINK) $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
 .PHONY: zsh
 zsh:
-	$(SOFTLINK) $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
+	$(Q)echo "==> zsh"
+	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
 
 # -- clean targets -------------------------------------------------------------
 
@@ -120,37 +141,38 @@ clean: $(foreach target,$(TARGETS),clean-$(target))
 
 .PHONY: clean-antidote
 clean-antidote:
-	rm -f $(HOME)/.zsh_plugins.txt
+	$(Q)rm -f $(HOME)/.zsh_plugins.txt
 
 .PHONY: clean-bin
 clean-bin:
-	rm -f $(HOME)/bin
+	$(Q)rm -f $(HOME)/bin
 
 .PHONY: clean-ssh
 clean-ssh:
-	rm -f $(HOME)/.ssh/config
-	rm -f $(HOME)/.ssh/config.d
+	$(Q)rm -f $(HOME)/.ssh/config
+	$(Q)rm -f $(HOME)/.ssh/config.d
 
 .PHONY: clean-starship
 clean-starship:
-	rm -f $(CONFIG)/starship.toml
+	$(Q)rm -f $(CONFIG)/starship.toml
 
 .PHONY: clean-vim
 clean-vim:
-	rm -rf $(HOME)/.vim
+	$(Q)rm -rf $(HOME)/.vim
 
 .PHONY: clean-wireshark
 clean-wireshark:
-	rm -rf $(CONFIG)/wireshark/profiles
+	$(Q)rm -rf $(CONFIG)/wireshark/profiles
 
 .PHONY: clean-zsh
 clean-zsh:
-	rm -f $(HOME)/.zshrc
+	$(Q)rm -f $(HOME)/.zshrc
 
 clean-%:
-	rm -f $(CONFIG)/$*
+	$(Q)rm -f $(CONFIG)/$*
 
 Makefile: ;
 
 %:: config
-	$(install-config)
+	$(Q)echo "==> $@"
+	$(Q)$(install-config)
