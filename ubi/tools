@@ -1,9 +1,14 @@
 sharkdp/bat
 dandavison/delta
+muesli/duf
 eza-community/eza
 sharkdp/fd
+antonmedv/fx
 junegunn/fzf
+cli/cli:gh
+jqlang/jq
 jesseduffield/lazygit
+neovim/neovim:nvim
 BurntSushi/ripgrep:rg
 starship/starship
 ajeetdsouza/zoxide
