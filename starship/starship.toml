@@ -14,12 +14,12 @@ truncate_to_repo = false
 style = "bold cyan"
 
 [username]
-show_always = false
+show_always = true
 format = "[$user]($style)[@](white)"
 style_user = "bold red"
 
 [hostname]
-ssh_only = true
+ssh_only = false
 format = "[$hostname]($style) "
 style = "bold yellow"
 
