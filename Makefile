@@ -101,7 +101,7 @@ bin:
 nvim: config vim
 	$(Q)echo "==> nvim"
 	$(Q)$(install-config)
-	$(Q)command -v nvim >/dev/null && nvim +'PlugUpdate --sync' +qall 2>/dev/null || true
+	$(Q)command -v nvim >/dev/null && nvim --headless +'PlugUpdate --sync' +qall 2>/dev/null || true
 
 .PHONY: ssh
 ssh:
@@ -119,7 +119,7 @@ starship: config
 vim:
 	$(Q)echo "==> vim"
 	$(Q)$(SOFTLINK) $(CURDIR)/vim $(HOME)/.vim
-	$(Q)command -v vim >/dev/null && vim +'PlugInstall --sync' +qall 2>/dev/null || true
+	$(Q)command -v vim >/dev/null && vim -Es +'PlugInstall --sync' +qall 2>/dev/null || true
 
 .PHONY: wireshark
 wireshark: config
