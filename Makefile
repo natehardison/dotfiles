@@ -91,6 +91,7 @@ antidote:
 	$(Q)echo "==> antidote"
 	$(Q)git clone --depth=1 https://github.com/mattmc3/antidote.git $(HOME)/.antidote 2>/dev/null || true
 	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zsh_plugins.txt $(HOME)/.zsh_plugins.txt
+	$(Q)zsh -c 'source $(HOME)/.antidote/antidote.zsh && antidote load'
 
 .PHONY: bin
 bin:
