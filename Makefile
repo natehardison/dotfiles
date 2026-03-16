@@ -110,6 +110,7 @@ starship: config
 .PHONY: vim
 vim:
 	$(Q)$(SOFTLINK) $(CURDIR)/vim $(HOME)/.vim
+	$(Q)command -v vim >/dev/null && vim +PlugInstall +qall || true
 
 .PHONY: wireshark
 wireshark: config
