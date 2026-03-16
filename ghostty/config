@@ -39,3 +39,6 @@
 
 # copy the terminfo entry the first time you log into a new server over SSH
 shell-integration-features = ssh-terminfo
+
+# treat option as alt so keybindings (option+arrow, etc.) work in zsh/vim
+macos-option-as-alt = true
