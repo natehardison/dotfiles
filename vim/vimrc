@@ -73,7 +73,7 @@ set wildmenu                     " Enable command-line completion
 set whichwrap+=hl                " Allow h / l to wrap to prev / next line
 set wrap                         " Wrap long lines
 
-colorscheme zenburn
+silent! colorscheme zenburn
 let g:airline_theme = 'zenburn'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
