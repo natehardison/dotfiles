@@ -12,11 +12,8 @@ endif
 
 CONFIG := $(HOME)/.config
 
-# BSD softlink requires -h to not follow existing links
-SOFTLINK := ln -sf
-ifeq ($(OS), Darwin)
-SOFTLINK := ln -shf
-endif
+# -n: don't follow existing symlinks or descend into directories
+SOFTLINK := ln -snf
 
 define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
@@ -24,31 +21,13 @@ endef
 
 # -- profiles ------------------------------------------------------------------
 
-# Default: full on macOS, minimal everywhere else
-.PHONY: all
-ifeq ($(OS),Darwin)
-all: full
-else
-all: minimal
-endif
-
 .PHONY: minimal
 minimal: packages config antidote bat bin git mise nvim ssh starship tmux vim zsh
 
 .PHONY: full
 full: minimal ghostty wireshark
-ifeq ($(OS),Darwin)
-full: casks screenshots
-endif
 
 # -- package installation ------------------------------------------------------
-
-.PHONY: packages
-ifeq ($(OS),Darwin)
-packages: brew
-else
-packages: ubi
-endif
 
 .PHONY: brew
 brew:
@@ -67,7 +46,17 @@ ubi:
 		$(UBI) -p "$$repo" -i $(HOME)/.local/bin $${exe:+-e "$$exe"}; \
 	done < $(CURDIR)/ubi/tools
 
+# -- macOS ---------------------------------------------------------------------
+
 ifeq ($(OS),Darwin)
+.PHONY: all
+all: full
+
+.PHONY: packages
+packages: brew
+
+full: casks screenshots
+
 .PHONY: casks
 casks: brew
 	$(Q)brew bundle --file $(CURDIR)/brew/Caskfile
@@ -77,6 +66,15 @@ screenshots:
 	$(Q)mkdir -p $(HOME)/screenshots
 	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
 	$(Q)killall SystemUIServer
+
+# -- Linux ---------------------------------------------------------------------
+
+else
+.PHONY: all
+all: minimal
+
+.PHONY: packages
+packages: ubi
 endif
 
 # -- config targets ------------------------------------------------------------
