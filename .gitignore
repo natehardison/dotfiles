@@ -1,3 +1,4 @@
+brew/Brewfile.lock.json
 git/config.d/*
 ssh/config.d/*
 tmux/plugins/
