@@ -1,0 +1,2 @@
+- Add a `Co-Authored-By: Kiro <noreply@kiro.dev>` trailer to commits.
+- When creating a PR, follow the repo's PR template if one exists.

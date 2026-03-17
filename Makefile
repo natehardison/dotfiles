@@ -18,7 +18,7 @@ endef
 # -- profiles ------------------------------------------------------------------
 
 .PHONY: minimal
-minimal: packages config antidote bat bin git mise ssh starship tmux vim zsh
+minimal: packages config antidote bat bin git kiro mise ssh starship tmux vim zsh
 
 .PHONY: full
 full: minimal ghostty nvim wireshark
@@ -128,6 +128,12 @@ wireshark: config
 	$(Q)mkdir -p $(CONFIG)/$@
 	$(Q)$(SOFTLINK) $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
+.PHONY: kiro
+kiro:
+	$(Q)echo "==> kiro"
+	$(Q)mkdir -p $(HOME)/.kiro
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering $(HOME)/.kiro/steering
+
 .PHONY: zsh
 zsh:
 	$(Q)echo "==> zsh"
@@ -145,7 +151,7 @@ update: packages
 
 # -- clean targets -------------------------------------------------------------
 
-TARGETS := bat bin ghostty git mise nvim antidote ssh starship tmux vim wireshark zsh
+TARGETS := bat bin ghostty git kiro mise nvim antidote ssh starship tmux vim wireshark zsh
 
 .PHONY: clean
 clean: $(foreach target,$(TARGETS),clean-$(target))
