@@ -109,7 +109,7 @@ if command -v eza >/dev/null; then
   fi
 fi
 alias ll='ls -l'
-alias la='ll -a'
+alias la='ls -la'
 
 # configure fzf for fuzzy-finding
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -182,6 +182,9 @@ alias gs='git status'
 alias jqf='jq -r | fzf --tac'
 alias jql='jq -C | bat'
 alias jqr='jqfzf'
+
+alias k='kiro-cli'
+alias kr='kiro-cli chat --resume'
 
 # zip and encrypt a directory
 zipenc() {
