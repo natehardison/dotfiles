@@ -68,16 +68,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 source "${HOME}/.antidote/antidote.zsh"
+
+# compinit must run before antidote load so fzf-tab can wrap the completion
+# system, and before widget-wrapping plugins (autosuggestions, syntax-highlighting).
+# Manually add zsh-completions to fpath first since antidote load hasn't run yet.
+fpath=($(antidote path zsh-users/zsh-completions)/src $fpath)
+autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+zstyle ':completion:*:descriptions' format '[%d]'
+
 antidote load
 
 # bind up/down to history-substring-search (from antidote plugin)
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-
-# completions (after antidote so plugin FPATH entries are picked up)
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-zstyle ':completion:*:descriptions' format '[%d]'
 
 #
 # Prompt
