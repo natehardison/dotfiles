@@ -240,8 +240,3 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     networksetup -disconnectpppoeservice $*
   }
 fi
-
-# load machine-specific stuff, use (N) glob qualifier to ignore empty match
-for file in $HOME/.zsh.d/*(N); do
-  source "$file"
-done

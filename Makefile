@@ -153,7 +153,8 @@ kiro:
 .PHONY: zsh
 zsh:
 	$(Q)echo "==> zsh"
-	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zshrc $(HOME)/.zshrc
+	$(Q)if [ -L $(HOME)/.zshrc ]; then rm $(HOME)/.zshrc; fi
+	$(Q)if [ ! -f $(HOME)/.zshrc ]; then echo 'source $(CURDIR)/zsh/zshrc' > $(HOME)/.zshrc; fi
 
 # -- update --------------------------------------------------------------------
 
