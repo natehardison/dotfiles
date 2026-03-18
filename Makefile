@@ -24,8 +24,11 @@ define install-config
 $(SOFTLINK) $(CURDIR)/$@ $(CONFIG)/$@
 endef
 
+.DEFAULT_GOAL := all
+
 # -- profiles ------------------------------------------------------------------
 
+# Default target is set per-OS below (full on macOS, minimal on Linux).
 .PHONY: minimal
 minimal: packages config antidote bat bin git kiro mise ssh starship tmux vim zsh
 
