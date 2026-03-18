@@ -1,8 +1,12 @@
 OS := $(shell uname -s)
 CONFIG := $(HOME)/.config
 
-# Wire up Homebrew PATH so brew-installed tools are visible to all targets.
+# Wire up Homebrew so brew-installed tools are visible to all targets.
+# /bin/sh on macOS runs path_helper which can clobber PATH, so we set
+# SHELL to use bash with no startup files.
 ifeq ($(OS),Darwin)
+SHELL := /bin/bash
+.SHELLFLAGS := --norc --noprofile -c
 export PATH := /opt/homebrew/bin:$(PATH)
 endif
 
