@@ -1,0 +1,12 @@
+{
+  "mcp.loadedBefore": true,
+  "chat.greeting.enabled": false,
+  "chat.enableThinking": true,
+  "chat.enableKnowledge": true,
+  "chat.enableCodeIntelligence": true,
+  "chat.enableTangentMode": true,
+  "chat.enableSubagent": true,
+  "chat.enableTodoList": true,
+  "chat.enableHistoryHints": true,
+  "chat.enablePromptHints": true
+}

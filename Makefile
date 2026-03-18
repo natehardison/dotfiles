@@ -148,6 +148,7 @@ kiro:
 	$(Q)echo "==> kiro"
 	$(Q)mkdir -p $(HOME)/.kiro
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering $(HOME)/.kiro/steering
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings $(HOME)/.kiro/settings
 
 .PHONY: zsh
 zsh:
