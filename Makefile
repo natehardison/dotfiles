@@ -68,7 +68,7 @@ all: full
 .PHONY: packages
 packages: brew
 
-full: casks screenshots
+full: casks screenshots touchid-sudo
 
 .PHONY: casks
 casks: brew
