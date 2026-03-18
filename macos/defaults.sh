@@ -59,6 +59,10 @@ defaults write com.apple.controlcenter "NSStatusItem Visible Battery" -bool true
 defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" -bool true
 defaults write com.apple.controlcenter "NSStatusItem Visible ScreenMirroring" -bool false
 
+# -- Finder --------------------------------------------------------------------
+
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
 # -- Screenshots ---------------------------------------------------------------
 
 mkdir -p "$HOME/screenshots"
