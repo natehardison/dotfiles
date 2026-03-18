@@ -70,6 +70,11 @@ screenshots:
 	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
 	$(Q)killall SystemUIServer
 
+.PHONY: touchid-sudo
+touchid-sudo:
+	$(Q)echo "==> touchid-sudo"
+	$(Q)sudo cp $(CURDIR)/touchid-sudo/sudo_local /etc/pam.d/sudo_local
+
 # -- Linux ---------------------------------------------------------------------
 
 else
@@ -151,7 +156,7 @@ update: packages
 
 # -- clean targets -------------------------------------------------------------
 
-TARGETS := bat bin ghostty git kiro mise nvim antidote ssh starship tmux vim wireshark zsh
+TARGETS := bat bin ghostty git kiro mise nvim antidote ssh starship tmux touchid-sudo vim wireshark zsh
 
 .PHONY: clean
 clean: $(foreach target,$(TARGETS),clean-$(target))
@@ -184,6 +189,10 @@ clean-wireshark:
 .PHONY: clean-zsh
 clean-zsh:
 	$(Q)rm -f $(HOME)/.zshrc
+
+.PHONY: clean-touchid-sudo
+clean-touchid-sudo:
+	$(Q)sudo rm -f /etc/pam.d/sudo_local
 
 clean-%:
 	$(Q)rm -f $(CONFIG)/$*
