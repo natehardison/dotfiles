@@ -84,7 +84,7 @@ screenshots:
 
 .PHONY: touchid-sudo
 touchid-sudo:
-	$(Q)echo "==> touchid-sudo"
+	$(Q)echo "==> Enabling Touch ID for sudo..."
 	$(Q)sudo cp $(CURDIR)/touchid-sudo/sudo_local /etc/pam.d/sudo_local
 
 # -- Linux ---------------------------------------------------------------------
