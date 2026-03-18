@@ -1,6 +1,11 @@
 OS := $(shell uname -s)
 CONFIG := $(HOME)/.config
 
+# Wire up Homebrew PATH so brew-installed tools are visible to all targets.
+ifeq ($(OS),Darwin)
+export PATH := /opt/homebrew/bin:$(PATH)
+endif
+
 # Suppress command echo by default; use V=1 to see raw commands.
 ifeq ($(V),1)
 Q :=
