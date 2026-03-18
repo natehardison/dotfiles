@@ -2,12 +2,12 @@ OS := $(shell uname -s)
 CONFIG := $(HOME)/.config
 
 # Wire up Homebrew so brew-installed tools are visible to all targets.
-# /bin/sh on macOS runs path_helper which can clobber PATH, so we set
-# SHELL to use bash with no startup files.
+# /bin/sh on macOS runs path_helper which clobbers PATH on fresh installs.
 ifeq ($(OS),Darwin)
+HOMEBREW_PREFIX := /opt/homebrew
 SHELL := /bin/bash
 .SHELLFLAGS := --norc --noprofile -c
-export PATH := /opt/homebrew/bin:$(PATH)
+export PATH := $(HOMEBREW_PREFIX)/bin:$(PATH)
 endif
 
 # Suppress command echo by default; use V=1 to see raw commands.
@@ -38,7 +38,7 @@ full: minimal ghostty nvim wireshark
 brew:
 	$(Q)echo "==> Installing packages via brew..."
 	$(Q)which brew >/dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	$(Q)brew bundle --file $(CURDIR)/brew/Brewfile
+	$(Q)$(HOMEBREW_PREFIX)/bin/brew bundle --file $(CURDIR)/brew/Brewfile
 
 UBI := $(HOME)/.local/bin/ubi
 .PHONY: ubi
@@ -70,7 +70,7 @@ full: casks screenshots
 .PHONY: casks
 casks: brew
 	$(Q)echo "==> Installing casks..."
-	$(Q)brew bundle --file $(CURDIR)/brew/Caskfile
+	$(Q)$(HOMEBREW_PREFIX)/bin/brew bundle --file $(CURDIR)/brew/Caskfile
 
 .PHONY: screenshots
 screenshots:
