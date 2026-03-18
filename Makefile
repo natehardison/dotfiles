@@ -150,6 +150,10 @@ kiro:
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering $(HOME)/.kiro/steering
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings $(HOME)/.kiro/settings
 
+# Create a wrapper ~/.zshrc that sources the dotfiles version. Machine-local
+# config lives below the source line, so tools that auto-append PATH entries
+# write to the local file instead of dirtying the repo. Skip if ~/.zshrc
+# already exists as a regular file to avoid clobbering local config.
 .PHONY: zsh
 zsh:
 	$(Q)echo "==> zsh"

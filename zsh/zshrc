@@ -90,8 +90,18 @@ bindkey '^[[B' history-substring-search-down
 eval "$(starship init zsh)"
 
 #
-# Tool aliases
+# Tools
 #
+
+# editor
+if command -v nvim >/dev/null; then
+  alias vim=nvim
+  EDITOR=nvim
+  VISUAL=nvim
+else
+  EDITOR=vim
+  VISUAL=vim
+fi
 
 # use bat for cat and man pages if available
 if command -v bat >/dev/null; then
@@ -118,9 +128,6 @@ alias la='ls -la'
 # configure fzf for fuzzy-finding
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# use lazygit for git gui
-alias gg='lazygit'
-
 # use htop instead of top
 if command -v htop >/dev/null; then
   alias top=htop
@@ -129,24 +136,14 @@ fi
 # use mise for managing language runtimes
 command -v mise >/dev/null && eval "$(mise activate zsh)"
 
-# use nvim instead of standard vim
-if command -v nvim >/dev/null; then
-  alias vim=nvim
-  EDITOR=nvim
-  VISUAL=nvim
-else
-  EDITOR=vim
-  VISUAL=vim
-fi
-
 # configure zoxide
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
 #
-# Functions & shortcuts
+# Aliases
 #
 
-# quick config file edits
+# config file edits
 ce() {
   vim ~/.config/$1
 }
@@ -155,7 +152,7 @@ alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
 alias ze='vim ~/.zshrc'
 
-# Git aliases
+# git
 alias ga='git add'
 alias gap='git add -p'
 alias gb='git branch'
@@ -182,13 +179,21 @@ alias grom='git fetch origin && git rebase origin/main'
 alias grm='git rm'
 alias gs='git status'
 
-# jq aliases
+# jq
 alias jqf='jq -r | fzf --tac'
 alias jql='jq -C | bat'
 alias jqr='jqfzf'
 
+# lazygit
+alias gg='lazygit'
+
+# kiro
 alias k='kiro-cli'
 alias kr='kiro-cli chat --resume'
+
+#
+# Functions
+#
 
 # zip and encrypt a directory
 zipenc() {
@@ -196,24 +201,20 @@ zipenc() {
   zip --encrypt --junk-paths --exclude \*.DS_Store -r "$(basename $1)" $1
 }
 
-
-# list all virtualenvs in the current directory
+# virtualenv helpers
 lsenv() {
   ls -a | grep -E "\.\w+env$" --color=never
 }
 
-# source a virtualenv
 srcenv() {
   source ${1:-.venv}/bin/activate
 }
 
-# make a new virtualenv and activate it
 mkenv() {
   local venv="${1:-.venv}"
   python3 -m venv $venv && srcenv $venv
 }
 
-# remove a virtualenv
 rmenv() {
   rm -rf "${1:-.venv}"
 }
