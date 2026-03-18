@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#
+# macOS system defaults — Dock, menu bar, hot corners.
+# Run via: make macos
+
+set -euo pipefail
+
+# -- Dock behavior -------------------------------------------------------------
+
+defaults write com.apple.dock tilesize -int 64
+defaults write com.apple.dock largesize -int 128
+defaults write com.apple.dock autohide -bool false
+defaults write com.apple.dock show-recents -bool false
+
+# -- Dock apps -----------------------------------------------------------------
+
+if command -v dockutil &>/dev/null; then
+  dockutil --add /Applications/Ghostty.app --no-restart
+  dockutil --add /Applications/Visual\ Studio\ Code.app --no-restart
+  dockutil --add /Applications/Slack.app --no-restart
+  dockutil --add /Applications/1Password.app --no-restart
+else
+  echo "warning: dockutil not found, skipping Dock app layout"
+fi
+
+# -- Disable hot corners ---------------------------------------------------------------
+
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
+defaults write com.apple.dock wvous-tl-modifier -int 0
+defaults write com.apple.dock wvous-tr-modifier -int 0
+defaults write com.apple.dock wvous-bl-modifier -int 0
+defaults write com.apple.dock wvous-br-modifier -int 0
+
+# -- Menu bar clock ------------------------------------------------------------
+
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+defaults write com.apple.menuextra.clock Show24Hour -bool false
+defaults write com.apple.menuextra.clock ShowAMPM -bool true
+defaults write com.apple.menuextra.clock ShowDate -int 0
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+defaults write com.apple.menuextra.clock ShowSeconds -bool true
+
+# -- Control Center ------------------------------------------------------------
+
+defaults write com.apple.controlcenter "NSStatusItem Visible Battery" -bool true
+defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" -bool true
+defaults write com.apple.controlcenter "NSStatusItem Visible ScreenMirroring" -bool false
+
+# -- Screenshots ---------------------------------------------------------------
+
+mkdir -p "$HOME/screenshots"
+defaults write com.apple.screencapture location "$HOME/screenshots"
+
+# -- Apply ---------------------------------------------------------------------
+
+killall Dock
+killall SystemUIServer 2>/dev/null || true

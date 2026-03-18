@@ -68,19 +68,17 @@ all: full
 .PHONY: packages
 packages: brew
 
-full: casks screenshots touchid-sudo
+full: casks macos touchid-sudo
 
 .PHONY: casks
 casks: brew
 	$(Q)echo "==> Installing casks..."
 	$(Q)$(HOMEBREW_PREFIX)/bin/brew bundle --file $(CURDIR)/brew/Caskfile
 
-.PHONY: screenshots
-screenshots:
-	$(Q)echo "==> Configuring screenshots..."
-	$(Q)mkdir -p $(HOME)/screenshots
-	$(Q)defaults write com.apple.screencapture location $(HOME)/screenshots
-	$(Q)killall SystemUIServer
+.PHONY: macos
+macos:
+	$(Q)echo "==> Configuring macOS defaults..."
+	$(Q)bash $(CURDIR)/macos/defaults.sh
 
 .PHONY: touchid-sudo
 touchid-sudo:
@@ -168,7 +166,7 @@ update: packages
 
 # -- clean targets -------------------------------------------------------------
 
-TARGETS := bat bin ghostty git kiro mise nvim antidote ssh starship tmux touchid-sudo vim wireshark zsh
+TARGETS := bat bin ghostty git kiro macos mise nvim antidote ssh starship tmux touchid-sudo vim wireshark zsh
 
 .PHONY: clean
 clean: $(foreach target,$(TARGETS),clean-$(target))
