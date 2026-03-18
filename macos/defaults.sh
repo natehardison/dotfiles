@@ -14,11 +14,21 @@ defaults write com.apple.dock show-recents -bool false
 
 # -- Dock apps -----------------------------------------------------------------
 
+dock_add() {
+  local app="$1"
+  local label
+  label=$(basename "$app" .app)
+  if dockutil --find "$label" &>/dev/null; then
+    return
+  fi
+  dockutil --add "$app" --no-restart
+}
+
 if command -v dockutil &>/dev/null; then
-  dockutil --add /Applications/Ghostty.app --no-restart
-  dockutil --add /Applications/Visual\ Studio\ Code.app --no-restart
-  dockutil --add /Applications/Slack.app --no-restart
-  dockutil --add /Applications/1Password.app --no-restart
+  dock_add /Applications/Ghostty.app
+  dock_add /Applications/Visual\ Studio\ Code.app
+  dock_add /Applications/Slack.app
+  dock_add /Applications/1Password.app
 else
   echo "warning: dockutil not found, skipping Dock app layout"
 fi
