@@ -68,7 +68,7 @@ all: full
 .PHONY: packages
 packages: brew
 
-full: casks macos touchid-sudo
+full: casks macos touchid-sudo declutter
 
 .PHONY: casks
 casks: brew
@@ -84,6 +84,15 @@ macos:
 touchid-sudo:
 	$(Q)echo "==> Enabling Touch ID for sudo..."
 	$(Q)sudo cp $(CURDIR)/touchid-sudo/sudo_local /etc/pam.d/sudo_local
+
+.PHONY: declutter
+declutter:
+	$(Q)echo "==> Removing unwanted apps..."
+	$(Q)for app in GarageBand iMovie; do \
+		[ -d "/Applications/$$app.app" ] || continue; \
+		echo "    $$app"; \
+		sudo rm -rf "/Applications/$$app.app"; \
+	done
 
 # -- Linux ---------------------------------------------------------------------
 
