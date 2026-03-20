@@ -11,4 +11,5 @@ wireshark/profiles/*/decode_as_entries
 wireshark/profiles/*/extcap.cfg
 wireshark/profiles/*/hosts
 wireshark/profiles/*/recent
+kiro/settings/mcp.json
 !README*
