@@ -1,5 +1,7 @@
 brew/Brewfile.lock.json
 git/config.d/*
+git/eero
+git/amazon
 ssh/config.d/*
 tmux/plugins/
 vim/.netrwhist
