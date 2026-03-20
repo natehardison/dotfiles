@@ -79,6 +79,11 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 mkdir -p "$HOME/screenshots"
 defaults write com.apple.screencapture location "$HOME/screenshots"
 
+# -- Key repeat ----------------------------------------------------------------
+
+# Disable press-and-hold for VS Code so Vim key repeat works.
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
 # -- Apply ---------------------------------------------------------------------
 
 killall Dock
