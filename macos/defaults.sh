@@ -63,6 +63,17 @@ defaults write com.apple.controlcenter "NSStatusItem Visible ScreenMirroring" -b
 
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
+# -- Window management ---------------------------------------------------------
+
+# Disable macOS Sequoia tiling in favor of Rectangle.
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTilingOptionAccelerator -bool false
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+
+# Launch Rectangle at login.
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Rectangle.app", hidden:true}' 2>/dev/null || true
+
 # -- Screenshots ---------------------------------------------------------------
 
 mkdir -p "$HOME/screenshots"
