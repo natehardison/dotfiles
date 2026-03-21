@@ -72,7 +72,7 @@ defaults write com.apple.WindowManager EnableTilingOptionAccelerator -bool false
 defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 
 # Launch Rectangle at login.
-osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Rectangle.app", hidden:true}' 2>/dev/null || true
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Rectangle.app", hidden:true}' &>/dev/null || true
 
 # -- Screenshots ---------------------------------------------------------------
 
