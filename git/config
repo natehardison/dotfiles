@@ -82,10 +82,10 @@
     markUnblamableLines = true
 
 [includeIf "gitdir:eero-inc/"]
-    path = ~/.config/git/eero
+    path = ~/.config/git/config.d/eero
 
 [includeIf "gitdir:amazon/"]
-    path = ~/.config/git/amazon
+    path = ~/.config/git/config.d/amazon
 
 # don't set tracking branch to main on "git checkout -b <new branch>"
 [branch]
