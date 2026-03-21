@@ -10,6 +10,12 @@
   ```
 - Do all work in the worktree directory. This keeps the main checkout on the default branch and available for other agents.
 - Clean up after merging: `git worktree remove ~/.worktrees/<repo-name>/<branch-name>`
+- `gh pr merge --delete-branch` fails locally in worktrees because it tries to switch to main, which is already checked out elsewhere. Merge with `gh pr merge --squash --delete-branch` (the remote merge and branch delete succeed), then clean up locally from the main checkout:
+  ```
+  git worktree remove ~/.worktrees/<repo-name>/<branch-name>
+  git worktree prune
+  git branch -D <branch-name>
+  ```
 - At session start, run `git worktree prune` to clean up stale worktrees from branches merged by humans.
 - Squash merges don't register as "fully merged" in git. Use `git branch -D` (force) to delete branches after confirming the PR was merged: `gh pr list --state merged --head <branch-name>`.
 
