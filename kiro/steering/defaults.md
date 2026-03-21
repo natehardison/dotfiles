@@ -28,12 +28,15 @@
 - Never launch an interactive editor. Use `GIT_EDITOR=true` to suppress editor prompts during rebase, cherry-pick, or merge conflict resolution.
 
 ## Knowledge Capture
-- After submitting a PR, troubleshooting an issue, or completing a research task, review what you had to figure out the hard way: workarounds, tool quirks, undocumented behavior, failed approaches.
-- If any of that knowledge would save a future agent time, propose updating the relevant skill, steering rule, or AGENTS.md.
-- Don't silently absorb lessons — surface them to the user as a suggested update.
+* Before declaring any task complete, review what you figured out the hard way: workarounds, tool quirks, undocumented behavior, failed approaches. Do this BEFORE asking the user "want me to push/PR/merge?"
+* If any of that knowledge would save a future agent time, propose updating the relevant skill, steering rule, or AGENTS.md.
+* Don't silently absorb lessons — surface them to the user as a suggested update.
 
 ## Test Quality
 - Test behavior, not implementation: verify observable outcomes, not internal function calls.
 - Don't test private functions directly — test through the public API.
 - Each test should answer "what breaks if this test fails?" If the answer is "nothing a user would notice," skip it.
 - Prefer realistic inputs over contrived ones.
+
+## Subagent Delegation
+- Subagents don't inherit steering files or repo context. When delegating work, include relevant rules (worktree path, commit format, pre-commit checks, coding standards) in the delegation prompt.
