@@ -2,14 +2,19 @@
 - When creating a PR, follow the repo's PR template if one exists.
 
 ## Worktree Workflow
-- **Before delegating any file-modifying work to subagents**, the orchestrator MUST create a worktree first and pass the worktree path as the working directory for all implementation subagents. Never let subagents modify files in the main checkout.
+- **ALWAYS create a worktree at the start of every task** if the current
+  directory is a git repository. The main checkout must stay clean so multiple
+  agents can work in the repo simultaneously.
+- Use the worktree as your working directory for all subsequent operations
+  in that task — file reads, writes, and shell commands.
+- Pass the worktree path as the working directory when delegating to subagents.
+  Never let subagents modify files in the main checkout.
 - Never commit feature/fix branches directly in the main checkout.
-- Create a worktree for each branch under `~/.worktrees/<repo-name>/`:
+- Create a worktree at the start of each task under `~/.worktrees/<repo-name>/`:
   ```
   mkdir -p ~/.worktrees/<repo-name>
   git worktree add ~/.worktrees/<repo-name>/<branch-name> -b <author>/<branch-name>
   ```
-- Do all work in the worktree directory. This keeps the main checkout on the default branch and available for other agents.
 - Clean up after merging: `git worktree remove ~/.worktrees/<repo-name>/<branch-name>`
 - `gh pr merge --delete-branch` fails locally in worktrees because it tries to switch to main, which is already checked out elsewhere. Merge with `gh pr merge --squash --delete-branch` (the remote merge and branch delete succeed), then clean up locally from the main checkout:
   ```
