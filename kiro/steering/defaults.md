@@ -18,6 +18,7 @@
 - Body: a few paragraphs explaining the change and your testing, word-wrapped at 72 columns.
 - After the body, add a line containing only `---`, then `Prompt: {the user's prompt}` (also wrapped at 72 columns). No empty lines before or after the `---` line.
 - Provide the commit message for review before committing.
+- Never launch an interactive editor. Use `GIT_EDITOR=true` to suppress editor prompts during rebase, cherry-pick, or merge conflict resolution.
 
 ## Knowledge Capture
 - After submitting a PR, troubleshooting an issue, or completing a research task, review what you had to figure out the hard way: workarounds, tool quirks, undocumented behavior, failed approaches.
