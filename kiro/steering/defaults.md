@@ -2,6 +2,7 @@
 - When creating a PR, follow the repo's PR template if one exists.
 
 ## Worktree Workflow
+- **Before delegating any file-modifying work to subagents**, the orchestrator MUST create a worktree first and pass the worktree path as the working directory for all implementation subagents. Never let subagents modify files in the main checkout.
 - Never commit feature/fix branches directly in the main checkout.
 - Create a worktree for each branch under `~/.worktrees/<repo-name>/`:
   ```
