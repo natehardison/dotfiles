@@ -79,6 +79,13 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 mkdir -p "$HOME/screenshots"
 defaults write com.apple.screencapture location "$HOME/screenshots"
 
+# -- Trackpad ------------------------------------------------------------------
+
+# Disable "Look Up & data detectors" (fires during large text selections).
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+
 # -- Key repeat ----------------------------------------------------------------
 
 # Disable press-and-hold for VS Code so Vim key repeat works.
