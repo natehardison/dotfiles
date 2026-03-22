@@ -106,7 +106,7 @@ fi
 # use bat for cat and man pages if available
 if command -v bat >/dev/null; then
   alias cat=bat
-  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Smyck'"
+  export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=zenburn'"
 fi
 
 # use duf instead of df
@@ -125,7 +125,12 @@ fi
 alias ll='ls -l'
 alias la='ls -la'
 
-# configure fzf for fuzzy-finding
+# configure fzf for fuzzy-finding (zenburn palette)
+export FZF_DEFAULT_OPTS="
+  --color=bg+:#4F4F4F,bg:#3F3F3F,fg:#DCDCCC,fg+:#DCDCCC
+  --color=hl:#F0DFAF,hl+:#F0DFAF,info:#7F9F7F,marker:#CC9393
+  --color=prompt:#8CD0D3,spinner:#DC8CC3,pointer:#CC9393,header:#8CD0D3
+  --color=gutter:#3F3F3F,border:#5F5F5F"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # use htop instead of top
