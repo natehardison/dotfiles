@@ -96,6 +96,12 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 # Force dark mode system-wide (Chrome and other apps follow this)
 defaults write -g AppleInterfaceStyle -string "Dark"
 
+# Reduce transparency (less glassy UI)
+defaults write com.apple.universalaccess reduceTransparency -bool true
+
+# Reduce motion (less animation)
+defaults write com.apple.universalaccess reduceMotion -bool true
+
 # Reduce brightness intensity
 defaults write -g CGDisplayReduceWhitePoint -bool true
 defaults write -g CGDisplayReduceWhitePointEnabled -bool true
