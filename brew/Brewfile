@@ -1,6 +1,5 @@
 brew "awscli"
 brew "bat"
-brew "brightness"
 brew "dockutil"
 brew "duf"
 brew "eza"
