@@ -4,41 +4,41 @@ format = """$username$hostname$python$directory$character"""
 right_format = """$cmd_duration$git_branch$git_status"""
 
 [character]
-success_symbol = "[❯](bold red)[❯](bold yellow)[❯](bold green)"
-error_symbol = "[❯](bold red)[❯](bold yellow)[❯](bold green)"
-vimcmd_symbol = "[❮](bold green)[❮](bold yellow)[❮](bold red)"
+success_symbol = "[❯](fg:#a6da95)[❯](fg:#eed49f)[❯](fg:#8aadf4)"
+error_symbol = "[❯](fg:#ed8796)[❯](fg:#eed49f)[❯](fg:#8aadf4)"
+vimcmd_symbol = "[❮](fg:#8aadf4)[❮](fg:#eed49f)[❮](fg:#ed8796)"
 
 [directory]
 truncation_length = 0
 truncate_to_repo = false
-style = "bold cyan"
+style = "fg:#8aadf4"
 
 [username]
 show_always = true
 format = "[$user]($style)[@](white)"
-style_user = "bold red"
+style_user = "fg:#ed8796"
 
 [hostname]
 ssh_only = false
 format = "[$hostname]($style) "
-style = "bold yellow"
+style = "fg:#eed49f"
 
 [git_branch]
 format = "[$symbol$branch]($style)"
 symbol = " "
-style = "bold green"
+style = "fg:#a6da95"
 
 [git_status]
 format = '([:](white)[$all_status$ahead_behind]($style))'
-ahead = "[⬆](bold purple)"
-behind = "[⬇](bold purple)"
-diverged = "[⬆⬇](bold purple)"
-modified = "[✱](bold blue)"
-staged = "[✚](bold green)"
-deleted = "[✖](bold red)"
-renamed = "[➜](bold purple)"
-untracked = "[◼](bold dimmed white)"
-stashed = "[✭](bold cyan)"
+ahead = "[⬆](fg:#c6a0f6)"
+behind = "[⬇](fg:#c6a0f6)"
+diverged = "[⬆⬇](fg:#c6a0f6)"
+modified = "[✱](fg:#8aadf4)"
+staged = "[✚](fg:#a6da95)"
+deleted = "[✖](fg:#ed8796)"
+renamed = "[➜](fg:#c6a0f6)"
+untracked = "[◼](fg:#6e738d)"
+stashed = "[✭](fg:#8bd5ca)"
 
 [python]
 format = '[(\($virtualenv\) )]($style)'
