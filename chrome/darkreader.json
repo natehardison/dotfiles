@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "enabled": true,
+  "theme": {
+    "mode": 1,
+    "brightness": 95,
+    "contrast": 90,
+    "sepia": 45,
+    "grayscale": 0,
+    "engine": "dynamicTheme",
+    "darkSchemeBackgroundColor": "#3f3f3f",
+    "darkSchemeTextColor": "#dcdccc",
+    "scrollbarColor": "auto",
+    "selectionColor": "auto",
+    "styleSystemControls": true
+  },
+  "presets": [],
+  "customThemes": [],
+  "siteList": [],
+  "siteListEnabled": [],
+  "changeBrowserTheme": false
+}
