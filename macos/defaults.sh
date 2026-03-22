@@ -91,6 +91,17 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 # Disable press-and-hold for VS Code so Vim key repeat works.
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
+# Reduce brightness intensity
+defaults write -g CGDisplayReduceWhitePoint -bool true
+defaults write -g CGDisplayReduceWhitePointEnabled -bool true
+
+# Disable harsh UI effects
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+defaults write -g NSScrollAnimationEnabled -bool false
+
+# Font smoothing (0–3 range; try 1 or 2 depending on your display)
+defaults write -g AppleFontSmoothing -int 1
+
 # -- Apply ---------------------------------------------------------------------
 
 killall Dock
