@@ -4,41 +4,41 @@ format = """$username$hostname$python$directory$character"""
 right_format = """$cmd_duration$git_branch$git_status"""
 
 [character]
-success_symbol = "[❯](fg:#a6da95)[❯](fg:#eed49f)[❯](fg:#8aadf4)"
-error_symbol = "[❯](fg:#ed8796)[❯](fg:#eed49f)[❯](fg:#8aadf4)"
-vimcmd_symbol = "[❮](fg:#8aadf4)[❮](fg:#eed49f)[❮](fg:#ed8796)"
+success_symbol = "[❯](fg:#7F9F7F)[❯](fg:#F0DFAF)[❯](fg:#8CD0D3)"
+error_symbol = "[❯](fg:#CC9393)[❯](fg:#F0DFAF)[❯](fg:#8CD0D3)"
+vimcmd_symbol = "[❮](fg:#8CD0D3)[❮](fg:#F0DFAF)[❮](fg:#CC9393)"
 
 [directory]
 truncation_length = 0
 truncate_to_repo = false
-style = "fg:#8aadf4"
+style = "fg:#8CD0D3"
 
 [username]
 show_always = true
-format = "[$user]($style)[@](white)"
-style_user = "fg:#ed8796"
+format = "[$user]($style)[@](fg:#DCDCCC)"
+style_user = "fg:#CC9393"
 
 [hostname]
 ssh_only = false
 format = "[$hostname]($style) "
-style = "fg:#eed49f"
+style = "fg:#F0DFAF"
 
 [git_branch]
 format = "[$symbol$branch]($style)"
 symbol = " "
-style = "fg:#a6da95"
+style = "fg:#7F9F7F"
 
 [git_status]
-format = '([:](white)[$all_status$ahead_behind]($style))'
-ahead = "[⬆](fg:#c6a0f6)"
-behind = "[⬇](fg:#c6a0f6)"
-diverged = "[⬆⬇](fg:#c6a0f6)"
-modified = "[✱](fg:#8aadf4)"
-staged = "[✚](fg:#a6da95)"
-deleted = "[✖](fg:#ed8796)"
-renamed = "[➜](fg:#c6a0f6)"
-untracked = "[◼](fg:#6e738d)"
-stashed = "[✭](fg:#8bd5ca)"
+format = '([:]($style)[$all_status$ahead_behind]($style))'
+ahead = "[⬆](fg:#DC8CC3)"
+behind = "[⬇](fg:#DC8CC3)"
+diverged = "[⬆⬇](fg:#DC8CC3)"
+modified = "[✱](fg:#8CD0D3)"
+staged = "[✚](fg:#7F9F7F)"
+deleted = "[✖](fg:#CC9393)"
+renamed = "[➜](fg:#DC8CC3)"
+untracked = "[◼](fg:#5F5F5F)"
+stashed = "[✭](fg:#93E0E3)"
 
 [python]
 format = '[(\($virtualenv\) )]($style)'

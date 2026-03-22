@@ -49,32 +49,32 @@ window-padding-y = 6
 cursor-style = block
 cursor-opacity = 0.8
 
-# Background (NOT pure black)
-background = #1e2030
-foreground = #cad3f5
+# Zenburn — warm, low-contrast, brown-toned
+background = #3F3F3F
+foreground = #DCDCCC
 
 # Selection
-selection-background = #494d64
-selection-foreground = #cad3f5
+selection-background = #5F5F5F
+selection-foreground = #DCDCCC
 
-# ANSI colors (desaturated)
-palette = 0=#494d64
-palette = 1=#ed8796
-palette = 2=#a6da95
-palette = 3=#eed49f
-palette = 4=#8aadf4
-palette = 5=#f5bde6
-palette = 6=#8bd5ca
-palette = 7=#b8c0e0
+# ANSI colors (zenburn palette)
+palette = 0=#3F3F3F
+palette = 1=#CC9393
+palette = 2=#7F9F7F
+palette = 3=#F0DFAF
+palette = 4=#8CD0D3
+palette = 5=#DC8CC3
+palette = 6=#93E0E3
+palette = 7=#DCDCCC
 
-palette = 8=#5b6078
-palette = 9=#ed8796
-palette = 10=#a6da95
-palette = 11=#eed49f
-palette = 12=#8aadf4
-palette = 13=#f5bde6
-palette = 14=#8bd5ca
-palette = 15=#a5adcb
+palette = 8=#5F5F5F
+palette = 9=#DCA3A3
+palette = 10=#8FB28F
+palette = 11=#F0DFAF
+palette = 12=#94BFF3
+palette = 13=#EC93D3
+palette = 14=#93E0E3
+palette = 15=#FFFFEF
 
 # copy the terminfo entry the first time you log into a new server over SSH
 shell-integration-features = ssh-terminfo
