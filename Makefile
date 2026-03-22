@@ -68,7 +68,7 @@ all: full
 .PHONY: packages
 packages: brew
 
-full: casks macos touchid-sudo declutter
+full: casks chrome macos touchid-sudo declutter
 
 .PHONY: casks
 casks: brew
@@ -84,6 +84,11 @@ macos:
 touchid-sudo:
 	$(Q)echo "==> Enabling Touch ID for sudo..."
 	$(Q)sudo cp $(CURDIR)/touchid-sudo/sudo_local /etc/pam.d/sudo_local
+
+.PHONY: chrome
+chrome:
+	$(Q)echo "==> Configuring Chrome..."
+	$(Q)bash $(CURDIR)/chrome/setup.sh || echo "    (skipped — Chrome may be running or not installed)"
 
 .PHONY: declutter
 declutter:
