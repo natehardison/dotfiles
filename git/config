@@ -13,6 +13,7 @@
     features = decorations
     navigate = true
     side-by-side = true
+    syntax-theme = zenburn
 
 [delta "interactive"]
     keep-plus-minus-markers = false
