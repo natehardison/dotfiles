@@ -47,6 +47,7 @@ window-padding-y = 6
 
 # Cursor
 cursor-style = block
+cursor-style-blink = false
 cursor-opacity = 0.8
 
 # Zenburn — warm, low-contrast, brown-toned
