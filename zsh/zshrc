@@ -194,7 +194,6 @@ alias kr='kiro-cli chat --resume'
 #
 # Functions
 #
-
 # zip and encrypt a directory
 zipenc() {
   [ -n "$1" ] || return 1
@@ -241,3 +240,24 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     networksetup -disconnectpppoeservice $*
   }
 fi
+
+claude-rc() {
+  # if name not provided, use name of parent dir
+  local name="${1:-${PWD##*/}}"
+
+  caffeinate -dis &
+  local caf_pid=$!
+
+  cleanup() {
+    kill $caf_pid 2>/dev/null
+    trap - EXIT INT TERM HUP
+  }
+
+  trap cleanup EXIT INT TERM HUP
+
+  claude remote-control --name "$name"
+  local rc=$?
+
+  cleanup
+  return $rc
+}
