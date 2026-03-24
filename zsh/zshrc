@@ -194,7 +194,7 @@ alias gg='lazygit'
 
 # kiro
 alias k='kiro-cli'
-alias kr='kiro-cli chat --resume'
+alias kr='kiro-cli chat --resume-picker'
 
 #
 # Functions
