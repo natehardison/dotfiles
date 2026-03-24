@@ -160,9 +160,10 @@ wireshark: config
 .PHONY: kiro
 kiro:
 	$(Q)echo "==> kiro"
-	$(Q)mkdir -p $(HOME)/.kiro
+	$(Q)mkdir -p $(HOME)/.kiro $(HOME)/.kiro/skills
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering $(HOME)/.kiro/steering
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings $(HOME)/.kiro/settings
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
 
 # Create a wrapper ~/.zshrc that sources the dotfiles version. Machine-local
 # config lives below the source line, so tools that auto-append PATH entries
