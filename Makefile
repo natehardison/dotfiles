@@ -161,7 +161,8 @@ wireshark: config
 kiro:
 	$(Q)echo "==> kiro"
 	$(Q)mkdir -p $(HOME)/.kiro $(HOME)/.kiro/skills
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering $(HOME)/.kiro/steering
+	$(Q)mkdir -p $(HOME)/.kiro/steering
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/defaults.md $(HOME)/.kiro/steering/defaults.md
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings $(HOME)/.kiro/settings
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
 
