@@ -1,5 +1,13 @@
 # Global Defaults
 
+## Dotfiles
+- This file lives in natehardison/dotfiles, a public GitHub repo.
+  Never put employer-specific URLs, org names, credentials, or
+  internal conventions in that repo.
+- Steering and skills symlinked from dotfiles must stay generic.
+- Commit directly to master — this repo is exempt from the
+  worktree rule below.
+
 ## Before Every Task
 - Create a git worktree before making any changes, if the current
   directory is a git repository. Never modify the main checkout
@@ -41,3 +49,11 @@
   prompt.
 - Pass the worktree path as the working directory when delegating to
   subagents. Never let subagents modify files in the main checkout.
+
+## Python Scripts
+- Use `uv` for running and managing dependencies, even for one-off
+  scripts. Prefer PEP 723 inline metadata for standalone scripts.
+- Run `uvx ruff check` and `uvx ruff format` before committing.
+- Run `uvx mypy --strict` before committing.
+- All functions must have type annotations. Use `from __future__
+  import annotations` or Python 3.10+ syntax for generics.
