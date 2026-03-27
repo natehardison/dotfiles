@@ -5,7 +5,7 @@
   Never put employer-specific URLs, org names, credentials, or
   internal conventions in that repo.
 - Steering and skills symlinked from dotfiles must stay generic.
-- Commit directly to master — this repo is exempt from the
+- Commit directly to dotfiles repos — they are exempt from the
   worktree rule below.
 
 ## Before Every Task
