@@ -53,7 +53,11 @@
 ## Python Scripts
 - Use `uv` for running and managing dependencies, even for one-off
   scripts. Prefer PEP 723 inline metadata for standalone scripts.
-- Run `uvx ruff check` and `uvx ruff format` before committing.
-- Run `uvx mypy --strict` before committing.
+- In repos with a `uv.lock`, use `uv run` to run tools (e.g.
+  `uv run ruff check`). This uses the pinned versions.
+- For standalone scripts or repos without `uv.lock`, use `uvx`
+  (e.g. `uvx ruff check`).
+- Run ruff check and ruff format before committing.
+- Run mypy --strict before committing.
 - All functions must have type annotations. Use `from __future__
   import annotations` or Python 3.10+ syntax for generics.
