@@ -89,6 +89,10 @@ bindkey '^[[B' history-substring-search-down
 
 eval "$(starship init zsh)"
 
+# Terminal title: directory + running command
+set_terminal_title_preexec() { print -Pn "\e]0;%~ · ${1}\a" }
+preexec_functions+=(set_terminal_title_preexec)
+
 #
 # Tools
 #
