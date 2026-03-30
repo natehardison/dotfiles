@@ -11,9 +11,15 @@ clean and is never used for feature branches.
 
 ### Placeholders
 
-- `<repo-name>`: basename of the repo directory (e.g., `eero-pylibs`)
+- `<repo-name>`: basename of the repo directory (e.g., `my-project`)
 - `<author>`: the user's username (e.g., `nateh`)
 - `<branch-name>`: short description of the task (e.g., `fix-serial-timeout`)
+
+## Command style
+
+Run each git and shell command as a separate `execute_bash` call.
+Use the `working_dir` parameter instead of `cd`. Never chain
+commands with `&&` or `;` — it defeats the auto-approval allowlist.
 
 ## Steps
 
