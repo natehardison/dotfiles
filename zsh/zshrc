@@ -64,7 +64,7 @@ bindkey '\e[1;3C' forward-word
 #
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
 fi
 
 source "${HOME}/.antidote/antidote.zsh"
@@ -73,7 +73,12 @@ source "${HOME}/.antidote/antidote.zsh"
 # system, and before widget-wrapping plugins (autosuggestions, syntax-highlighting).
 # Manually add zsh-completions to fpath first since antidote load hasn't run yet.
 fpath=($(antidote path zsh-users/zsh-completions)/src $fpath)
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+if [[ -f ~/.zcompdump && $(date +'%j') == $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]]; then
+  compinit -C
+else
+  compinit
+fi
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:descriptions' format '[%d]'
 
