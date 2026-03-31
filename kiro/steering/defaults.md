@@ -39,6 +39,9 @@
   approaches. Do this BEFORE asking the user "want me to push/PR/merge?"
 - If any of that knowledge would save a future agent time, propose
   updating the relevant skill, steering rule, or AGENTS.md.
+- For observations that don't fit the current task (bugs found,
+  API quirks, codebase facts), append to `~/personal/inbox.md`
+  with a date header and repo context. Weekly review triages these.
 - Don't silently absorb lessons — surface them to the user as a
   suggested update.
 
