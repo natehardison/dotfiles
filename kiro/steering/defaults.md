@@ -43,12 +43,13 @@
   suggested update.
 
 ## Subagent Delegation
-- Subagents don't inherit steering files or repo context. When
-  delegating work, include relevant rules (worktree path, commit
-  format, pre-commit checks, coding standards) in the delegation
-  prompt.
+- Subagents load their own steering and skills but not the parent's
+  conversation context. Include task-specific state (worktree path,
+  coding standards) in the delegation prompt.
 - Pass the worktree path as the working directory when delegating to
   subagents. Never let subagents modify files in the main checkout.
+- Keep input files under ~400KB per subagent. Larger files risk
+  timeouts — split and delegate in parallel instead.
 
 ## Python Scripts
 - Use `uv` for running and managing dependencies, even for one-off
@@ -61,3 +62,9 @@
 - Run mypy --strict before committing.
 - All functions must have type annotations. Use `from __future__
   import annotations` or Python 3.10+ syntax for generics.
+
+## Large File Transforms
+- Use scripts for mechanical file transformations (renumbering,
+  bulk renames, path updates) instead of generating full file
+  content inline. A 3-line Python script beats rewriting a
+  500-line file and risking a timeout.
