@@ -68,3 +68,13 @@
   bulk renames, path updates) instead of generating full file
   content inline. A 3-line Python script beats rewriting a
   500-line file and risking a timeout.
+- Never reconstruct markdown via sed pipelines. `grep -v '^$'`
+  strips blank lines and destroys formatting. Use targeted
+  str_replace on the original file.
+
+## Git Safety
+- Commit before git surgery. Staged-but-uncommitted changes are
+  not recoverable after `git reset --hard`. Always commit (even
+  WIP) before rebase or reset.
+- Check `git diff --stat origin/main..HEAD` before any reset to
+  understand the full scope of changes on the branch.
