@@ -40,8 +40,8 @@
 - If any of that knowledge would save a future agent time, propose
   updating the relevant skill, steering rule, or AGENTS.md.
 - For observations that don't fit the current task (bugs found,
-  API quirks, codebase facts), append to `~/personal/inbox.md`
-  with a date header and repo context. Weekly review triages these.
+  API quirks, codebase facts), capture them for later triage.
+  See private steering for the specific workflow.
 - Don't silently absorb lessons — surface them to the user as a
   suggested update.
 
@@ -62,7 +62,11 @@
 - For standalone scripts or repos without `uv.lock`, use `uvx`
   (e.g. `uvx ruff check`).
 - Run ruff check and ruff format before committing.
-- Run mypy --strict before committing.
+- Run mypy --strict before committing. For PEP 723 scripts, run
+  mypy inside the script's dependency environment — `uvx mypy`
+  won't have the script's deps and reports false errors. Write a
+  small wrapper script that declares the same deps plus mypy,
+  then calls `mypy --strict` via subprocess.
 - All functions must have type annotations. Use `from __future__
   import annotations` or Python 3.10+ syntax for generics.
 
