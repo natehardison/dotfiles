@@ -70,6 +70,11 @@
 - All functions must have type annotations. Use `from __future__
   import annotations` or Python 3.10+ syntax for generics.
 
+## Shell & JSON
+- For JSON parsing in shell commands, prefer `jq` over Python
+  one-liners. Reserve Python for complex transformations that
+  need error handling or multi-step logic.
+
 ## Large File Transforms
 - Use scripts for mechanical file transformations (renumbering,
   bulk renames, path updates) instead of generating full file
