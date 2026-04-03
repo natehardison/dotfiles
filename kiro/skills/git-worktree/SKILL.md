@@ -12,7 +12,7 @@ clean and is never used for feature branches.
 ### Placeholders
 
 - `<repo-name>`: basename of the repo directory (e.g., `my-project`)
-- `<author>`: the user's username (e.g., `nateh`)
+- `<author>`: detect with `whoami` or `git config user.name`
 - `<branch-name>`: short description of the task (e.g., `fix-serial-timeout`)
 
 ## Command style

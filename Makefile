@@ -160,10 +160,9 @@ wireshark: config
 .PHONY: kiro
 kiro:
 	$(Q)echo "==> kiro"
-	$(Q)mkdir -p $(HOME)/.kiro $(HOME)/.kiro/skills
-	$(Q)mkdir -p $(HOME)/.kiro/steering
+	$(Q)mkdir -p $(HOME)/.kiro/skills $(HOME)/.kiro/steering $(HOME)/.kiro/settings
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings/cli.json $(HOME)/.kiro/settings/cli.json
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/defaults.md $(HOME)/.kiro/steering/defaults.md
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings $(HOME)/.kiro/settings
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
 
 # Create a wrapper ~/.zshrc that sources the dotfiles version. Machine-local
