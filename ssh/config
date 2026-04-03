@@ -20,3 +20,5 @@ Match host * exec "test -e ~/Library/'Group Containers'/2BUA8C4S2C.com.1password
 
 Match host * exec "test -e ~/.1password/agent.sock"
     IdentityAgent "~/.1password/agent.sock"
+
+Include /home/nateh/.ssh/bastions-config

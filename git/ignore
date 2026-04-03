@@ -33,3 +33,4 @@ Temporary Items
 .idea
 
 **/.claude/settings.local.json
+.sisyphus/

@@ -74,7 +74,7 @@ source "${HOME}/.antidote/antidote.zsh"
 # Manually add zsh-completions to fpath first since antidote load hasn't run yet.
 fpath=($(antidote path zsh-users/zsh-completions)/src $fpath)
 autoload -Uz compinit
-if [[ -f ~/.zcompdump && $(date +'%j') == $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]]; then
+if [[ -f ~/.zcompdump(#qN.mh-24) ]]; then
   compinit -C
 else
   compinit
