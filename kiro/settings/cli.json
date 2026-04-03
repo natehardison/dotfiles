@@ -9,5 +9,6 @@
   "chat.enableTodoList": true,
   "chat.enableHistoryHints": true,
   "chat.enablePromptHints": true,
+  "chat.defaultAgent": "default",
   "chat.ui": "tui"
 }
