@@ -60,6 +60,14 @@ git worktree prune
 
 ## Troubleshooting
 
+- **Orphaned conflict markers after rebase**: `git rebase --continue`
+  does not check for leftover `<<<<<<<` / `>>>>>>>` markers. After
+  any rebase with conflicts, verify the final result:
+  ```bash
+  grep -rn '<<<<<<<\|>>>>>>>' <changed-dirs> --include='*.py'
+  ```
+  Do this after the rebase completes, not just at each conflict step.
+
 - **`git branch -d` says branch is not fully merged**: Squash merges
   don't register as merged in git. Confirm the PR was merged first,
   then force delete:
