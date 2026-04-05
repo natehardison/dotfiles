@@ -6,6 +6,7 @@
 typeset -gU cdpath fpath mailpath path
 
 path=(
+  $HOME/.local/share/mise/shims(N)
   $HOME/.local/bin(N)
   $HOME/{,s}bin(N)
   /opt/{homebrew,local}/{,s}bin(N)
@@ -60,29 +61,42 @@ bindkey '\e[1;3D' backward-word
 bindkey '\e[1;3C' forward-word
 
 #
-# Antidote plugin manager
+# Plugins (antidote)
+#
+# We use a static bundle (~/.zsh_plugins.zsh) instead of `antidote load`
+# to avoid ~20ms of overhead on every shell. The bundle is a plain list
+# of fpath+= and source commands generated from ~/.zsh_plugins.txt.
+#
+# The bundle auto-rebuilds when the plugin list is newer. You can also
+# rebuild manually with `make antidote` or `make update`.
 #
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
-fi
-
-source "${HOME}/.antidote/antidote.zsh"
-
-# compinit must run before antidote load so fzf-tab can wrap the completion
-# system, and before widget-wrapping plugins (autosuggestions, syntax-highlighting).
-# Manually add zsh-completions to fpath first since antidote load hasn't run yet.
-fpath=($(antidote path zsh-users/zsh-completions)/src $fpath)
-autoload -Uz compinit
-if [[ -f ~/.zcompdump(#qN.mh-24) ]]; then
-  compinit -C
+  antidote_cache="$HOME/Library/Caches/antidote"
 else
-  compinit
+  antidote_cache="${XDG_CACHE_HOME:-$HOME/.cache}/antidote"
 fi
+
+zsh_plugins_txt="${ZDOTDIR:-${HOME}}/.zsh_plugins.txt"
+zsh_plugins_zsh="${ZDOTDIR:-${HOME}}/.zsh_plugins.zsh"
+if [[ ! -e "$zsh_plugins_zsh" || "$zsh_plugins_txt" -nt "$zsh_plugins_zsh" ]]; then
+  source "${HOME}/.antidote/antidote.zsh"
+  antidote bundle < "$zsh_plugins_txt" > "$zsh_plugins_zsh"
+fi
+
+# compinit must run BEFORE the plugin bundle is sourced: fzf-tab needs to
+# wrap the completion widget, and autosuggestions/syntax-highlighting need
+# to wrap zle widgets that compinit registers. But compinit needs the
+# zsh-completions fpath entry that the bundle would normally provide, so
+# we add it explicitly here first.
+fpath=("$antidote_cache/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions/src" $fpath)
+autoload -Uz compinit && compinit -C
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:descriptions' format '[%d]'
 
-antidote load
+source "$zsh_plugins_zsh"
+unset zsh_plugins_txt zsh_plugins_zsh antidote_cache
 
 # bind up/down to history-substring-search (from antidote plugin)
 bindkey '^[[A' history-substring-search-up
@@ -147,8 +161,7 @@ if command -v htop >/dev/null; then
   alias top=htop
 fi
 
-# use mise for managing language runtimes
-command -v mise >/dev/null && eval "$(mise activate zsh)"
+# mise: shims dir is on PATH (see top of file), no activate hook needed
 
 # configure zoxide
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
@@ -161,6 +174,9 @@ command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 ce() {
   vim ~/.config/$1
 }
+# rebuild zsh completion cache (run after installing new CLI tools)
+zsh-rebuild() { rm -f ~/.zcompdump && exec zsh }
+
 alias se='vim ~/.ssh/config'
 alias te='vim ~/.tmux.conf.local'
 alias ve='vim ~/.vim/vimrc'
@@ -212,6 +228,12 @@ alias kr='kiro-cli chat --resume-picker'
 zipenc() {
   [ -n "$1" ] || return 1
   zip --encrypt --junk-paths --exclude \*.DS_Store -r "$(basename $1)" $1
+}
+
+# jump to a git worktree
+gw() {
+  local dir
+  dir=$(git worktree list | awk '{print $1}' | fzf) && cd "$dir"
 }
 
 # virtualenv helpers

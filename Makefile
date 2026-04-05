@@ -120,7 +120,7 @@ antidote:
 	$(Q)echo "==> antidote"
 	$(Q)git clone --depth=1 https://github.com/mattmc3/antidote.git $(HOME)/.antidote 2>/dev/null || true
 	$(Q)$(SOFTLINK) $(CURDIR)/zsh/zsh_plugins.txt $(HOME)/.zsh_plugins.txt
-	$(Q)zsh -c 'source $(HOME)/.antidote/antidote.zsh && antidote load'
+	$(Q)zsh -c 'source $(HOME)/.antidote/antidote.zsh && antidote bundle < $(HOME)/.zsh_plugins.txt > $(HOME)/.zsh_plugins.zsh'
 
 .PHONY: bin
 bin:
@@ -180,7 +180,7 @@ zsh:
 .PHONY: update
 update: packages
 	$(Q)echo "==> Updating antidote plugins..."
-	$(Q)zsh -c 'source $(HOME)/.antidote/antidote.zsh && antidote update'
+	$(Q)zsh -c 'source $(HOME)/.antidote/antidote.zsh && antidote update && antidote bundle < $(HOME)/.zsh_plugins.txt > $(HOME)/.zsh_plugins.zsh'
 	$(Q)echo "==> Updating vim plugins..."
 	$(Q)command -v vim >/dev/null && vim -Es +'PlugUpdate --sync' +qall 2>/dev/null || true
 	$(Q)command -v nvim >/dev/null && nvim --headless +'PlugUpdate --sync' +qall 2>/dev/null || true
@@ -194,7 +194,7 @@ clean: $(foreach target,$(TARGETS),clean-$(target))
 
 .PHONY: clean-antidote
 clean-antidote:
-	$(Q)rm -f $(HOME)/.zsh_plugins.txt
+	$(Q)rm -f $(HOME)/.zsh_plugins.txt $(HOME)/.zsh_plugins.zsh
 
 .PHONY: clean-bin
 clean-bin:
