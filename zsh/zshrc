@@ -233,7 +233,7 @@ zipenc() {
 # jump to a git worktree
 gw() {
   local dir
-  dir=$(git worktree list | awk '{print $1}' | fzf) && cd "$dir"
+  dir=$(git worktree list | awk '{print $1}' | fzf --height=~15%) && cd "$dir"
 }
 
 # virtualenv helpers
