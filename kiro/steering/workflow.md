@@ -1,5 +1,11 @@
 # Workflow
 
+## File Safety
+- Never read dotfiles or dotfile directories in `~/` (e.g.
+  `~/.ssh`, `~/.aws`, `~/.gnupg`, `~/.netrc`, `~/.config`)
+  without explicit human approval. They may contain credentials
+  or private information.
+
 ## Knowledge Capture
 - Before declaring any task complete, review what you figured out the
   hard way: workarounds, tool quirks, undocumented behavior, failed
