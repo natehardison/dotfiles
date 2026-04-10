@@ -77,6 +77,9 @@
   str_replace on the original file.
 
 ## Git Safety
+- Never push to a remote without explicit user confirmation.
+  Commit locally, show what will be pushed, and wait for a
+  go-ahead.
 - Commit before git surgery. Staged-but-uncommitted changes are
   not recoverable after `git reset --hard`. Always commit (even
   WIP) before rebase or reset.

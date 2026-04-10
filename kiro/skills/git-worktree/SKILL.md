@@ -23,25 +23,35 @@ commands with `&&` or `;` — it defeats the auto-approval allowlist.
 
 ## Steps
 
-1. Create the worktree directory and branch:
+1. Fetch latest main before branching:
    ```bash
-   mkdir -p ~/.worktrees/<repo-name>
-   git worktree add ~/.worktrees/<repo-name>/<branch-name> -b <author>/<branch-name>
+   git fetch origin main
    ```
 
-2. Use the worktree path as your working directory for all subsequent
+2. Create the worktree directory and branch:
+   ```bash
+   mkdir -p ~/.worktrees/<repo-name>
+   git worktree add ~/.worktrees/<repo-name>/<branch-name> -b <author>/<branch-name> origin/main
+   ```
+
+3. Use the worktree path as your working directory for all subsequent
    operations — file reads, writes, and shell commands.
 
-3. Push the branch, create a PR, and get it reviewed. See the
+4. Before pushing, rebase on latest main:
+   ```bash
+   git fetch origin main
+   git rebase origin/main
+   ```
+   Then push the branch, create a PR, and get it reviewed. See the
    `pull-requests` skill if the repo has one.
 
-4. Merge the PR from the worktree. Don't use `--delete-branch` — it
+5. Merge the PR from the worktree. Don't use `--delete-branch` — it
    fails in worktrees because `gh` can't switch to main:
    ```bash
    gh pr merge --squash
    ```
 
-5. Clean up. Run these from the original repo directory (where the
+6. Clean up. Run these from the original repo directory (where the
    session started), not the worktree:
    ```bash
    git worktree remove ~/.worktrees/<repo-name>/<branch-name>

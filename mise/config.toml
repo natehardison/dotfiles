@@ -1,6 +1,8 @@
 [tools]
 go = "latest"
+java = "corretto-17"
 node = "latest"
+sbt = "1.12.1"
 
 [settings]
 experimental = true
