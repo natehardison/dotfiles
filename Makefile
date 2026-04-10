@@ -162,7 +162,10 @@ kiro:
 	$(Q)echo "==> kiro"
 	$(Q)mkdir -p $(HOME)/.kiro/skills $(HOME)/.kiro/steering $(HOME)/.kiro/settings
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings/cli.json $(HOME)/.kiro/settings/cli.json
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/public.md $(HOME)/.kiro/steering/public.md
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/git.md $(HOME)/.kiro/steering/git.md
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/python.md $(HOME)/.kiro/steering/python.md
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/coding.md $(HOME)/.kiro/steering/coding.md
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/workflow.md $(HOME)/.kiro/steering/workflow.md
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
 
 # Create a wrapper ~/.zshrc that sources the dotfiles version. Machine-local
