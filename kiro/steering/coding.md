@@ -10,3 +10,9 @@
 - Never reconstruct markdown via sed pipelines. `grep -v '^$'`
   strips blank lines and destroys formatting. Use targeted
   str_replace on the original file.
+- No organizing comments (`# --- Setup ---`, `# Initialize`,
+  `# Helper functions`). Code structure should be self-evident
+  from naming and grouping.
+- Do comment tricky logic, non-obvious invariants, and
+  workarounds. If you had to think hard about why the code is
+  correct, the next reader will too.
