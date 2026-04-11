@@ -18,6 +18,12 @@
 - Don't silently absorb lessons — surface them to the user as a
   suggested update.
 
+## External Comments
+- When posting comments to GitHub PRs, Jira tickets, Slack, or
+  any external system, include a footer line: `*Sent from my Kiro*`.
+  This makes it clear the comment was agent-assisted, not
+  hand-written.
+
 ## Subagent Delegation
 - Subagents load their own steering and skills but not the parent's
   conversation context. Include task-specific state (worktree path,
