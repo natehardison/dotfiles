@@ -16,3 +16,16 @@
 - Do comment tricky logic, non-obvious invariants, and
   workarounds. If you had to think hard about why the code is
   correct, the next reader will too.
+
+## Test Quality
+
+- Inline before/after fixtures for file mutations: when test data
+  is small enough for a readable triple-quoted string, write it
+  directly in the test body and assert against the full file
+  content after the operation. Use file fixtures in tests/fixtures/
+  for larger inputs.
+- `@pytest.mark.usefixtures` over unused fixture args: when a test
+  needs a fixture's side effect but doesn't reference it in the
+  body, use the decorator instead of adding an unused parameter.
+- `tmp_path` over `tmpdir`: `tmp_path` returns `pathlib.Path`;
+  `tmpdir` returns legacy `py.path.local`.
