@@ -32,5 +32,7 @@
 - Commit before git surgery. Staged-but-uncommitted changes are
   not recoverable after `git reset --hard`. Always commit (even
   WIP) before rebase or reset.
-- Check `git diff --stat origin/main..HEAD` before any reset to
-  understand the full scope of changes on the branch.
+- After any rebase, cherry-pick, or reset, run
+  `git diff origin/main..HEAD` and audit every hunk — not just
+  the files you intended to change. A clean-looking branch can
+  silently revert changes that landed on main since you branched.
