@@ -1,17 +1,6 @@
 {
   "model": "opus",
-  "theme": "auto",
   "permissions": {
-    "deny": [
-      "Bash(cmd:*~/.aws*)",
-      "Bash(cmd:*~/.ssh*)",
-      "Bash(cmd:*~/.gnupg*)",
-      "Bash(cmd:*~/.netrc*)",
-      "Read(~/.aws/**)",
-      "Read(~/.ssh/**)",
-      "Read(~/.gnupg/**)",
-      "Read(~/.netrc)"
-    ],
     "allow": [
       "Bash(cmd:arch *)",
       "Bash(cmd:base64 *)",
@@ -75,7 +64,6 @@
       "Bash(cmd:which *)",
       "Bash(cmd:whoami *)",
       "Bash(cmd:xxd *)",
-
       "Bash(cmd:git add *)",
       "Bash(cmd:git blame *)",
       "Bash(cmd:git branch *)",
@@ -101,7 +89,6 @@
       "Bash(cmd:git stash apply *)",
       "Bash(cmd:git status *)",
       "Bash(cmd:git worktree *)",
-
       "Bash(cmd:gh issue list *)",
       "Bash(cmd:gh issue view *)",
       "Bash(cmd:gh issue status *)",
@@ -116,7 +103,6 @@
       "Bash(cmd:gh repo list *)",
       "Bash(cmd:gh repo view *)",
       "Bash(cmd:gh search *)",
-
       "Bash(cmd:docker ps *)",
       "Bash(cmd:docker images *)",
       "Bash(cmd:docker inspect *)",
@@ -135,7 +121,6 @@
       "Bash(cmd:docker compose ps *)",
       "Bash(cmd:docker compose logs *)",
       "Bash(cmd:docker compose config *)",
-
       "Bash(cmd:uv run ruff *)",
       "Bash(cmd:uv run pytest *)",
       "Bash(cmd:uv run mypy *)",
@@ -150,6 +135,18 @@
       "Bash(cmd:uv python list *)",
       "Bash(cmd:uv python find *)",
       "Bash(cmd:uv version *)"
+    ],
+    "deny": [
+      "Bash(*~/.aws*)",
+      "Bash(*~/.ssh*)",
+      "Bash(*~/.gnupg*)",
+      "Bash(*~/.netrc*)",
+      "Read(~/.aws/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.netrc)"
     ]
+  },
+  "theme": "auto",
   }
 }
