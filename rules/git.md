@@ -1,9 +1,9 @@
 # Git
 
 ## Before Every Task
-- Create a git worktree before making any changes, if the current
-  directory is a git repository. Never modify the main checkout
-  directly.
+- Work in a git worktree. Never modify the main checkout directly.
+- After entering the worktree, fetch and rebase onto origin/main:
+  `git fetch origin main && git rebase origin/main`
 - Use the worktree as your working directory for all subsequent
   operations — file reads, writes, and shell commands.
 - Branch names follow `<author>/<description>` convention.
