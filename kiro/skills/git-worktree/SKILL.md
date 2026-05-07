@@ -11,7 +11,6 @@ clean and is never used for feature branches.
 
 ### Placeholders
 
-- `<repo-name>`: basename of the repo directory (e.g., `my-project`)
 - `<author>`: detect with `whoami` or `git config user.name`
 - `<branch-name>`: short description of the task (e.g., `fix-serial-timeout`)
 
@@ -30,8 +29,8 @@ commands with `&&` or `;` — it defeats the auto-approval allowlist.
 
 2. Create the worktree directory and branch:
    ```bash
-   mkdir -p ~/.worktrees/<repo-name>
-   git worktree add ~/.worktrees/<repo-name>/<branch-name> -b <author>/<branch-name> origin/main
+   mkdir -p .worktrees
+   git worktree add .worktrees/<branch-name> -b <author>/<branch-name> origin/main
    ```
 
 3. Use the worktree path as your working directory for all subsequent
@@ -54,7 +53,7 @@ commands with `&&` or `;` — it defeats the auto-approval allowlist.
 6. Clean up. Run these from the original repo directory (where the
    session started), not the worktree:
    ```bash
-   git worktree remove ~/.worktrees/<repo-name>/<branch-name>
+   git worktree remove .worktrees/<branch-name>
    git worktree prune
    git branch -D <author>/<branch-name>
    git pull origin main
