@@ -17,7 +17,7 @@
   hard way: workarounds, tool quirks, undocumented behavior, failed
   approaches. Do this BEFORE asking the user "want me to push/PR/merge?"
 - If any of that knowledge would save a future agent time, propose
-  updating the relevant skill, steering rule, or AGENTS.md.
+  updating the relevant rule, convention, or project docs.
 - For observations that don't fit the current task (bugs found,
   API quirks, codebase facts), capture them for later triage.
   See private steering for the specific workflow.
@@ -26,18 +26,8 @@
 
 ## External Comments
 - When posting comments to GitHub PRs, Jira tickets, Slack, or
-  any external system, include a footer line: `*Sent from my Kiro*`.
-  This makes it clear the comment was agent-assisted, not
-  hand-written.
-
-## Subagent Delegation
-- Subagents load their own steering and skills but not the parent's
-  conversation context. Include task-specific state (worktree path,
-  coding standards) in the delegation prompt.
-- Pass the worktree path as the working directory when delegating to
-  subagents. Never let subagents modify files in the main checkout.
-- Keep input files under ~400KB per subagent. Larger files risk
-  timeouts — split and delegate in parallel instead.
+  any external system, include a footer indicating the comment
+  was agent-assisted.
 
 ## Amazon Q Bot Reviews
 - First round usually finds real issues. Fix them.

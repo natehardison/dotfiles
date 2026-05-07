@@ -30,7 +30,7 @@ endef
 
 # Default target is set per-OS below (full on macOS, minimal on Linux).
 .PHONY: minimal
-minimal: packages config antidote bat bin git kiro mise ssh starship tmux vim zsh
+minimal: packages config antidote bat bin claude git kiro mise ssh starship tmux vim zsh
 
 .PHONY: full
 full: minimal ghostty nvim wireshark
@@ -157,15 +157,30 @@ wireshark: config
 	$(Q)mkdir -p $(CONFIG)/$@
 	$(Q)$(SOFTLINK) $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
 
+.PHONY: claude
+claude:
+	$(Q)echo "==> claude"
+	$(Q)mkdir -p $(HOME)/.claude/rules
+	$(Q)for f in $(CURDIR)/rules/*.md; do \
+		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
+	done
+	$(Q)for f in $(CURDIR)/claude/rules/*.md; do \
+		[ -e "$$f" ] || continue; \
+		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
+	done
+
 .PHONY: kiro
 kiro:
 	$(Q)echo "==> kiro"
 	$(Q)mkdir -p $(HOME)/.kiro/skills $(HOME)/.kiro/steering $(HOME)/.kiro/settings
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings/cli.json $(HOME)/.kiro/settings/cli.json
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/git.md $(HOME)/.kiro/steering/git.md
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/python.md $(HOME)/.kiro/steering/python.md
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/coding.md $(HOME)/.kiro/steering/coding.md
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/steering/workflow.md $(HOME)/.kiro/steering/workflow.md
+	$(Q)for f in $(CURDIR)/rules/*.md; do \
+		$(SOFTLINK) "$$f" $(HOME)/.kiro/steering/$$(basename "$$f"); \
+	done
+	$(Q)for f in $(CURDIR)/kiro/steering/*.md; do \
+		[ -e "$$f" ] || continue; \
+		$(SOFTLINK) "$$f" $(HOME)/.kiro/steering/$$(basename "$$f"); \
+	done
 	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
 
 # Create a wrapper ~/.zshrc that sources the dotfiles version. Machine-local
@@ -190,7 +205,7 @@ update: packages
 
 # -- clean targets -------------------------------------------------------------
 
-TARGETS := bat bin ghostty git kiro macos mise nvim antidote ssh starship tmux touchid-sudo vim wireshark zsh
+TARGETS := antidote bat bin claude ghostty git kiro macos mise nvim ssh starship tmux touchid-sudo vim wireshark zsh
 
 .PHONY: clean
 clean: $(foreach target,$(TARGETS),clean-$(target))
@@ -203,6 +218,13 @@ clean-antidote:
 clean-bin:
 	$(Q)rm -f $(HOME)/bin
 
+.PHONY: clean-claude
+clean-claude:
+	$(Q)for f in $(CURDIR)/rules/*.md $(CURDIR)/claude/rules/*.md; do \
+		[ -e "$$f" ] || continue; \
+		rm -f $(HOME)/.claude/rules/$$(basename "$$f"); \
+	done
+
 .PHONY: clean-ssh
 clean-ssh:
 	$(Q)rm -f $(HOME)/.ssh/config
@@ -211,6 +233,10 @@ clean-ssh:
 .PHONY: clean-starship
 clean-starship:
 	$(Q)rm -f $(CONFIG)/starship.toml
+
+.PHONY: clean-touchid-sudo
+clean-touchid-sudo:
+	$(Q)sudo rm -f /etc/pam.d/sudo_local
 
 .PHONY: clean-vim
 clean-vim:
@@ -223,10 +249,6 @@ clean-wireshark:
 .PHONY: clean-zsh
 clean-zsh:
 	$(Q)rm -f $(HOME)/.zshrc
-
-.PHONY: clean-touchid-sudo
-clean-touchid-sudo:
-	$(Q)sudo rm -f /etc/pam.d/sudo_local
 
 clean-%:
 	$(Q)rm -f $(CONFIG)/$*
