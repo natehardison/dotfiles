@@ -161,6 +161,7 @@ wireshark: config
 claude:
 	$(Q)echo "==> claude"
 	$(Q)mkdir -p $(HOME)/.claude/rules
+	$(Q)$(SOFTLINK) $(CURDIR)/claude/settings.json $(HOME)/.claude/settings.json
 	$(Q)for f in $(CURDIR)/rules/*.md; do \
 		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
 	done
@@ -220,6 +221,7 @@ clean-bin:
 
 .PHONY: clean-claude
 clean-claude:
+	$(Q)rm -f $(HOME)/.claude/settings.json
 	$(Q)for f in $(CURDIR)/rules/*.md $(CURDIR)/claude/rules/*.md; do \
 		[ -e "$$f" ] || continue; \
 		rm -f $(HOME)/.claude/rules/$$(basename "$$f"); \
