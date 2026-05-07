@@ -1,7 +1,8 @@
 # Git
 
 ## Before Every Task
-- Work in a git worktree. Never modify the main checkout directly.
+- Unless the project's own instructions say otherwise, work in a
+  git worktree. Never modify the main checkout directly.
 - After entering the worktree, fetch and rebase onto origin/main:
   `git fetch origin main && git rebase origin/main`
 - Use the worktree as your working directory for all subsequent

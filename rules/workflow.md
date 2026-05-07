@@ -13,25 +13,18 @@
   the web page.
 
 ## Knowledge Capture
-- Before declaring any task complete, review what you figured out the
-  hard way: workarounds, tool quirks, undocumented behavior, failed
-  approaches. Do this BEFORE asking the user "want me to push/PR/merge?"
-- If any of that knowledge would save a future agent time, propose
-  updating the relevant rule, convention, or project docs.
-- For observations that don't fit the current task (bugs found,
-  API quirks, codebase facts), capture them for later triage.
-  See private steering for the specific workflow.
-- Don't silently absorb lessons — surface them to the user as a
-  suggested update.
+- Before declaring a task complete, check whether anything you
+  learned the hard way should be captured in project docs or
+  steering rules. Propose the update — don't silently absorb it.
 
 ## External Comments
 - When posting comments to GitHub PRs, Jira tickets, Slack, or
   any external system, include a footer indicating the comment
-  was agent-assisted.
+  was agent-assisted. Format: `— Agent-assisted (<agent name>)`
 
-## Amazon Q Bot Reviews
+## Automated Bot Reviews
 - First round usually finds real issues. Fix them.
-- Subsequent rounds get speculative — Q invents scenarios that
+- Subsequent rounds get speculative — bots invent scenarios that
   can't happen (concurrent access that's already blocked, signals
   that can't fail). Assess critically after round 2.
 - Reply with rationale when dismissing. Don't just ignore.
