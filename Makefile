@@ -204,6 +204,19 @@ update: packages
 	$(Q)command -v vim >/dev/null && vim -Es +'PlugUpdate --sync' +qall 2>/dev/null || true
 	$(Q)command -v nvim >/dev/null && nvim --headless +'PlugUpdate --sync' +qall 2>/dev/null || true
 
+# -- check targets -------------------------------------------------------------
+
+.PHONY: check
+check:
+	$(Q)echo "==> Checking for broken symlinks..."
+	$(Q)broken=$$(find $(HOME)/.claude $(HOME)/.kiro $(CONFIG) $(HOME)/.ssh $(HOME)/.vim $(HOME)/bin \
+		-type l ! -exec test -e {} \; -print 2>/dev/null); \
+	if [ -n "$$broken" ]; then \
+		echo "Broken symlinks:"; echo "$$broken"; exit 1; \
+	else \
+		echo "    All symlinks OK"; \
+	fi
+
 # -- clean targets -------------------------------------------------------------
 
 TARGETS := antidote bat bin claude ghostty git kiro macos mise nvim ssh starship tmux touchid-sudo vim wireshark zsh
