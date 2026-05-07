@@ -6,6 +6,12 @@
   without explicit human approval. They may contain credentials
   or private information.
 
+## GitHub
+- Use the `gh` CLI to fetch issues, PRs, and other GitHub data,
+  even when the user pastes an HTTP link. Parse the owner, repo,
+  and number from the URL and call `gh` directly — don't fetch
+  the web page.
+
 ## Knowledge Capture
 - Before declaring any task complete, review what you figured out the
   hard way: workarounds, tool quirks, undocumented behavior, failed
@@ -32,3 +38,10 @@
   subagents. Never let subagents modify files in the main checkout.
 - Keep input files under ~400KB per subagent. Larger files risk
   timeouts — split and delegate in parallel instead.
+
+## Amazon Q Bot Reviews
+- First round usually finds real issues. Fix them.
+- Subsequent rounds get speculative — Q invents scenarios that
+  can't happen (concurrent access that's already blocked, signals
+  that can't fail). Assess critically after round 2.
+- Reply with rationale when dismissing. Don't just ignore.
