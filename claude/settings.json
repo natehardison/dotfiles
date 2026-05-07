@@ -147,6 +147,5 @@
       "Read(~/.netrc)"
     ]
   },
-  "theme": "auto",
-  }
+  "theme": "auto"
 }
