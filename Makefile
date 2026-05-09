@@ -127,6 +127,33 @@ bin:
 	$(Q)echo "==> bin"
 	$(Q)$(SOFTLINK) $(CURDIR)/bin $(HOME)/bin
 
+.PHONY: claude
+claude:
+	$(Q)echo "==> claude"
+	$(Q)mkdir -p $(HOME)/.claude/rules
+	$(Q)$(SOFTLINK) $(CURDIR)/claude/settings.json $(HOME)/.claude/settings.json
+	$(Q)for f in $(CURDIR)/rules/*.md; do \
+		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
+	done
+	$(Q)for f in $(CURDIR)/claude/rules/*.md; do \
+		[ -e "$$f" ] || continue; \
+		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
+	done
+
+.PHONY: kiro
+kiro:
+	$(Q)echo "==> kiro"
+	$(Q)mkdir -p $(HOME)/.kiro/skills $(HOME)/.kiro/steering $(HOME)/.kiro/settings
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings/cli.json $(HOME)/.kiro/settings/cli.json
+	$(Q)for f in $(CURDIR)/rules/*.md; do \
+		$(SOFTLINK) "$$f" $(HOME)/.kiro/steering/$$(basename "$$f"); \
+	done
+	$(Q)for f in $(CURDIR)/kiro/steering/*.md; do \
+		[ -e "$$f" ] || continue; \
+		$(SOFTLINK) "$$f" $(HOME)/.kiro/steering/$$(basename "$$f"); \
+	done
+	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
+
 .PHONY: nvim
 nvim: config vim
 	$(Q)echo "==> nvim"
@@ -156,33 +183,6 @@ wireshark: config
 	$(Q)echo "==> wireshark"
 	$(Q)mkdir -p $(CONFIG)/$@
 	$(Q)$(SOFTLINK) $(CURDIR)/$@/profiles $(CONFIG)/$@/profiles
-
-.PHONY: claude
-claude:
-	$(Q)echo "==> claude"
-	$(Q)mkdir -p $(HOME)/.claude/rules
-	$(Q)$(SOFTLINK) $(CURDIR)/claude/settings.json $(HOME)/.claude/settings.json
-	$(Q)for f in $(CURDIR)/rules/*.md; do \
-		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
-	done
-	$(Q)for f in $(CURDIR)/claude/rules/*.md; do \
-		[ -e "$$f" ] || continue; \
-		$(SOFTLINK) "$$f" $(HOME)/.claude/rules/$$(basename "$$f"); \
-	done
-
-.PHONY: kiro
-kiro:
-	$(Q)echo "==> kiro"
-	$(Q)mkdir -p $(HOME)/.kiro/skills $(HOME)/.kiro/steering $(HOME)/.kiro/settings
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/settings/cli.json $(HOME)/.kiro/settings/cli.json
-	$(Q)for f in $(CURDIR)/rules/*.md; do \
-		$(SOFTLINK) "$$f" $(HOME)/.kiro/steering/$$(basename "$$f"); \
-	done
-	$(Q)for f in $(CURDIR)/kiro/steering/*.md; do \
-		[ -e "$$f" ] || continue; \
-		$(SOFTLINK) "$$f" $(HOME)/.kiro/steering/$$(basename "$$f"); \
-	done
-	$(Q)$(SOFTLINK) $(CURDIR)/kiro/skills/git-worktree $(HOME)/.kiro/skills/git-worktree
 
 # Create a wrapper ~/.zshrc that sources the dotfiles version. Machine-local
 # config lives below the source line, so tools that auto-append PATH entries
