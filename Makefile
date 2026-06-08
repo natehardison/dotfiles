@@ -48,15 +48,22 @@ UBI := $(HOME)/.local/bin/ubi
 ubi:
 	$(Q)mkdir -p $(HOME)/.local/bin
 	$(Q)echo "==> Installing ubi..."
-	$(Q)command -v ubi >/dev/null 2>&1 || \
-		export TARGET="$(HOME)/.local/bin" && \
+	$(Q)command -v ubi >/dev/null 2>&1 || { \
+		export TARGET="$(HOME)/.local/bin"; \
 		curl --silent --location \
-			https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh | sh
+			https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh | sh; \
+	}
 	$(Q)echo "==> Installing packages via ubi..."
-	$(Q)while IFS=: read -r repo exe; do \
+	$(Q)token="$${GITHUB_TOKEN:-$$(gh auth token 2>/dev/null)}"; \
+	if [ -z "$$token" ]; then \
+		echo "    WARNING: no GITHUB_TOKEN set and 'gh auth token' unavailable."; \
+		echo "    Unauthenticated GitHub API is capped at 60 req/hr; installs may"; \
+		echo "    fail. Run 'gh auth login' or export GITHUB_TOKEN, then retry."; \
+	fi; \
+	while IFS=: read -r repo exe; do \
 		case "$$repo" in ''|\#*) continue;; esac; \
 		echo "    $$repo"; \
-		$(UBI) -p "$$repo" -i $(HOME)/.local/bin $${exe:+-e "$$exe"} 2>&1; \
+		GITHUB_TOKEN="$$token" $(UBI) -p "$$repo" -i $(HOME)/.local/bin $${exe:+-e "$$exe"} 2>&1; \
 	done < $(CURDIR)/ubi/tools
 
 # -- macOS ---------------------------------------------------------------------
