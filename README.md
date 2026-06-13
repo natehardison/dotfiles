@@ -52,3 +52,11 @@ gutentags, tagbar, CHADtree. Plugins managed by
 
 Uses `Include config.d/*` for modular configs. The 1Password SSH agent
 is conditionally enabled via `Match exec` (works on both macOS and Linux).
+
+On headless Linux boxes (no 1Password), `make ssh-agent` installs a
+persistent user-scoped `ssh-agent` as a systemd user service, so a
+single agent is shared across every login instead of one spawned per
+shell. It's standalone (not in `minimal`/`full`) and a no-op without a
+systemd user instance. Run `loginctl enable-linger $USER` once so the
+agent survives with no active login. The shell adopts its socket only
+when `SSH_AUTH_SOCK` is unset, leaving forwarded agents alone.

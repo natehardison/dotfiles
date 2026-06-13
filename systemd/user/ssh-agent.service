@@ -1,0 +1,16 @@
+[Unit]
+Description=SSH authentication agent
+Documentation=man:ssh-agent(1)
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+# %t is the user runtime dir ($XDG_RUNTIME_DIR). ssh-agent -a fails to
+# bind if the socket already exists, so clear any stale one first; the
+# leading - means a missing socket is not an error.
+ExecStartPre=-/bin/rm -f %t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

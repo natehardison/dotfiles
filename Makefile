@@ -179,6 +179,25 @@ starship: config
 	$(Q)echo "==> starship"
 	$(Q)$(SOFTLINK) $(CURDIR)/starship/starship.toml $(CONFIG)/starship.toml
 
+# Persistent user-scoped ssh-agent for headless Linux boxes (no 1Password
+# agent there — that's macOS-only). One agent owned by systemd and shared
+# across every login, instead of one spawned per shell. Standalone and
+# opt-in, not part of minimal/full. No-op unless a systemd user instance
+# is reachable, so devcontainers and non-systemd boxes skip it cleanly.
+# Run `loginctl enable-linger $$USER` once so the agent survives with no
+# active login session.
+.PHONY: ssh-agent
+ssh-agent: config
+	$(Q)echo "==> ssh-agent"
+	$(Q)if [ "$(OS)" != "Linux" ] || ! systemctl --user show-environment >/dev/null 2>&1; then \
+		echo "    (skipped — no reachable systemd user instance)"; \
+	else \
+		mkdir -p $(CONFIG)/systemd/user; \
+		$(SOFTLINK) $(CURDIR)/systemd/user/ssh-agent.service $(CONFIG)/systemd/user/ssh-agent.service; \
+		systemctl --user daemon-reload; \
+		systemctl --user enable --now ssh-agent.service; \
+	fi
+
 .PHONY: vim
 vim:
 	$(Q)echo "==> vim"
@@ -226,7 +245,7 @@ check:
 
 # -- clean targets -------------------------------------------------------------
 
-TARGETS := antidote bat bin claude ghostty git kiro macos mise nvim ssh starship tmux touchid-sudo vim wireshark zsh
+TARGETS := antidote bat bin claude ghostty git kiro macos mise nvim ssh ssh-agent starship tmux touchid-sudo vim wireshark zsh
 
 .PHONY: clean
 clean: $(foreach target,$(TARGETS),clean-$(target))
@@ -251,6 +270,13 @@ clean-claude:
 clean-ssh:
 	$(Q)rm -f $(HOME)/.ssh/config
 	$(Q)rm -f $(HOME)/.ssh/config.d
+
+.PHONY: clean-ssh-agent
+clean-ssh-agent:
+	$(Q)if [ "$(OS)" = "Linux" ] && systemctl --user show-environment >/dev/null 2>&1; then \
+		systemctl --user disable --now ssh-agent.service 2>/dev/null || true; \
+	fi
+	$(Q)rm -f $(CONFIG)/systemd/user/ssh-agent.service
 
 .PHONY: clean-starship
 clean-starship:

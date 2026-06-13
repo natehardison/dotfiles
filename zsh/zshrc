@@ -31,9 +31,15 @@ fi
 # required for 256 color tmux terminal
 export TERMINFO_DIRS="$HOME/.local/share/terminfo/"
 
-# add the 1Password SSH agent
+# Point at an SSH agent: 1Password on macOS, else the persistent
+# systemd user agent on Linux (see `make ssh-agent`). Only adopt the
+# systemd socket if nothing already set SSH_AUTH_SOCK (e.g. a forwarded
+# agent) and the socket actually exists, so boxes without the service —
+# devcontainers, hosts using forwarding — are left untouched.
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+elif [[ "$OSTYPE" == "linux"* && -z "$SSH_AUTH_SOCK" && -S "${XDG_RUNTIME_DIR}/ssh-agent.socket" ]]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 fi
 
 #
