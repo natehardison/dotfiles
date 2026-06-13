@@ -49,6 +49,8 @@
     ds = diff --stat
     st = status
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
     wip = commit -a -m"WIP"
     sw = switch
     dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)%an <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
@@ -88,9 +90,16 @@
 [includeIf "gitdir:amazon/"]
     path = ~/.config/git/config.d/amazon
 
-# don't set tracking branch to main on "git checkout -b <new branch>"
+# Set upstream only when branching off a remote-tracking branch (e.g.
+# "git switch foo" picks up origin/foo). Branching off a local branch
+# like main sets NO upstream, so "git checkout -b foo" from main won't
+# track main and risk an accidental push to it. ("always" would track
+# the local start point too — that's the footgun we're avoiding.)
 [branch]
-    autoSetupMerge = false
+    autoSetupMerge = true
+
+[rerere]
+    enabled = true
 
 [filter "lfs"]
     smudge = git-lfs smudge -- %f
