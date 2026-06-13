@@ -62,3 +62,12 @@
   body, use the decorator instead of adding an unused parameter.
 - `tmp_path` over `tmpdir`: `tmp_path` returns `pathlib.Path`;
   `tmpdir` returns legacy `py.path.local`.
+- Test decisions, not formatting. If a test mocks the only
+  interesting logic and then asserts on string output, it's
+  testing display — delete it. Integration tests cover display;
+  unit tests cover behavior (filtering, routing, error paths).
+- For stdlib/third-party modules imported as `import X`, patch
+  the attribute directly on the module object:
+  `monkeypatch.setattr(subprocess, "run", Mock(...))`. For
+  names imported via `from X import Y`, patch the local binding:
+  `monkeypatch.setattr("caller_module.Y", Mock(...))`.
