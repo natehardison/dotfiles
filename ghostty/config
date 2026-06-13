@@ -39,7 +39,7 @@
 
 # Font
 font-family = "InconsolataGo Nerd Font"
-font-size = 16
+font-size = 18
 
 # Layout
 window-padding-x = 6
