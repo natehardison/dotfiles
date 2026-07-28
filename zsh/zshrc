@@ -91,6 +91,8 @@ if [[ ! -e "$zsh_plugins_zsh" || "$zsh_plugins_txt" -nt "$zsh_plugins_zsh" ]]; t
   antidote bundle < "$zsh_plugins_txt" > "$zsh_plugins_zsh"
 fi
 
+fpath+=("$HOME/.zfunc")
+
 # compinit must run BEFORE the plugin bundle is sourced: fzf-tab needs to
 # wrap the completion widget, and autosuggestions/syntax-highlighting need
 # to wrap zle widgets that compinit registers. But compinit needs the
