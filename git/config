@@ -44,6 +44,9 @@
 [pull]
     rebase = true
 
+[rebase]
+    autoStash  = true
+
 [alias]
     dc = diff --cached
     ds = diff --stat
