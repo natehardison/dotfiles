@@ -101,8 +101,14 @@
 [branch]
     autoSetupMerge = true
 
+[checkout]
+    defaultRemote=origin
+
 [rerere]
     enabled = true
+
+[remote]
+    pushDefault = origin
 
 [filter "lfs"]
     smudge = git-lfs smudge -- %f
